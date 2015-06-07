@@ -148,7 +148,7 @@ function submitRegister() {
 	}
 
 	$.ajax({
-		url : '../admin/common/register',
+		url : '../common/register',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',

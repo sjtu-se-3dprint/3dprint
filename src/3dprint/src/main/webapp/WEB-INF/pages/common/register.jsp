@@ -51,6 +51,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-6">
 						<button id="registerBtn" type="submit" class="btn btn-default">注册</button>
+						<a href="login" style="margin-left:10px">去登录</a>
 					</div>
 				</div>
 			</div>
