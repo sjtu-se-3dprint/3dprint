@@ -40,6 +40,12 @@
 
 	<bean id="myUserDetailsService" class="service.impl.MyUserDetailsService">
 	</bean>
-
-
+	
+	<bean id="accessDeniedHandler" class="config.MyAccessDeniedHandler">
+		<property name="errorPage" value="/view/accessdenied"></property>
+	</bean>
+	
+	<bean id="myAuthenticationEntryPoint" class="config.MyAuthenticationEntryPoint">
+		<property name="loginPage" value="/view/login"></property>
+	</bean>
 </beans>

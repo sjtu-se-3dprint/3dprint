@@ -15,8 +15,7 @@
 			</div>
 		</c:if>
 	
-		<p class="message">拒绝访问!</p>
-		<a href="/3dprint/view/index">去首页</a>
+		<a href="/3dprint/view/index">返回首页</a>
 		<a href="/3dprint/view/login">重新登录</a> 
 	</body>
 </html>

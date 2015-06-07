@@ -5,15 +5,7 @@
            http://www.springframework.org/schema/security  
            http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<!-- <http pattern="/*.html" security="none" /> -->
-	<!-- <http pattern="/*.js" security="none" /> -->
-	<!-- <http pattern="/view/list" security="none" /> -->
-	<!-- <http pattern="/j_spring_security_check" security="none" /> -->
-
-	<!-- <http pattern="/view/something" security="none" /> -->
-	
-
-	<http auto-config="true" use-expressions="true">
+	<http auto-config="true" use-expressions="true" entry-point-ref="myAuthenticationEntryPoint">
 		<intercept-url pattern="/view/login" access="permitAll"></intercept-url>
 		<intercept-url pattern="/view/logout" access="permitAll"></intercept-url>
 		<intercept-url pattern="/view/accessdenied" access="permitAll"></intercept-url>
@@ -22,13 +14,13 @@
 		<intercept-url pattern="/view/user/**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/view/admin/**" access="hasRole('ROLE_ADMIN')"></intercept-url>
 		<intercept-url pattern="/view/manager/**" access="hasRole('ROLE_MANAGER')"></intercept-url>
-		
-		
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"></intercept-url>
-		
-		<access-denied-handler error-page="/view/accessdenied" />
-		
-		<form-login login-page="/view/login" default-target-url="/view/index"
+		<intercept-url pattern="/manager/**" access="hasRole('ROLE_MANAGER')"></intercept-url>
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"></intercept-url>
+
+		<access-denied-handler ref="accessDeniedHandler" />
+
+		<form-login default-target-url="/view/index"
 			authentication-failure-url="/view/loginfailed"></form-login>
 		<logout logout-success-url="/view/logout"></logout>
 	</http>
