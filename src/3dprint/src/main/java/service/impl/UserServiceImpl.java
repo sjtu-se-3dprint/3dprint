@@ -105,4 +105,9 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	public Boolean isUsernameValid(Map param) {
+		Map user = userMapper.findUserByName(param);
+		return user == null;
+	}
+
 }

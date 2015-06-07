@@ -3,3 +3,6 @@
 <% session.invalidate(); %>
 You are now logged out!!
 <a href="login">Go back to login page.</a>
+<script>
+	window.location.href = 'login';
+</script>

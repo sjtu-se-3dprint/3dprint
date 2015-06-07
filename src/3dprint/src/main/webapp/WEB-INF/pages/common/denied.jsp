@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 	<body>
-	
+		<jsp:include page="header.jsp" flush="true"></jsp:include>
 		<h1 id="banner">你没有浏览该页的权限 !!</h1>
 	
 		<hr />
@@ -16,7 +16,7 @@
 		</c:if>
 	
 		<p class="message">拒绝访问!</p>
-		<a href="/3dprint/view/common/index">去首页</a>
+		<a href="/3dprint/view/index">去首页</a>
 		<a href="/3dprint/view/login">重新登录</a> 
 	</body>
 </html>

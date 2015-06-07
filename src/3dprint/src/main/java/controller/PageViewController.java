@@ -11,7 +11,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/view")
 public class PageViewController {
+	
+	@RequestMapping(value = "/oldhead", method = RequestMethod.GET)
+	public String oldhead(ModelMap model) {
+		return "common/oldheader";
+	}
 
+	/**
+	 * 页面导航栏
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/head", method = RequestMethod.GET)
+	public String head(ModelMap model) {
+		return "common/header";
+	}
+	
 	/**
 	 * 登录界面
 	 * @param model
@@ -19,7 +34,17 @@ public class PageViewController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
-		return "login";
+		return "common/login";
+	}
+
+	/**
+	 * 注册界面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(ModelMap model) {
+		return "common/register";
 	}
 
 	/**
@@ -30,7 +55,7 @@ public class PageViewController {
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public String accessdenied(ModelMap model) {
 		model.addAttribute("error", "true");
-		return "denied";
+		return "common/denied";
 	}
 	
 	/**
@@ -41,7 +66,7 @@ public class PageViewController {
 	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
 	public String loginfailed(ModelMap model) {
 		model.addAttribute("error", "true");
-		return "loginfailed";
+		return "common/loginfailed";
 	}
 
 	/**
@@ -51,7 +76,7 @@ public class PageViewController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model) {
-		return "logout";
+		return "common/logout";
 	}
 	
 	/**
@@ -59,9 +84,9 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/common/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(ModelMap model) {
-		return "index";
+		return "common/index";
 	}
 	
 	/**
@@ -71,7 +96,7 @@ public class PageViewController {
 	 */
 	@RequestMapping(value = "/admin/index", method = RequestMethod.GET)
 	public String admin(ModelMap model) {
-		return "admin";
+		return "admin/admin";
 	}
 	
 	/**
@@ -81,7 +106,7 @@ public class PageViewController {
 	 */
 	@RequestMapping(value = "/manager/index", method = RequestMethod.GET)
 	public String manager(ModelMap model) {
-		return "manager";
+		return "manager/manager";
 	}
 	
 	/**
@@ -91,6 +116,6 @@ public class PageViewController {
 	 */
 	@RequestMapping(value = "/user/index", method = RequestMethod.GET)
 	public String user(ModelMap model) {
-		return "user";
+		return "user/user";
 	}
 }

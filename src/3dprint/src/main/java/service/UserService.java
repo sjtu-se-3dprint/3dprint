@@ -13,7 +13,7 @@ public interface UserService {
 	public List queryPlainUserList(Map param);
 	
 	/**
-	 * 删除一个用户（根据Id）
+	 * 删除一个用户（user_id）
 	 * @param param
 	 * @return
 	 * @throws Exception 
@@ -21,7 +21,7 @@ public interface UserService {
 	public Boolean removePlainUser(Map param) throws Exception;
 	
 	/**
-	 * 恢复一个用户（根据Id）
+	 * 恢复一个用户（user_id）
 	 * @param param
 	 * @return
 	 * @throws Exception
@@ -35,4 +35,11 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	public Boolean addPlainUser(Map param) throws Exception;
+	
+	/**
+	 * 新用户名是否可用（username）
+	 * @param param
+	 * @return
+	 */
+	public Boolean isUsernameValid(Map param);
 }
