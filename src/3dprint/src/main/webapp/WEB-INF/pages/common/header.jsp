@@ -19,6 +19,8 @@
 <script
 	src="<%=request.getContextPath()%>/css/bootstrap-table-master/src/locale/bootstrap-table-zh-CN.js"></script>
 
+<script src="<%=request.getContextPath()%>/js/util.js"></script>
+
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -42,13 +44,13 @@
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<li><a href="#">Admin中心</a></li>
+								<li><a href="<%=request.getContextPath()%>/view/admin/index">Admin中心</a></li>
 							</security:authorize>
 							<security:authorize access="hasRole('ROLE_MANAGER')">
-								<li><a href="#">Manager中心</a></li>
+								<li><a href="<%=request.getContextPath()%>/view/manager/index">Manager中心</a></li>
 							</security:authorize>
 							<security:authorize access="hasRole('ROLE_USER')">
-								<li><a href="#">用户中心</a></li>
+								<li><a href="<%=request.getContextPath()%>/view/user/index">用户中心</a></li>
 								<li><a href="#">购物车</a></li>
 							</security:authorize>
 							<li class="divider"></li>

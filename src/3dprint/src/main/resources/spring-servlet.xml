@@ -18,7 +18,7 @@
 
 	<!-- 设置需要检查annotation的包 -->
 	<context:component-scan base-package="controller,service.impl,mapper"></context:component-scan>
-	
+
 	<!-- 创建Adapter，并使其支持json自动转换 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -31,7 +31,11 @@
 			</list>
 		</property>
 	</bean>
-	
+
+	<!-- 上传文件需要用，支持multipart/form-data -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 	<!-- 创建事务管理器，并启用 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -39,6 +43,7 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+	<!-- 视图管理器，负责把url映射到jsp文件 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

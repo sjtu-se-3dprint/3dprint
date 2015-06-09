@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<form class="form-horizontal"
-				action="<c:url value='../j_spring_security_check'/>" method="POST">
+				action="<%=request.getContextPath()%>/j_spring_security_check" method="POST">
 				<div class="form-group">
 					<label for="inputUsername" class="col-sm-4 control-label">用户名</label>
 					<div class="col-sm-4">

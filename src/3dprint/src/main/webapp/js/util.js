@@ -1,3 +1,6 @@
+var pathName=window.document.location.pathname;
+var ContextPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+
 Date.prototype.pattern=function(fmt) {           
     var o = {           
     "M+" : this.getMonth()+1, //月份           

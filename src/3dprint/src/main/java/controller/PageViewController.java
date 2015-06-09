@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/view")
 public class PageViewController {
 	
+	@RequestMapping(value = "/common/uploadimage", method = RequestMethod.GET)
+	public String uploadimage(ModelMap model) {
+		return "uploadimage";
+	}
+	
 	@RequestMapping(value = "/oldhead", method = RequestMethod.GET)
 	public String oldhead(ModelMap model) {
 		return "common/oldheader";

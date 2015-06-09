@@ -14,6 +14,15 @@
 		  <if test="status!=null">and status=#{status}</if>
 	</select>
 	
+	<update id="modifyUserInfo">
+		update user
+		set status=status
+		<if test="email!=null">, email=#{email}</if>
+		<if test="telephone!=null">, telephone=#{telephone}</if>
+		<if test="qq!=null">, qq=#{qq}</if>
+		where user_id=#{user_id}
+	</update>
+	
 	<update id="removeUserById">
 		update user
 		set status="deleted"

@@ -6,6 +6,22 @@ import java.util.Map;
 public interface UserService {
 
 	/**
+	 * 查出自己的用户信息
+	 * @param param
+	 * @return
+	 */
+	public Map myInfo(Map param);
+	
+
+	/**
+	 * 修改用户自己的信息
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean modifyInfo(Map param) throws Exception;
+	
+	/**
 	 * 查出权限只为User的用户
 	 * @param param
 	 * @return

@@ -5,8 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<script src="../../js/util.js"></script>
-
 <style>
 .link {
 	padding-bottom: 5px;

@@ -60,4 +60,11 @@ public interface UserMapper {
 	 * @return
 	 */
 	public List queryPlainUserList(Map param);
+	
+	/**
+	 * 修改用户信息
+	 * @param param
+	 * @return
+	 */
+	public Integer modifyUserInfo(Map param);
 }

@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import javax.annotation.Resource;
 
 import mapper.UserMapper;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,6 +111,43 @@ public class UserServiceImpl implements UserService {
 	public Boolean isUsernameValid(Map param) {
 		Map user = userMapper.findUserByName(param);
 		return user == null;
+	}
+
+	public Map myInfo(Map param) {
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+			    .getAuthentication()
+			    .getPrincipal();
+		
+		if(userDetails == null || userDetails.getUsername() == null){
+			return null;
+		}
+		
+		param = new HashMap();
+		param.put("name", userDetails.getUsername());
+		param.put("status", "normal");
+		
+		Map user = userMapper.findUserByName(param);
+		user.remove("password");
+		user.remove("status");
+		
+		return user;
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public Boolean modifyInfo(Map param) throws Exception {
+		Map user = myInfo(null);
+		if(user == null){
+			throw new Exception("你还没有登录。");
+		}
+		
+		param.put("user_id", user.get("user_id"));
+		Integer rows = userMapper.modifyUserInfo(param);
+		if(rows == null || rows != 1){
+			throw new Exception("修改资料失败！");
+		}
+		
+		return true;
 	}
 
 }
