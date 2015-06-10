@@ -97,7 +97,9 @@
 					<div style="height: 300px; float: left; margin-left: 30px;">
 						<div style="position: relative">
 							<div id="headimageFilter"
-								style="position: absolute; border: 1px dotted #777; display: none"></div>
+								style="position: absolute; border: 1px dotted #777; display: none">
+								<div id="headimageFilterScaler" style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:gray"></div>
+							</div>
 							<p class="text-danger"
 								style="position: absolute; width: 270px; top: 10px;">
 								您上传的头像会自动生成三种尺寸，请注意头像是否清晰</p>

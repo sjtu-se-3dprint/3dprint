@@ -4,7 +4,7 @@
 // 摘自：http://www.cnblogs.com/ljchow/archive/2010/04/27/1721695.html
 // 出处：http://ljchow.cnblogs.com 
 
-// ps：180~190行做出了一些修改
+// ps：修改了一些代码
 
 var Common = {
 	getEvent : function() {// ie/ff
@@ -87,7 +87,7 @@ Drag.prototype = {
 		// 设置点击是否透明，默认不透明
 		titleBar = Common.getItself(titleBar);
 		dragDiv = Common.getItself(dragDiv);
-		if(callback){
+		if (callback) {
 			this.callback = callback;
 		}
 		this.dragArea = {
@@ -131,6 +131,7 @@ Drag.prototype = {
 		this.tmpX = 0;
 		this.tmpY = 0;
 		this.moveable = false;
+		this.scale = false;
 
 		var dragObj = this;
 
@@ -171,6 +172,17 @@ Drag.prototype = {
 				ev.preventDefault();
 				ev.stopPropagation();
 			}
+			
+			var dx = downPos.x - this.getBoundingClientRect().left+document.documentElement.scrollLeft
+			var dy = downPos.y - this.getBoundingClientRect().top+document.documentElement.scrollTop;
+			var len = 10;
+			
+			if(parseInt(dragDiv.style.width)-dx < len && parseInt(dragDiv.style.height)-dy < len){
+				dragObj.scale = true;
+				titleBar.style.cursor = 'nw-resize';
+			}else{
+				dragObj.scale = false;
+			}
 
 			document.onmousemove = function(e) {
 				if (dragObj.moveable) {
@@ -184,16 +196,37 @@ Drag.prototype = {
 					var movePos = Common.getMousePos(ev);
 					var width = parseInt(dragDiv.style.width);
 					var height = parseInt(dragDiv.style.height);
+
 					var left = Math.max(Math.min(movePos.x - dragObj.tmpX,
 							dragObj.dragArea.maxRight - width),
 							dragObj.dragArea.maxLeft);
 					var top = Math.max(Math.min(movePos.y - dragObj.tmpY,
 							dragObj.dragArea.maxBottom - height),
 							dragObj.dragArea.maxTop);
-					dragDiv.style.left = left + 'px';
-					dragDiv.style.top = top + 'px';
+					
+					if(dragObj.scale){
+						var dx = movePos.x - dragObj.tmpX - parseInt(dragDiv.style.left);
+						var dy = movePos.y - dragObj.tmpY - parseInt(dragDiv.style.top);
+						var d = dx < dy ? dx : dy;
+						if(parseInt(dragDiv.style.width) + d < 30){
+							d = parseInt(dragDiv.style.width) + d < 30 ? 30 - parseInt(dragDiv.style.width) : d;
+						}
+						if(parseInt(dragDiv.style.width) + d + parseInt(dragDiv.style.left) > dragObj.dragArea.maxRight){
+							d = dragObj.dragArea.maxRight - (parseInt(dragDiv.style.width) + parseInt(dragDiv.style.left));
+						}
+						var newWidth = (parseInt(dragDiv.style.width) + d);
+						if(newWidth >= 30 && newWidth+parseInt(dragDiv.style.left)<=dragObj.dragArea.maxRight){
+							dragDiv.style.width = (parseInt(dragDiv.style.width) + d) + 'px';
+							dragDiv.style.height = (parseInt(dragDiv.style.height) + d) + 'px';
+							dragObj.tmpX += d;
+							dragObj.tmpY += d;	
+						}
+					}else{
+						dragDiv.style.left = left + 'px';
+						dragDiv.style.top = top + 'px';
+					}
 
-					if(callback){
+					if (callback) {
 						callback();
 					}
 				}
