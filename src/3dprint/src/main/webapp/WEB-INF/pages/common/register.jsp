@@ -4,7 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
 	<script src="<%=request.getContextPath()%>/js/common/register.js"></script>

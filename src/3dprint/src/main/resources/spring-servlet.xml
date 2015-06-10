@@ -33,8 +33,9 @@
 	</bean>
 
 	<!-- 上传文件需要用，支持multipart/form-data -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<!-- <bean id="multipartResolver" -->
+	<!-- class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
+		/> -->
 
 	<!-- 创建事务管理器，并启用 -->
 	<bean id="transactionManager"

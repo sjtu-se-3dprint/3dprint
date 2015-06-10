@@ -58,4 +58,12 @@ public interface UserService {
 	 * @return
 	 */
 	public Boolean isUsernameValid(Map param);
+	
+	/**
+	 * 上传用户头像，储存到文件系统
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean modifyUserhead(Map param) throws Exception;
 }
