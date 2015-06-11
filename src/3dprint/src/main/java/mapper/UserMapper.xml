@@ -16,23 +16,32 @@
 	
 	<update id="modifyUserInfo">
 		update user
-		set status=status
+		set updatetime=now()
 		<if test="email!=null">, email=#{email}</if>
 		<if test="telephone!=null">, telephone=#{telephone}</if>
 		<if test="qq!=null">, qq=#{qq}</if>
 		where user_id=#{user_id}
 	</update>
 	
+	<update id="modifyPassword">
+		update user
+		set password=#{newPassword},
+			updatetime=now()
+		where user_id=#{user_id}
+	</update>
+	
 	<update id="removeUserById">
 		update user
-		set status="deleted"
+		set status="deleted",
+			updatetime=now()
 		where user_id=#{user_id}
 		  and status=#{status}
 	</update>
 	
 	<update id="resumeUserById">
 		update user
-		set status="normal"
+		set status="normal",
+			updatetime=now()
 		where user_id=#{user_id}
 		  and status=#{status}
 	</update>

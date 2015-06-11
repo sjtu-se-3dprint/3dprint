@@ -98,7 +98,8 @@
 						<div style="position: relative">
 							<div id="headimageFilter"
 								style="position: absolute; border: 1px dotted #777; display: none">
-								<div id="headimageFilterScaler" style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:gray"></div>
+								<div id="headimageFilterScaler"
+									style="position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; background: gray"></div>
 							</div>
 							<p class="text-danger"
 								style="position: absolute; width: 270px; top: 10px;">
@@ -138,7 +139,38 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane" id="panel-modify-password"></div>
+			<div class="tab-pane" id="panel-modify-password">
+				<div class="form-horizontal"
+					style="padding-top: 40px; margin-left: -40px">
+					<div class="form-group">
+						<label for="inputTelephone" class="col-sm-2 control-label">原密码：</label>
+						<div class="col-sm-4">
+							<input type="password" class="form-control" id="inputOldPassword"
+								placeholder="Old Password">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail" class="col-sm-2 control-label">新密码：</label>
+						<div class="col-sm-4">
+							<input type="password" class="form-control" id="inputNewPassword"
+								placeholder="New Password">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputQQ" class="col-sm-2 control-label">确认密码：</label>
+						<div class="col-sm-4">
+							<input type="password" class="form-control" id="inputConfirmPassword"
+								placeholder="Confirm New Password">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-2">
+							<button id="modifyPasswordBtn" type="submit" class="btn btn-primary"
+								style="width: 100%">确认修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

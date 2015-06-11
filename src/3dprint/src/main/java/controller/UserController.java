@@ -22,6 +22,17 @@ public class UserController extends BaseController {
 	@Resource(name = "userServiceImpl")
 	UserService userService;
 
+	@RequestMapping(value = "/modifyPassword", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map modifyPassword(@RequestBody Map param) {                 
+		try {
+			return initResult(true, userService.modifyPassword(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
 	/**
 	 * 上传用户头像，一次共大中小三张
 	 * @param param

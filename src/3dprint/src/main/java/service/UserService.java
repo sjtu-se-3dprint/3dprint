@@ -60,10 +60,18 @@ public interface UserService {
 	public Boolean isUsernameValid(Map param);
 	
 	/**
-	 * 上传用户头像，储存到文件系统
+	 * 上传用户头像，储存到文件系统（largeImg、midImg、smallImg）
 	 * @param param
 	 * @return
 	 * @throws Exception
 	 */
 	public Boolean modifyUserhead(Map param) throws Exception;
+	
+	/**
+	 * 修改密码（newPassword、oldPassword）
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean modifyPassword(Map param) throws Exception;
 }

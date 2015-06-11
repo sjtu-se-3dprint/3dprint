@@ -23,6 +23,9 @@ $(function() {
 
 				// 绑定修改头像tab中选择图片按钮事件
 				bindModifyUserheadButton();
+				
+				// 绑定修改密码按钮事件
+				bindModifyPasswordButton();
 
 			} else if (res) {
 				alert(res.message);
@@ -250,4 +253,56 @@ function selectUserhead(file) {
 
 	// 读取文件
 	reader.readAsDataURL(file);
+}
+
+// 绑定修改密码按钮事件
+function bindModifyPasswordButton(){
+	$('#modifyPasswordBtn').unbind('click').bind('click', modifyPassword);
+}
+
+// 修改用户密码
+function modifyPassword(){
+	var oldPassword = $('#inputOldPassword').val();
+	var newPassword = $('#inputNewPassword').val();
+	var confirmPassword = $('#inputConfirmPassword').val();
+	if(oldPassword == ''){
+		alert('请填写原密码！');
+		return;
+	}
+	if(newPassword.length < 5){
+		alert('新密码最少需要5位！');
+		return;
+	}
+	if(newPassword != confirmPassword){
+		alert('两次密码不一致！');
+		return;
+	}
+	if(oldPassword == newPassword){
+		alert('新密码不能与原密码相同！');
+		return;
+	}
+	
+	$.ajax({
+		url : ContextPath + '/user/modifyPassword',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/json',
+		data : JSON.stringify({
+			oldPassword: oldPassword,
+			newPassword: newPassword
+		}),
+		success : function(res) {
+			if (res && res.success) {
+				$('#inputOldPassword').val('');
+				$('#inputNewPassword').val('');
+				$('#inputConfirmPassword').val('');
+				alert('修改密码成功！');
+			}else if(res){
+				alert(res.message);
+			}
+		},
+		error : function(){
+			alert('未知错误');
+		}
+	});
 }

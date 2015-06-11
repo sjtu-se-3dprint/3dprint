@@ -67,4 +67,11 @@ public interface UserMapper {
 	 * @return
 	 */
 	public Integer modifyUserInfo(Map param);
+	
+	/**
+	 * 修改用户密码
+	 * @param param
+	 * @return
+	 */
+	public Integer modifyPassword(Map param);
 }

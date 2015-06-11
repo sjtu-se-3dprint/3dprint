@@ -217,4 +217,36 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Boolean modifyPassword(Map param) throws Exception {
+
+		// 验证是否登录，获取用户信息
+		Map user = myInfo(null);
+		if (user == null) {
+			throw new Exception("你还没有登录。");
+		}
+		
+		// 查出用户密码
+		user.put("status", "normal");
+		user = userMapper.findUserById(user);
+		if (user == null) {
+			throw new Exception("你还没有登录。");
+		}
+		
+		// 验证密码
+		String password = (String)user.get("password");
+		if(password == null || !password.equals(param.get("oldPassword"))){
+			throw new Exception("原密码不正确！");
+		}
+		
+		// 修改密码
+		param.put("user_id", user.get("user_id"));
+		Integer rows = userMapper.modifyPassword(param);
+		if(rows==null || rows != 1){
+			throw new Exception("修改密码失败！");
+		}
+		
+		return true;
+	}
+
 }

@@ -6,12 +6,15 @@
 
 <!DOCTYPE html>
 <html lang="zh-CN">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
 	<div class="container">
 		<div class="row">
 			<form class="form-horizontal"
-				action="<%=request.getContextPath()%>/j_spring_security_check" method="POST">
+				action="<%=request.getContextPath()%>/j_spring_security_check"
+				method="POST" accept-charset="utf-8"
+				onsubmit="document.charset='utf-8';">
 				<div class="form-group">
 					<label for="inputUsername" class="col-sm-4 control-label">用户名</label>
 					<div class="col-sm-4">
@@ -36,12 +39,34 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-6">
-						<button type="submit" class="btn btn-default">登录</button>
-						<a href="register" style="margin-left:10px">去注册</a>
+						<button id="loginBtn" type="button" class="btn btn-default">登录</button>
+						<a href="register" style="margin-left: 10px">去注册</a>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$('#loginBtn').bind('click', function(){
+				$('form').submit();
+// 				$.ajax({
+// 					url: ContextPath + '/j_spring_security_check',
+// 					type: 'post',
+// 					data: {
+// 						j_username:$('#inputUsername').val(),
+// 						j_password:$('#inputPassword').val()
+// 					},
+// 					success: function(res){
+// 						console.log(res);
+// 						alert('OK');
+// 					},
+// 					error: function(){
+// 						alert('Error');
+// 					}
+// 				});
+			});
+		})
+	</script>
 </body>
 </html>

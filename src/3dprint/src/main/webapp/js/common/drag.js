@@ -214,6 +214,9 @@ Drag.prototype = {
 						if(parseInt(dragDiv.style.width) + d + parseInt(dragDiv.style.left) > dragObj.dragArea.maxRight){
 							d = dragObj.dragArea.maxRight - (parseInt(dragDiv.style.width) + parseInt(dragDiv.style.left));
 						}
+						if(parseInt(dragDiv.style.height) + d + parseInt(dragDiv.style.top) > dragObj.dragArea.maxBottom){
+							d = dragObj.dragArea.maxBottom - (parseInt(dragDiv.style.height) + parseInt(dragDiv.style.top));
+						}
 						var newWidth = (parseInt(dragDiv.style.width) + d);
 						if(newWidth >= 30 && newWidth+parseInt(dragDiv.style.left)<=dragObj.dragArea.maxRight){
 							dragDiv.style.width = (parseInt(dragDiv.style.width) + d) + 'px';
