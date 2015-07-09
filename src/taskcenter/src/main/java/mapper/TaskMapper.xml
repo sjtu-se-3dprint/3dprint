@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.TaskMapper" >
+
+	<select id="getTaskList" resultType="map">
+		select task.*, user_id, user_name from task, user
+		where task.task_publisher = user.user_id
+		<if test="task_status!=null">and task_status=#{task_status} order by task.task_id, user.user_id</if>
+		<if test="task_status==null">order by task_status, task.id, user.user_id</if>
+	</select>
+	
+	<select id="getExecutorByTaskId" resultType="map">
+		select user.user_name, user.user_id, process.process_id, process.process_duration,
+			process.addtime, process.updatetime, process.status from user, process
+		where process.task_id = #{task_id}
+			and user.user_id = process.user_id
+		order by process.process_id desc
+		limit 1
+	</select>
+	
+	<select id="getUserList" resultType="map">
+		select * from user order by user_id
+	</select>
+	
+	<select id="getTaskById" resultType="map">
+		select * from task where task_id = #{task_id}
+	</select>
+	
+	<select id="getUserById" resultType="map">
+		select * from user where user_id = #{user_id}
+	</select>
+	
+	<update id="updateTaskStatus">
+		update task set task_status = #{task_status_new}
+		where task_id = #{task_id}
+			and task_status = #{task_status_old}
+	</update>
+	
+	<insert id="insertProcess">
+		insert into process(task_id, user_id, process_duration)
+		values(#{task_id}, #{user_id}, #{process_duration})
+	</insert>
+	
+	<insert id="insertTask">
+		insert into task(task_name, task_detail, task_publisher)
+		values(#{task_name}, #{task_detail}, #{task_publisher})
+	</insert>
+	
+</mapper>
