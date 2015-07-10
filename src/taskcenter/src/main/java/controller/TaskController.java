@@ -62,4 +62,37 @@ public class TaskController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
+	
+	@RequestMapping(value = "/cancelTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map cancelTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.cancelTask(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/delayTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map delayTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.delayTask(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/endTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map endTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.endTask(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
 }

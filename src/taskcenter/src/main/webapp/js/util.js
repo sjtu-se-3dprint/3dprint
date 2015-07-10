@@ -5,7 +5,7 @@ Date.prototype.pattern=function(fmt) {
     var o = {           
     "M+" : this.getMonth()+1, //月份           
     "d+" : this.getDate(), //日           
-    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小时           
+    "h+" : this.getHours()%24, //小时           
     "H+" : this.getHours(), //小时           
     "m+" : this.getMinutes(), //分           
     "s+" : this.getSeconds(), //秒           

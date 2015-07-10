@@ -9,4 +9,7 @@ public interface TaskService {
 	public List getUserList(Map param);
 	public Boolean pickTask(Map param) throws Exception;
 	public Boolean publishTask(Map param) throws Exception;
+	public Boolean cancelTask(Map param) throws Exception;
+	public Boolean delayTask(Map param) throws Exception;
+	public Boolean endTask(Map param) throws Exception;
 }

@@ -14,6 +14,7 @@
 			process.addtime, process.updatetime, process.status from user, process
 		where process.task_id = #{task_id}
 			and user.user_id = process.user_id
+			and process.status = #{process_status}
 		order by process.process_id desc
 		limit 1
 	</select>
@@ -31,7 +32,8 @@
 	</select>
 	
 	<update id="updateTaskStatus">
-		update task set task_status = #{task_status_new}
+		update task set task_status = #{task_status_new},
+			updatetime = now()
 		where task_id = #{task_id}
 			and task_status = #{task_status_old}
 	</update>
@@ -45,5 +47,19 @@
 		insert into task(task_name, task_detail, task_publisher)
 		values(#{task_name}, #{task_detail}, #{task_publisher})
 	</insert>
+	
+	<update id="updateProcessStatus">
+		update process set status = #{process_status_new},
+			updatetime = now()
+		where process_id = #{process_id}
+			and status = #{process_status_old}
+	</update>
+	
+	<update id="updateProcessDuration">
+		update process set process_duration = #{process_duration},
+			updatetime = now()
+		where process_id = #{process_id}
+	</update>
+	
 	
 </mapper>

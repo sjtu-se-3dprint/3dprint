@@ -269,6 +269,74 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="finishedTaskModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">任务详情</h4>
+					</div>
+					<div class="modal-body">
+						<div class="fontsize_11 fontcolor_6">
+							<div class="row margin_5">
+								<div class="col-md-3">
+									编码：<span id="task_id_finished"></span>
+								</div>
+								<div class="col-md-3">
+									发布时间：<span id="task_addtime_finished"></span>
+								</div>
+								<div class="col-md-3">
+									修改时间：<span id="task_updatetime_finished"></span>
+								</div>
+							</div>
+							<div class="row margin_5">
+								<div class="col-md-3">
+								</div>
+								<div class="col-md-3">
+									领取时间：<span id="task_startime_finished"></span>
+								</div>
+								<div class="col-md-3">
+									预计完成时间：<span id="task_endtime_finished"></span>
+								</div>
+								<div class="col-md-3">
+									实际完成时间：<span id="task_finishtime_finished"></span>
+								</div>
+							</div>
+							<div class="row margin_5">
+								<div class="col-md-3">
+									任务名称：<span id="task_name_finished"></span>
+								</div>
+								<div class="col-md-3">
+									任务状态：<span id="task_status_finished"></span>
+								</div>
+								<div class="col-md-3">
+									发布者：<span id="task_publisher_finished"></span>
+								</div>
+								<div class="col-md-3">
+									执行者：<span id="task_executor_finished"></span>
+								</div>
+							</div>
+						</div>
+						<div class="fontsize_13 fontcolor_5">
+							<div class="row margin_5 border_top">
+								<div class="col-md-12">任务详情：</div>
+							</div>
+							<div class="row margin_5 border_bottom">
+								<div class="col-md-12 margin_left_10 margin_right_10"
+									id="task_detail_finished"></div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
