@@ -1,0 +1,51 @@
+.margin_5 {
+	margin: 5px;
+}
+
+.margin_left_10 {
+	margin-left: 10px;
+}
+
+.margin_right_10 {
+	margin-right: 10px;
+}
+
+.padding_top_5 {
+	padding-top: 5px;
+}
+
+.padding_buttom_5 {
+	padding-bottom: 5px;
+}
+
+.border_top {
+	border-top: 1px solid #AAA
+}
+
+.border_bottom {
+	border-bottom: 1px solid #AAA
+}
+
+.fontsize_11 {
+	font-size: 11px;
+}
+
+.fontsize_12 {
+	font-size: 12px;
+}
+
+.fontsize_13 {
+	font-size: 13px;
+}
+
+.fontcolor_5 {
+	color: #555;
+}
+
+.fontcolor_6 {
+	color: #666;
+}
+
+.taskDetailStyle {
+	width: 500px;
+}

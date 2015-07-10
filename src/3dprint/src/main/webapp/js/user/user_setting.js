@@ -45,7 +45,7 @@ function initUserHead() {
 	$('#usernameText').html(user.name)
 
 	$("<img/>").load(function() {
-		$('#headimage').attr('src', ContextPath + '/image/userhead/' + user.user_id + '/large.png');
+		$('#headimage').attr('src', ContextPath + '/image/userhead/' + user.user_id + '/large.png' + '?' + new Date().getTime());
 	}).error(function() {
 		console.log("error loading image");
 	}).attr("src", ContextPath + '/image/userhead/' + user.user_id + '/large.png');
