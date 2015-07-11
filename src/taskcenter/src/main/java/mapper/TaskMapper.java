@@ -24,4 +24,6 @@ public interface TaskMapper {
 	public Integer updateProcessStatus(Map param);
 	
 	public Integer updateProcessDuration(Map param);
+	
+	public Integer updateTask(Map param);
 }

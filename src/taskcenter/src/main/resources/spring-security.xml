@@ -8,6 +8,7 @@
 	<!-- 权限管理设置 -->
 	<http auto-config="true" use-expressions="true" entry-point-ref="myAuthenticationEntryPoint">
 		<intercept-url pattern="/index.htm" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/task/**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/**" access="permitAll"></intercept-url>
 		<access-denied-handler ref="accessDeniedHandler" />
 		

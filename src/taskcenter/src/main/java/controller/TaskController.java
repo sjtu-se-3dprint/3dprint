@@ -63,6 +63,28 @@ public class TaskController extends BaseController {
 		}
 	}
 	
+	@RequestMapping(value = "/editTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map editTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.editTask(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/deleteTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map deleteTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.deleteTask(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
 	@RequestMapping(value = "/cancelTask.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map cancelTask(@RequestBody Map param) {                 
@@ -90,6 +112,17 @@ public class TaskController extends BaseController {
 	public Map endTask(@RequestBody Map param) {                 
 		try {
 			return initResult(true, taskServiceImpl.endTask(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/myUser.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map myUser(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.myUser());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");

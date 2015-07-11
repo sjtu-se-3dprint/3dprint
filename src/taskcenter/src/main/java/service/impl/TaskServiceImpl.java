@@ -7,7 +7,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import mapper.TaskMapper;
+import mapper.UserMapper;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,8 @@ public class TaskServiceImpl implements TaskService{
 
 	@Resource(name = "taskMapper")
 	TaskMapper taskMapper;
+	@Resource(name = "userMapper")
+	UserMapper userMapper;
 	
 	public List getTaskList(Map param) {
 		List<Map> taskList = taskMapper.getTaskList(param); 
@@ -48,15 +53,16 @@ public class TaskServiceImpl implements TaskService{
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean pickTask(Map param) throws Exception {
-		Map task = taskMapper.getTaskById(param);
-		Map user = new HashMap();
-		user.put("user_id", param.get("executor_id"));
-		user = taskMapper.getUserById(user);
-		if(task == null || user == null){
-			throw new Exception("找不到该任务或该执行人");
+		
+		Map user = myUser();
+		if(user == null){
+			throw new Exception("请先登录");
 		}
-		System.out.println(task);
-		System.out.println(user);
+
+		Map task = taskMapper.getTaskById(param);
+		if(task == null){
+			throw new Exception("找不到该任务");
+		}
 		
 		if(!"未处理".equals(task.get("task_status"))){
 			throw new Exception("该任务已在处理中");
@@ -81,11 +87,38 @@ public class TaskServiceImpl implements TaskService{
 		return true;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean publishTask(Map param) throws Exception {
 
+		Map user = myUser();
+		if(user == null){
+			throw new Exception("请先登录");
+		}
+		
+		param.put("task_publisher", user.get("user_id"));
 		if(1 != taskMapper.insertTask(param)){
 			throw new Exception("发布任务失败");
 		}
+		return true;
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Boolean editTask(Map param) throws Exception {
+		
+		Map user = myUser();
+		if(user == null){
+			throw new Exception("请先登录");
+		}
+		
+		Map task = taskMapper.getTaskById(param);
+		if(task == null){
+			throw new Exception("找不到该任务");
+		}
+		
+		if(1 != taskMapper.updateTask(param)){
+			throw new Exception("编辑任务失败");
+		}
+		
 		return true;
 	}
 
@@ -181,6 +214,53 @@ public class TaskServiceImpl implements TaskService{
 		taskStatus.put("task_status_new", "已完成");
 		if(1 != taskMapper.updateTaskStatus(taskStatus)){
 			throw new Exception("提交失败");
+		}
+		
+		return true;
+	}
+
+	public Map myUser() throws Exception {
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+
+		if (userDetails == null || userDetails.getUsername() == null) {
+			return null;
+		}
+
+		Map param = new HashMap();
+		param.put("user_account", userDetails.getUsername());
+
+		Map user = userMapper.findUserByAccount(param);
+		user.remove("user_password");
+
+		return user;
+
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Boolean deleteTask(Map param) throws Exception {
+		
+		Map user = myUser();
+		if(user == null){
+			throw new Exception("请先登录");
+		}
+		
+		Map task = taskMapper.getTaskById(param);
+		if(task == null){
+			throw new Exception("找不到该任务");
+		}
+		
+		if("已删除".equals(task.get("task_status"))){
+			throw new Exception("该任务已经被删除");
+		}
+		
+		Map taskStatus = new HashMap();
+		taskStatus.put("task_id", param.get("task_id"));
+		taskStatus.put("task_status_old", task.get("task_status"));
+		taskStatus.put("task_status_new", "已删除");
+		if(1 != taskMapper.updateTaskStatus(taskStatus)){
+			throw new Exception("删除任务失败");
 		}
 		
 		return true;

@@ -12,4 +12,8 @@ public interface TaskService {
 	public Boolean cancelTask(Map param) throws Exception;
 	public Boolean delayTask(Map param) throws Exception;
 	public Boolean endTask(Map param) throws Exception;
+	public Boolean editTask(Map param) throws Exception;
+	public Boolean deleteTask(Map param) throws Exception;
+	
+	public Map myUser() throws Exception;
 }

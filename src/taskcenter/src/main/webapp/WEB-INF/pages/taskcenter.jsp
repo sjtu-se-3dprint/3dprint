@@ -24,6 +24,11 @@
 <script src="<%=request.getContextPath()%>/js/util.js"></script>
 
 <script src="<%=request.getContextPath()%>/js/task/taskcenter.js"></script>
+<script src="<%=request.getContextPath()%>/js/task/taskcenter_ajax.js"></script>
+<script src="<%=request.getContextPath()%>/js/task/taskcenter_finished_task.js"></script>
+<script src="<%=request.getContextPath()%>/js/task/taskcenter_processing_task.js"></script>
+<script src="<%=request.getContextPath()%>/js/task/taskcenter_publish_edit_task.js"></script>
+<script src="<%=request.getContextPath()%>/js/task/taskcenter_unprocessing_task.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/taskcenter.css" />
 
@@ -35,10 +40,18 @@
 <title>任务中心</title>
 </head>
 <body>
-	<div class="container" style="padding-bottom:100px">
-		<div>
-			<button id="publishTaskModalButton" class="btn btn-primary"
-				style="margin-top: 30px">发布任务</button>
+	<div class="container" style="padding-bottom: 100px">
+		<div class="row" style="margin-top: 30px">
+			<div class="col-md-4">
+				<button id="publishTaskModalButton" class="btn btn-primary">发布任务</button>
+			</div>
+			<div class="col-md-1 pull-right">
+				<a href="<%=request.getContextPath()%>/logout.htm">注销</a>
+			</div>
+			<div class="pull-right">
+				<span>已登录：<security:authentication
+						property="principal.username"></security:authentication></span>
+			</div>
 		</div>
 		<div style="padding-top: 30px">
 			<ul class="nav nav-tabs hcrm-nav hcrm-nav-tabs" role="tablist"
@@ -114,8 +127,7 @@
 						<div class="fontsize_13 fontcolor_5">
 							<div class="row margin_5">
 								<div class="col-md-5">
-									请选择你的角色：<select id="userSelect">
-									</select>
+									你的角色：<span id="userSelect"> </span>
 								</div>
 							</div>
 							<div class="row margin_5">
@@ -166,8 +178,7 @@
 								任务名称： <input type="text" id="taskNameInput" style="width: 80%">
 							</div>
 							<div class="row margin_5">
-								选择角色： <select id="userSelectPublishTask">
-								</select>
+								你的角色： <span id="userSelectPublishTask"> </span>
 							</div>
 							<div class="row margin_5 border_top padding_top_5">任务详细描述：
 							</div>
@@ -188,6 +199,43 @@
 			</div>
 		</div>
 		
+		<div class="modal fade" id="editTaskModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">编辑任务</h4>
+					</div>
+					<div class="modal-body">
+						<div class="fontsize_13 fontcolor_5">
+							<div class="row margin_5">
+								任务名称： <input type="text" id="editTaskNameInput" style="width: 80%">
+							</div>
+							<div class="row margin_5">
+								你的角色： <span id="editUserSelectPublishTask"> </span>
+							</div>
+							<div class="row margin_5 border_top padding_top_5">任务详细描述：
+							</div>
+							<div class="row margin_5">
+								<script id="editEditor" type="text/plain" style="height: 400px;"></script>
+								<script>
+									var ueEdit = UE.getEditor('editEditor');
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary"
+							id="editTaskButton">修改任务</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal fade" id="finishTheTaskModal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -212,8 +260,7 @@
 								</div>
 							</div>
 							<div class="row margin_5">
-								<div class="col-md-2">
-								</div>
+								<div class="col-md-2"></div>
 								<div class="col-md-5">
 									领取时间：<span id="task_startime_finish"></span>
 								</div>
@@ -245,8 +292,7 @@
 						<div class="fontsize_13 fontcolor_5">
 							<div class="row margin_5">
 								<div class="col-md-5">
-									你的角色：<select id="userSelect_finish" disabled>
-									</select>
+									你的角色：<span id="userSelect_finish" disabled> </span>
 								</div>
 							</div>
 							<div class="row margin_5">
@@ -256,20 +302,21 @@
 										<option value="1">完成任务</option>
 										<option value="2">申请延期</option>
 										<option value="3">撤销任务</option>
-									</select>
-									<span id="finishStatusDurationSpan" style="display:none">输入延期天数：<input id="finishStatusDurationInput" type="text"></span>
+									</select> <span id="finishStatusDurationSpan" style="display: none">输入延期天数：<input
+										id="finishStatusDurationInput" type="text"></span>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary" id="finishTaskButton">结束任务</button>
+						<button type="button" class="btn btn-primary"
+							id="finishTaskButton">结束任务</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" id="finishedTaskModal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -294,8 +341,7 @@
 								</div>
 							</div>
 							<div class="row margin_5">
-								<div class="col-md-3">
-								</div>
+								<div class="col-md-3"></div>
 								<div class="col-md-3">
 									领取时间：<span id="task_startime_finished"></span>
 								</div>

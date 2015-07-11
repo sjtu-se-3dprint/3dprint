@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -23,6 +25,11 @@
 	src="<%=request.getContextPath()%>/css/bootstrap-table-master/src/locale/bootstrap-table-zh-CN.js"></script>
 
 <body>
+	<security:authorize access="hasRole('ROLE_USER')">
+		<script>
+		window.location.href = '<%=request.getContextPath()%>/index.htm';
+		</script>
+	</security:authorize>
 	<div class="container">
 		<div class="row" style="margin-top:40px">
 			<form class="form-horizontal"
