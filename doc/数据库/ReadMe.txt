@@ -12,3 +12,5 @@
 	添加：表'user'，任务中心的用户表
 	添加：表'task'，任务中心的任务表
 	添加：表'process'，任务中心的领取任务表
+2015-07-11
+	修改：任务中心表'user'添加user_account、user_password字段
