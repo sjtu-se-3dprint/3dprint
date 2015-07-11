@@ -12,35 +12,34 @@ function createProcessingTaskTable(data) {
 			title : '编号',
 			field : 'task_id',
 			sortable : true,
+			width : 20,
 		}, {
 			title : '任务名',
 			field : 'task_name',
+			width : 140,
 		}, {
 			title : '任务内容',
 			field : 'task_detail',
-			cellStyle : 'taskDetailStyle',
-		},/*
-			 * { title : '任务状态', field : 'task_status', }, { title : '发布时间',
-			 * field : 'addtime_format', }, { title : '发布者', field :
-			 * 'user_name', },
-			 */{
+		},{
 			title : '执行者',
 			field : 'executor_name',
 			sortable : true,
+			width : 70,
 		}, {
 			title : '开始时间',
 			field : 'starttime_format',
 			sortable : true,
+			width : 120,
 		}, {
 			title : '预计完成时间',
 			field : 'endtime_format',
 			sortable : true,
+			width : 120,
 		}, {
 			title : '操作',
 			field : 'processTheTask',
-			align : 'center',
-			valign : 'middle',
 			formatter : finishTheTaskIcon,
+			width : 90,
 			events : window.operateEvents = {
 				'click .finish' : function(e, value, row, index) {
 					globalRow = row;

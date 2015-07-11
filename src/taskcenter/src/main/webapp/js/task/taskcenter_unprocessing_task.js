@@ -1,4 +1,3 @@
-
 function showUnprocessingTasks() {
 	globalTab = 'unprocessing';
 	$('#unprocessingTaskTable').bootstrapTable('destroy');
@@ -12,29 +11,29 @@ function createUnprocessingTaskTable(data) {
 			title : '编号',
 			field : 'task_id',
 			sortable : true,
+			width : 20,
 		}, {
 			title : '任务名',
 			field : 'task_name',
+			width : 140,
 		}, {
 			title : '任务内容',
 			field : 'task_detail',
-			cellStyle : 'taskDetailStyle',
-		},/*
-			 * { title : '任务状态', field : 'task_status', },
-			 */{
+		}, {
 			title : '发布时间',
 			field : 'addtime_format',
 			sortable : true,
+			width : 120,
 		}, {
 			title : '发布者',
 			field : 'user_name',
 			sortable : true,
+			width : 90,
 		}, {
 			title : '操作',
 			field : 'processTheTask',
-			align : 'center',
-			valign : 'middle',
 			formatter : processTheTaskIcon,
+			width : 90,
 			events : window.operateEvents = {
 				'click .process' : function(e, value, row, index) {
 					globalRow = row;
@@ -50,13 +49,13 @@ function createUnprocessingTaskTable(data) {
 
 					$('#durationSelect').val(-1);
 				},
-				'click .edit' : function(e, value, row, index){
+				'click .edit' : function(e, value, row, index) {
 					globalRow = row;
 					editTaskModal();
 				},
-				'click .delete' : function(e, value, row, index){
+				'click .delete' : function(e, value, row, index) {
 					globalRow = row;
-					if(confirm('真的要删除任务【' + globalRow.task_name + '】吗？')){
+					if (confirm('真的要删除任务【' + globalRow.task_name + '】吗？')) {
 						deleteTask();
 					}
 				}
@@ -79,6 +78,6 @@ function unprocessingFormat(rows) {
 
 function processTheTaskIcon() {
 	return "<a class='process' href='javascript:void(0)'style=''>领取任务</a><br>"
-	+ "<a class='delete pull-right' href='javascript:void(0)'style='font-size:9px; color:#999;margin-top:10px;margin-right:0px'>删除</a>"
-	+ "<a class='edit pull-right' href='javascript:void(0)'style='font-size:9px; color:#999;margin-top:10px;margin-right:5px'>编辑</a>"
+			+ "<a class='delete pull-right' href='javascript:void(0)'style='font-size:9px; color:#999;margin-top:10px;margin-right:0px'>删除</a>"
+			+ "<a class='edit pull-right' href='javascript:void(0)'style='font-size:9px; color:#999;margin-top:10px;margin-right:5px'>编辑</a>"
 }

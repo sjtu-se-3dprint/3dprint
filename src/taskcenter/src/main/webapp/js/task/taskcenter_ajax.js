@@ -40,6 +40,8 @@ function getTaskListFromServer(task_status, callback) {
 		data : JSON.stringify(statusObj),
 		success : function(res) {
 			if (res && res.success) {
+				console.log(res.value);
+				mergeTaskDetail(res.value);
 				callback(res.value);
 			} else if (res) {
 				alert(res.message);
@@ -51,6 +53,22 @@ function getTaskListFromServer(task_status, callback) {
 			alert('未知错误');
 		}
 	});
+}
+
+function mergeTaskDetail(rows){
+	if(!rows || !rows.length){
+		return;
+	}
+	for(var i=0; i<rows.length; i++){
+		var row = rows[i];
+		if(row.task_detail_list && row.task_detail_list.length){
+			var list = row.task_detail_list;
+			row.task_detail = '';
+			for(var j=0; j<list.length; j++){
+				row.task_detail += list[j];
+			}
+		}
+	}
 }
 
 function deleteTask() {

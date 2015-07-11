@@ -88,6 +88,7 @@ function taskHistoryDetail(callback) {
 		}),
 		success : function(res) {
 			if (res && res.success) {
+				mergeRecordTaskDetail(res.value);
 				callback(res.value);
 			} else if (res) {
 				alert(res.message);
@@ -100,7 +101,21 @@ function taskHistoryDetail(callback) {
 		}
 	});
 }
-
+function mergeRecordTaskDetail(rows){
+	if(!rows || !rows.length){
+		return;
+	}
+	for(var i=0; i<rows.length; i++){
+		var row = rows[i];
+		if(row.record_task_detail_list && row.record_task_detail_list.length){
+			var list = row.record_task_detail_list;
+			row.record_task_detail = '';
+			for(var j=0; j<list.length; j++){
+				row.record_task_detail += list[j];
+			}
+		}
+	}
+}
 function detailTaskFormat(rows){
 	for (var i = 0; i < rows.length; i++) {
 		rows[i].addtime_format = new Date(rows[i].addtime)

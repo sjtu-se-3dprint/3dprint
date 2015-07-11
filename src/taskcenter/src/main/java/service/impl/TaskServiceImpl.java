@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,28 @@ public class TaskServiceImpl implements TaskService {
 	@Resource(name = "recordMapper")
 	RecordMapper recordMapper;
 
+	private void splitTaskDetail(List<Map> taskList, String name, String listName){
+		if(taskList == null){
+			return;
+		}
+		int len = 500;
+		for(Map item : taskList){
+			Object detailObj = item.get(name);
+			if(detailObj == null){
+				continue;
+			}
+			String detail = (String)detailObj;
+			List task_detail_list = new ArrayList<String>();
+			for(int i=0; i<detail.length(); i+=len){
+				task_detail_list.add(detail.substring(i, Math.min(i+len, detail.length())));
+			}
+			item.put(listName, task_detail_list);
+			item.remove(name);
+		}
+	}
 	public List getTaskList(Map param) {
 		List<Map> taskList = taskMapper.getTaskList(param);
+		splitTaskDetail(taskList, "task_detail", "task_detail_list");
 		if (taskList != null && "正在进行中".equals(param.get("task_status"))) {
 			for (Map item : taskList) {
 				item.put("process_status", "processing");
@@ -52,6 +73,7 @@ public class TaskServiceImpl implements TaskService {
 
 	public List getAllTaskList(Map param) {
 		List<Map> taskList = taskMapper.getTaskList(param);
+		splitTaskDetail(taskList, "task_detail", "task_detail_list");
 		return taskList;
 	}
 
@@ -411,6 +433,8 @@ public class TaskServiceImpl implements TaskService {
 			Map operator = taskMapper.getUserById(record);
 			record.put("operator", operator);
 		}
+
+		splitTaskDetail(records, "record_task_detail", "record_task_detail_list");
 
 		return records;
 	}
