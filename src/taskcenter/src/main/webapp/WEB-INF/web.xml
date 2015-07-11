@@ -33,4 +33,9 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.htm</location>
+	</error-page>
 </web-app>

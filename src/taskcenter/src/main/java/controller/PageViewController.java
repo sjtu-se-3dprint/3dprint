@@ -17,6 +17,11 @@ public class PageViewController {
 	public String taskcenter(ModelMap model) {
 		return "taskcenter";
 	}
+	
+	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
+	public String notfound(ModelMap model) {
+		return "404";
+	}
 
 //	@RequestMapping(value = "/ueditor1_4_3-utf8-jsp-2/jsp/controller.jsp", method = RequestMethod.GET)
 //	public void ueditor(HttpServletRequest request, HttpServletResponse response) {
