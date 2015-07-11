@@ -16,3 +16,7 @@
 	修改：任务中心表'user'添加user_account、user_password字段
 2015-07-11_2
 	添加：任务中心表'record'，用于记录任务的操作流程
+2015-07-11_3
+	修改：任务中心表'task'的task_detail字段设置为长度20000
+	修改：任务中心表'record'的record_task_detail字段设置为长度20000
+	修改：任务中心表'record'的record_content字段设置为长度1280
