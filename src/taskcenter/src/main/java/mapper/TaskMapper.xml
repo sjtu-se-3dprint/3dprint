@@ -38,12 +38,12 @@
 			and task_status = #{task_status_old}
 	</update>
 	
-	<insert id="insertProcess">
+	<insert id="insertProcess"  useGeneratedKeys="true" keyProperty="process_id">
 		insert into process(task_id, user_id, process_duration)
 		values(#{task_id}, #{user_id}, #{process_duration})
 	</insert>
 	
-	<insert id="insertTask">
+	<insert id="insertTask"  useGeneratedKeys="true" keyProperty="task_id">
 		insert into task(task_name, task_detail, task_publisher)
 		values(#{task_name}, #{task_detail}, #{task_publisher})
 	</insert>

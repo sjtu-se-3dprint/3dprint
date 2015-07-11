@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import mapper.RecordMapper;
 import mapper.TaskMapper;
 import mapper.UserMapper;
 
@@ -24,6 +25,8 @@ public class TaskServiceImpl implements TaskService {
 	TaskMapper taskMapper;
 	@Resource(name = "userMapper")
 	UserMapper userMapper;
+	@Resource(name = "recordMapper")
+	RecordMapper recordMapper;
 
 	public List getTaskList(Map param) {
 		List<Map> taskList = taskMapper.getTaskList(param);
@@ -84,6 +87,16 @@ public class TaskServiceImpl implements TaskService {
 			throw new Exception("领取任务失败");
 		}
 
+		task = taskMapper.getTaskById(param);
+		
+		Map record = createRecord(task, user, "领取任务", user.get("user_name")
+				+ "领取了任务【" + task.get("task_name") + "】");
+		record.put("record_process_id", processMap.get("process_id"));
+		record.put("record_days", param.get("process_duration"));
+		if (1 != recordMapper.insertRecord(record)) {
+			throw new Exception("领取任务失败");
+		}
+
 		return true;
 	}
 
@@ -99,6 +112,18 @@ public class TaskServiceImpl implements TaskService {
 		if (1 != taskMapper.insertTask(param)) {
 			throw new Exception("发布任务失败");
 		}
+
+		Map task = taskMapper.getTaskById(param);
+		if (task == null) {
+			throw new Exception("发布任务失败");
+		}
+
+		Map record = createRecord(task, user, "发布任务", user.get("user_name")
+				+ "发布了任务【" + task.get("task_name") + "】");
+		if (1 != recordMapper.insertRecord(record)) {
+			throw new Exception("发布任务失败");
+		}
+
 		return true;
 	}
 
@@ -122,10 +147,11 @@ public class TaskServiceImpl implements TaskService {
 		} else if ("正在进行中".equals(task.get("task_status"))) {
 			task.put("process_status", "processing");
 			Map executor = taskMapper.getExecutorByTaskId(task);
-			if(executor == null){
+			if (executor == null) {
 				throw new Exception("该任务正在被执行，但是找不到执行者，编辑任务失败");
 			}
-			if(Integer.parseInt("" + executor.get("user_id")) != Integer.parseInt("" + user.get("user_id"))){
+			if (Integer.parseInt("" + executor.get("user_id")) != Integer
+					.parseInt("" + user.get("user_id"))) {
 				throw new Exception("该任务正在被其他人执行，你不能编辑它");
 			}
 			if (1 != taskMapper.updateTask(param)) {
@@ -133,11 +159,25 @@ public class TaskServiceImpl implements TaskService {
 			}
 		}
 
+		String taskName = (String) task.get("task_name");
+		task = taskMapper.getTaskById(param);
+
+		Map record = createRecord(task, user, "编辑任务", user.get("user_name")
+				+ "编辑了任务【" + taskName + "】");
+		if (1 != recordMapper.insertRecord(record)) {
+			throw new Exception("编辑任务失败");
+		}
+
 		return true;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean cancelTask(Map param) throws Exception {
+
+		Map user = myUser();
+		if (user == null) {
+			throw new Exception("请先登录");
+		}
 
 		Map task = taskMapper.getTaskById(param);
 		if (task == null || !"正在进行中".equals(task.get("task_status"))) {
@@ -168,12 +208,25 @@ public class TaskServiceImpl implements TaskService {
 			throw new Exception("撤销任务失败");
 		}
 
-		System.out.println(task);
+		task = taskMapper.getTaskById(param);
+
+		Map record = createRecord(task, user, "撤销任务", user.get("user_name")
+				+ "撤销了任务【" + task.get("task_name") + "】");
+		record.put("record_process_id", executor.get("process_id"));
+		if (1 != recordMapper.insertRecord(record)) {
+			throw new Exception("撤销任务失败");
+		}
+
 		return true;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean delayTask(Map param) throws Exception {
+
+		Map user = myUser();
+		if (user == null) {
+			throw new Exception("请先登录");
+		}
 
 		Map task = taskMapper.getTaskById(param);
 		if (task == null || !"正在进行中".equals(task.get("task_status"))) {
@@ -197,11 +250,28 @@ public class TaskServiceImpl implements TaskService {
 			throw new Exception("申请延期失败");
 		}
 
+		task = taskMapper.getTaskById(param);
+
+		Map record = createRecord(task, user, "申请延期",
+				user.get("user_name") + "延期了任务【" + task.get("task_name") + "】"
+						+ param.get("delay_days") + "天");
+		record.put("record_process_id", executor.get("process_id"));
+		record.put("record_delay",
+				Integer.parseInt("" + param.get("delay_days")));
+		if (1 != recordMapper.insertRecord(record)) {
+			throw new Exception("申请延期失败");
+		}
+
 		return true;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean endTask(Map param) throws Exception {
+
+		Map user = myUser();
+		if (user == null) {
+			throw new Exception("请先登录");
+		}
 
 		Map task = taskMapper.getTaskById(param);
 		if (task == null || !"正在进行中".equals(task.get("task_status"))) {
@@ -229,6 +299,15 @@ public class TaskServiceImpl implements TaskService {
 		taskStatus.put("task_status_old", "正在进行中");
 		taskStatus.put("task_status_new", "已完成");
 		if (1 != taskMapper.updateTaskStatus(taskStatus)) {
+			throw new Exception("提交失败");
+		}
+
+		task = taskMapper.getTaskById(param);
+
+		Map record = createRecord(task, user, "完成任务", user.get("user_name")
+				+ "完成了任务【" + task.get("task_name") + "】");
+		record.put("record_process_id", executor.get("process_id"));
+		if (1 != recordMapper.insertRecord(record)) {
 			throw new Exception("提交失败");
 		}
 
@@ -283,7 +362,26 @@ public class TaskServiceImpl implements TaskService {
 			throw new Exception("删除任务失败");
 		}
 
+		task = taskMapper.getTaskById(param);
+
+		Map record = createRecord(task, user, "删除任务", user.get("user_name")
+				+ "删除了任务【" + task.get("task_name") + "】");
+		if (1 != recordMapper.insertRecord(record)) {
+			throw new Exception("删除任务失败");
+		}
+
 		return true;
 	}
 
+	private Map createRecord(Map task, Map user, String type, String content) {
+		Map record = new HashMap();
+		record.put("record_type", type);
+		record.put("record_task_name", task.get("task_name"));
+		record.put("record_task_detail", task.get("task_detail"));
+		record.put("record_task_status", task.get("task_status"));
+		record.put("task_id", task.get("task_id"));
+		record.put("record_content", content);
+		record.put("user_id", user.get("user_id"));
+		return record;
+	}
 }
