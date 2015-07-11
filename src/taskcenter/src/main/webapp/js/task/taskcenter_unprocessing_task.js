@@ -63,7 +63,8 @@ function createUnprocessingTaskTable(data) {
 			}
 		} ],
 		sortName : 'addtime_format',
-		sortOrder : 'desc'
+		sortOrder : 'desc',
+		classes : tableClasses()
 	}).bootstrapTable('load', data);
 }
 

@@ -62,7 +62,8 @@ function createProcessedTaskTable(data) {
 			}
 		} ],
 		sortName : 'finish_time',
-		sortOrder : 'desc'
+		sortOrder : 'desc',
+		classes : tableClasses()
 	}).bootstrapTable('load', data);
 }
 

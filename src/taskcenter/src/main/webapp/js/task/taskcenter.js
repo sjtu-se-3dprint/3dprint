@@ -41,3 +41,7 @@ function refreshTab(){
 		break;
 	}
 }
+
+function tableClasses(){
+	return 'table table-striped';
+}

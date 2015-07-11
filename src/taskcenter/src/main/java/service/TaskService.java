@@ -6,6 +6,8 @@ import java.util.Map;
 public interface TaskService {
 
 	public List getTaskList(Map param);
+	public List getAllTaskList(Map param);
+	public List getTaskHistoryDetail(Map param) throws Exception;
 	public List getUserList(Map param);
 	public Boolean pickTask(Map param) throws Exception;
 	public Boolean publishTask(Map param) throws Exception;

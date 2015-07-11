@@ -25,10 +25,14 @@
 
 <script src="<%=request.getContextPath()%>/js/task/taskcenter.js"></script>
 <script src="<%=request.getContextPath()%>/js/task/taskcenter_ajax.js"></script>
-<script src="<%=request.getContextPath()%>/js/task/taskcenter_finished_task.js"></script>
-<script src="<%=request.getContextPath()%>/js/task/taskcenter_processing_task.js"></script>
-<script src="<%=request.getContextPath()%>/js/task/taskcenter_publish_edit_task.js"></script>
-<script src="<%=request.getContextPath()%>/js/task/taskcenter_unprocessing_task.js"></script>
+<script
+	src="<%=request.getContextPath()%>/js/task/taskcenter_finished_task.js"></script>
+<script
+	src="<%=request.getContextPath()%>/js/task/taskcenter_processing_task.js"></script>
+<script
+	src="<%=request.getContextPath()%>/js/task/taskcenter_publish_edit_task.js"></script>
+<script
+	src="<%=request.getContextPath()%>/js/task/taskcenter_unprocessing_task.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/taskcenter.css" />
 
@@ -41,16 +45,28 @@
 </head>
 <body>
 	<div class="container" style="padding-bottom: 100px">
-		<div class="row" style="margin-top: 30px">
-			<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-4" style="margin-top: 30px">
 				<button id="publishTaskModalButton" class="btn btn-primary">发布任务</button>
 			</div>
-			<div class="col-md-1 pull-right">
-				<a href="<%=request.getContextPath()%>/logout.htm">注销</a>
-			</div>
-			<div class="pull-right">
-				<span>已登录：<security:authentication
-						property="principal.username"></security:authentication></span>
+
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"> <span class="text-primary"> <security:authentication
+									property="principal.username"></security:authentication>
+						</span>
+					</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false">更多
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<%=request.getContextPath()%>/history.htm">任务历史流程列表</a></li>
+							<li class="divider"></li>
+							<li><a href="<%=request.getContextPath()%>/logout.htm">注销</a></li>
+						</ul></li>
+				</ul>
 			</div>
 		</div>
 		<div style="padding-top: 30px">
@@ -198,7 +214,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal fade" id="editTaskModal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -212,7 +228,8 @@
 					<div class="modal-body">
 						<div class="fontsize_13 fontcolor_5">
 							<div class="row margin_5">
-								任务名称： <input type="text" id="editTaskNameInput" style="width: 80%">
+								任务名称： <input type="text" id="editTaskNameInput"
+									style="width: 80%">
 							</div>
 							<div class="row margin_5">
 								你的角色： <span id="editUserSelectPublishTask"> </span>
@@ -229,8 +246,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary"
-							id="editTaskButton">修改任务</button>
+						<button type="button" class="btn btn-primary" id="editTaskButton">修改任务</button>
 					</div>
 				</div>
 			</div>

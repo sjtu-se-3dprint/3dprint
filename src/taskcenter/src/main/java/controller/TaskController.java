@@ -29,6 +29,28 @@ public class TaskController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
+
+	@RequestMapping(value = "/listAllTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map listAllTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.getAllTaskList(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+
+	@RequestMapping(value = "/taskHistoryDetail.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map taskHistoryDetail(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.getTaskHistoryDetail(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
 	
 	@RequestMapping(value = "/listUser.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody

@@ -16,5 +16,11 @@
 			<if test="record_days!=null">,#{record_days}</if>
 			)
 	</insert>
+	
+	<select id="findRecordsByTaskId" resultType="map">
+		select * from record
+		where task_id = #{task_id}
+		order by record_id
+	</select>
 
 </mapper>

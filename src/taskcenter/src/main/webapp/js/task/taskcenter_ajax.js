@@ -28,17 +28,18 @@ function getMyUser() {
 
 // 获取任务列表
 function getTaskListFromServer(task_status, callback) {
+	var statusObj = new Object();
+	if(task_status != null){
+		statusObj.task_status = task_status;
+	}
 	$.ajax({
 		url : ContextPath + '/task/listTask.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
-		data : JSON.stringify({
-			task_status : task_status
-		}),
+		data : JSON.stringify(statusObj),
 		success : function(res) {
 			if (res && res.success) {
-				console.log(res);
 				callback(res.value);
 			} else if (res) {
 				alert(res.message);

@@ -50,6 +50,11 @@ public class TaskServiceImpl implements TaskService {
 		return taskList;
 	}
 
+	public List getAllTaskList(Map param) {
+		List<Map> taskList = taskMapper.getTaskList(param);
+		return taskList;
+	}
+
 	public List getUserList(Map param) {
 		return taskMapper.getUserList();
 	}
@@ -383,5 +388,30 @@ public class TaskServiceImpl implements TaskService {
 		record.put("record_content", content);
 		record.put("user_id", user.get("user_id"));
 		return record;
+	}
+
+	public List getTaskHistoryDetail(Map param) throws Exception{
+
+		Map user = myUser();
+		if (user == null) {
+			throw new Exception("请先登录");
+		}
+
+		Map task = taskMapper.getTaskById(param);
+		if (task == null) {
+			throw new Exception("找不到该任务");
+		}
+		
+		List<Map> records = recordMapper.findRecordsByTaskId(param);
+		if(records == null){
+			return records;
+		}
+		
+		for(Map record : records){
+			Map operator = taskMapper.getUserById(record);
+			record.put("operator", operator);
+		}
+
+		return records;
 	}
 }

@@ -6,7 +6,7 @@
 		select task.*, user_id, user_name from task, user
 		where task.task_publisher = user.user_id
 		<if test="task_status!=null">and task_status=#{task_status} order by task.task_id, user.user_id</if>
-		<if test="task_status==null">order by task_status, task.id, user.user_id</if>
+		<if test="task_status==null">order by task.task_id desc</if>
 	</select>
 	
 	<select id="getExecutorByTaskId" resultType="map">
