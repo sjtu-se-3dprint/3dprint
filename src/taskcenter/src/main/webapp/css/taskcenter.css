@@ -58,3 +58,7 @@ p {
 	overflow:hidden;
 	max-width:600px;
 }
+td {
+	overflow:hidden;
+	max-width:140px;
+}

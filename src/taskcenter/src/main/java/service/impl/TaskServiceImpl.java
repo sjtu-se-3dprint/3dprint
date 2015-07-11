@@ -135,6 +135,16 @@ public class TaskServiceImpl implements TaskService {
 			throw new Exception("请先登录");
 		}
 
+		int max_name = 128;
+		if(((String)param.get("task_name")).length() > max_name){
+			throw new Exception("标题最长为" + max_name + "个字符");
+		}
+		
+		int max_detail = 20000;
+		if(((String)param.get("task_detail")).length() > max_detail){
+			throw new Exception("任务详细描述太长，请删除部分内容再提交");
+		}
+
 		param.put("task_publisher", user.get("user_id"));
 		if (1 != taskMapper.insertTask(param)) {
 			throw new Exception("发布任务失败");
