@@ -18,6 +18,26 @@ public class PageViewController {
 		return "taskcenter";
 	}
 
+	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
+	public String notfound(ModelMap model) {
+		return "404";
+	}
+
+	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
+	public String login(ModelMap model) {
+		return "login";
+	}
+
+	@RequestMapping(value = "/loginfailed.htm", method = RequestMethod.GET)
+	public String loginfailed(ModelMap model) {
+		return "loginfailed";
+	}
+
+	@RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
+	public String logout(ModelMap model) {
+		return "logout";
+	}
+
 //	@RequestMapping(value = "/ueditor1_4_3-utf8-jsp-2/jsp/controller.jsp", method = RequestMethod.GET)
 //	public void ueditor(HttpServletRequest request, HttpServletResponse response) {
 //		System.out.println("UEditor!");
