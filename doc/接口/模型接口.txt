@@ -125,3 +125,9 @@
 	amount
 返回
 	返回类型为List
+
+2.删除模型
+入参
+	model_id
+返回
+	返回类型为boolean
