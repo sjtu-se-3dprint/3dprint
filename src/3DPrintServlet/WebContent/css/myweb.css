@@ -1,0 +1,28 @@
+.top_bar {
+	min-height:30px;
+	background:#25292C;
+	border-bottom: 1px solid #414f5a;
+	font-size: 14px;
+	padding-top: 6px;
+	padding-right: 0;
+	padding-bottom: 0px;
+	padding-left: 0;
+}
+#icon-phone{
+    color: #fff;
+    float: left;
+    margin-left: 40px;
+}
+
+#icon-envelop{
+    color: #fff;
+    float: left;
+    margin-left: 20px;
+}
+.login{
+    float: right;
+}
+
+.sign_up{float: left;margin-right: 30px;margin-top: 4px;font-size: 16px;}
+.login_in{float: left;margin-right: 40px;margin-top: 4px;font-size: 16px;}
+

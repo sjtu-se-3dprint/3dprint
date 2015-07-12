@@ -1,0 +1,91 @@
+.panel {
+	display: none;
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	border-color: #ddd;
+}
+
+.panel-heading {
+	color: #333;
+	background-color: #f5f5f5;
+	border-color: #ddd;
+	padding: 10px 15px;
+	border-bottom: 1px solid #ddd;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.table {
+	margin-bottom: 0px;
+	border-bottom: 1px solid #ddd;
+}
+
+.icon-chevron-up {
+	margin-left: 5px;
+	position: absolute;
+	top: -6px;
+	color: lightgrey;
+}
+
+.icon-chevron-up:hover {
+	cursor: pointer;
+	color: #333;
+}
+
+.icon-chevron-down {
+	margin-left: 5px;
+	position: absolute;
+	top: 4px;
+	color: lightgrey;
+}
+
+.icon-chevron-down:hover {
+	cursor: pointer;
+	color: #333;
+}
+
+.table .one-row:hover {
+	background: #eee;
+	cursor: pointer;
+}
+
+.btn-group {
+	padding-top: 30px;
+}
+
+.btn-right {
+	float: right;
+	border: 1px #999 solid;
+	background: transparent;
+}
+
+.reject {
+	background: crimson;
+	color: white;
+}
+
+.pass {
+	background: mediumseagreen;
+	color: white;
+}
+
+.wait {
+	background: gold;
+	color: white;
+}
+
+.reject2 {
+	border-left: 6px solid crimson;
+}
+
+.pass2 {
+	border-left: 6px solid mediumseagreen;
+}
+
+.wait2 {
+	border-left: 6px solid gold;
+}

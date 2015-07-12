@@ -1,0 +1,328 @@
+<web-app>
+	<servlet>
+		<servlet-name>UserExist</servlet-name>
+		<servlet-class>ajaxservice.UserExistAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserExist</servlet-name>
+		<url-pattern>/ajax/userexist</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>ajaxservice.RegisterAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/ajax/register</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>ajaxservice.LoginAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/ajax/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>ajaxservice.LogoutAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/ajax/logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CancelUserlike</servlet-name>
+		<servlet-class>ajaxservice.CancelUserlikeAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CancelUserlike</servlet-name>
+		<url-pattern>/ajax/canceluserlike</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Userlike</servlet-name>
+		<servlet-class>ajaxservice.UserlikeAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Userlike</servlet-name>
+		<url-pattern>/ajax/userlike</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserCollection</servlet-name>
+		<servlet-class>ajaxservice.UserCollectionAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserCollection</servlet-name>
+		<url-pattern>/ajax/usercollection</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CancelUserCollection</servlet-name>
+		<servlet-class>ajaxservice.CancelUserCollectionAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CancelUserCollection</servlet-name>
+		<url-pattern>/ajax/cancelusercollection</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserComment</servlet-name>
+		<servlet-class>ajaxservice.UserCommentAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserComment</servlet-name>
+		<url-pattern>/ajax/usercomment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SearchComment</servlet-name>
+		<servlet-class>ajaxservice.SearchCommentAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchComment</servlet-name>
+		<url-pattern>/ajax/searchcomment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModifyUserInfo</servlet-name>
+		<servlet-class>ajaxservice.ModifyUserInfoAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModifyUserInfo</servlet-name>
+		<url-pattern>/ajax/modifyuserinfo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModifyPassword</servlet-name>
+		<servlet-class>ajaxservice.ModifyPasswordAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModifyPassword</servlet-name>
+		<url-pattern>/ajax/modifypassword</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteModels</servlet-name>
+		<servlet-class>ajaxservice.DeleteModelsAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteModels</servlet-name>
+		<url-pattern>/ajax/deletemodels</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CancelUserCollections</servlet-name>
+		<servlet-class>ajaxservice.CancelUserCollectionsAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CancelUserCollections</servlet-name>
+		<url-pattern>/ajax/cancelusercollections</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpLoadUserheadImage</servlet-name>
+		<servlet-class>ajaxservice.UpLoadUserheadImageAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpLoadUserheadImage</servlet-name>
+		<url-pattern>/ajax/uploaduserheadimage</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>AddShopcar</servlet-name>
+		<servlet-class>ajaxservice.AddShopcarAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddShopcar</servlet-name>
+		<url-pattern>/ajax/addshopcar</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>DeleteShopcar</servlet-name>
+		<servlet-class>ajaxservice.DeleteShopcarAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteShopcar</servlet-name>
+		<url-pattern>/ajax/deleteshopcar</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddOrders</servlet-name>
+		<servlet-class>ajaxservice.AddOrdersAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddOrders</servlet-name>
+		<url-pattern>/ajax/addorders</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UploadModel</servlet-name>
+		<servlet-class>ajaxservice.UploadModelAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadModel</servlet-name>
+		<url-pattern>/ajax/uploadmodel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModifyModel</servlet-name>
+		<servlet-class>ajaxservice.ModifyModelAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModifyModel</servlet-name>
+		<url-pattern>/ajax/modifymodel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteUser</servlet-name>
+		<servlet-class>ajaxservice.DeleteUserAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteUser</servlet-name>
+		<url-pattern>/ajax/deleteuser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddManager</servlet-name>
+		<servlet-class>ajaxservice.AddManagerAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddManager</servlet-name>
+		<url-pattern>/ajax/addmanager</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteComments</servlet-name>
+		<servlet-class>ajaxservice.DeleteCommentsAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteComments</servlet-name>
+		<url-pattern>/ajax/deletecomments</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeletePost</servlet-name>
+		<servlet-class>ajaxservice.DeletePostAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeletePost</servlet-name>
+		<url-pattern>/ajax/deletepost</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChangeOrdersStatus</servlet-name>
+		<servlet-class>ajaxservice.ChangeOrdersStatusAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeOrdersStatus</servlet-name>
+		<url-pattern>/ajax/changeordersstatus</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChangeOrdersStatusByUser</servlet-name>
+		<servlet-class>ajaxservice.ChangeOrdersStatusByUserAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeOrdersStatusByUser</servlet-name>
+		<url-pattern>/ajax/changeordersstatusbyuser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddPost</servlet-name>
+		<servlet-class>ajaxservice.AddPostAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPost</servlet-name>
+		<url-pattern>/ajax/addpost</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddPostcomment</servlet-name>
+		<servlet-class>ajaxservice.AddPostcommentAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPostcomment</servlet-name>
+		<url-pattern>/ajax/addpostcomment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddPostcommentComment</servlet-name>
+		<servlet-class>ajaxservice.AddPostcommentCommentAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPostcommentComment</servlet-name>
+		<url-pattern>/ajax/addpostcommentcomment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddPostsupport</servlet-name>
+		<servlet-class>ajaxservice.AddPostsupportAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPostsupport</servlet-name>
+		<url-pattern>/ajax/addpostsupport</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserHeadImage</servlet-name>
+		<servlet-class>ajaxservice.UserHeadImageAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserHeadImage</servlet-name>
+		<url-pattern>/userheadimage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DownloadModel</servlet-name>
+		<servlet-class>ajaxservice.DownloadModelAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DownloadModel</servlet-name>
+		<url-pattern>/downloadmodel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModelImage</servlet-name>
+		<servlet-class>ajaxservice.ModelImageAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModelImage</servlet-name>
+		<url-pattern>/modelimage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddLessonAjax</servlet-name>
+		<servlet-class>ajaxservice.AddLessonAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddLessonAjax</servlet-name>
+		<url-pattern>/ajax/addlesson</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddLessonNewAjax</servlet-name>
+		<servlet-class>ajaxservice.AddLessonNewAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddLessonNewAjax</servlet-name>
+		<url-pattern>/ajax/addlesson_new</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LessonImageAjax</servlet-name>
+		<servlet-class>ajaxservice.LessonImageAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LessonImageAjax</servlet-name>
+		<url-pattern>/ajax/lessonimage</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

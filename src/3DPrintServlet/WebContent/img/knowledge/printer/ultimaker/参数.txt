@@ -1,0 +1,5 @@
+参数1：Desktop space ：357 x 342 x 388 mm
+参数2：Build volume ：210 x 210 x 205 mm
+参数3：Speed：30 - 300 mm/s
+参数4：Quality：up to 20 micron (0.02mm)
+
