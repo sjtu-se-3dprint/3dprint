@@ -1,0 +1,127 @@
+模型列表页面（任意权限可访问）
+
+1.获取模型列表
+入参
+	page 页码
+	amount 每页个数
+	type 模型类型
+	sortType 排序类型：销量、收藏数、添加时间、默认排序 {bought, collected, addtime, default}
+	keyWord 关键字，根据关键字来筛选模型（不填表示全部）
+返回
+	返回类型为List
+	List中的每一项是数据库表'model'中的一整行
+
+2.获取模型类型列表
+入参
+	空
+返回
+	返回类型为List
+	List中的每一项是数据库表'model_type'中的一整行
+
+模型详细页面（任意权限可访问）
+
+1.获取模型详细信息
+入参
+	model_id 模型id
+返回
+	返回类型为Map（model表中的一行）
+
+2.获取用户详细信息
+入参
+	user_id 上传该模型用户id
+返回
+	返回类型为Map（user表中的一行，但是password要去掉）
+
+3.获取模型评论
+入参
+	page 页码
+	amount 每页个数
+	model_id 模型id
+返回
+	返回类型为List
+	List中每一项是数据库表'model_comment'中的一整行，还要加上评论者的name
+
+4.该用户是否收藏了该模型
+入参
+	model_id
+返回
+	返回类型为boolean
+
+5.该用户是否已经把该模型添加到了购物车里面
+入参
+	model_id
+返回
+	返回类型为boolean
+
+6.用户收藏该模型
+入参
+	model_id
+返回
+	返回类型为boolean
+
+7.用户取消收藏
+入参
+	model_id
+返回
+	返回类型为boolean
+
+8.用户下载该模型
+入参
+	model_id
+返回
+	下载该文件
+	
+9.用户发表评论
+入参
+	model_id
+	model_comment_content 用户的评论内容（不少于10个字，不超过140个）
+返回
+	返回类型为boolean
+
+10.加入购物车
+入参
+	model_id
+返回
+	返回类型为boolean
+
+模型上传页面
+
+1.上传模型
+入参
+	model_file
+	model_name
+	model_description
+	model_length
+	model_height
+	model_width
+	model_style
+	model_images
+返回
+	返回类型为boolean
+
+2.获取模型类型列表（在模型列表页面已实现）
+	
+模型编辑页面
+
+1.获取模型详细信息（在模型详细页面已实现）
+
+2.提交编辑类容
+入参
+	model_id
+	model_description
+	model_length
+	model_height
+	model_width
+	delete_images 删除掉的模型图片名称如1;3;4
+	add_images 新增的图片内容
+返回
+	返回类型为boolean
+
+用户中心-我的模型
+
+1.获取已上传模型列表
+入参
+	page
+	amount
+返回
+	返回类型为List
