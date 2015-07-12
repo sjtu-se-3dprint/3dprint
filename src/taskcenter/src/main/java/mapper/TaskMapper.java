@@ -20,4 +20,10 @@ public interface TaskMapper {
 	public Integer insertProcess(Map param);
 	
 	public Integer insertTask(Map param);
+	
+	public Integer updateProcessStatus(Map param);
+	
+	public Integer updateProcessDuration(Map param);
+	
+	public Integer updateTask(Map param);
 }

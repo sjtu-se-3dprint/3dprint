@@ -46,6 +46,19 @@
 	color: #666;
 }
 
-.taskDetailStyle {
-	width: 500px;
+.nav li a:hover {
+	text-decoration: none;
+	background-color: #fff;
+}
+
+p {
+	text-indent: 2em;
+	padding: 0px;
+	margin: 0px;
+	overflow:hidden;
+	max-width:600px;
+}
+td {
+	overflow:hidden;
+	max-width:140px;
 }

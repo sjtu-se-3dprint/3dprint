@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.RecordMapper">
+
+	<insert id="insertRecord">
+		insert into record(record_type, record_task_name, record_task_detail, record_task_status,
+			record_content, user_id, task_id
+			<if test="record_process_id!=null">, record_process_id</if>
+			<if test="record_delay!=null">, record_delay</if>
+			<if test="record_days!=null">, record_days</if>
+			)
+		values (#{record_type},#{record_task_name},#{record_task_detail},#{record_task_status},
+			#{record_content},#{user_id},#{task_id}
+			<if test="record_process_id!=null">,#{record_process_id}</if>
+			<if test="record_delay!=null">,#{record_delay}</if>
+			<if test="record_days!=null">,#{record_days}</if>
+			)
+	</insert>
+	
+	<select id="findRecordsByTaskId" resultType="map">
+		select * from record
+		where task_id = #{task_id}
+		order by record_id
+	</select>
+
+</mapper>

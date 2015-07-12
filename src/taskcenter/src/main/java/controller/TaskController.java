@@ -25,7 +25,29 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.getTaskList(param));
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+
+	@RequestMapping(value = "/listAllTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map listAllTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.getAllTaskList(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+
+	@RequestMapping(value = "/taskHistoryDetail.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map taskHistoryDetail(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.getTaskHistoryDetail(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -36,7 +58,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.getUserList(param));
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -47,7 +69,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.pickTask(param));
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -58,7 +80,73 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.publishTask(param));
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/editTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map editTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.editTask(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/deleteTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map deleteTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.deleteTask(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/cancelTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map cancelTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.cancelTask(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/delayTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map delayTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.delayTask(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/endTask.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map endTask(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.endTask(param));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/myUser.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map myUser(@RequestBody Map param) {                 
+		try {
+			return initResult(true, taskServiceImpl.myUser());
+		} catch (Exception e) {
+			// e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}

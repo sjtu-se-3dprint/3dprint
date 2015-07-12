@@ -37,4 +37,18 @@
 		<property name="basePackage" value="mapper" />
 		<property name="sqlSessionFactoryBeanName" value="lazySqlSessionFactory" />
 	</bean>
+	
+	<!-- 登录验证bean -->
+	<bean id="myUserDetailsService" class="service.impl.MyUserDetailsService">
+	</bean>
+	
+	<!-- 拒绝访问异常处理bean -->
+	<bean id="accessDeniedHandler" class="config.MyAccessDeniedHandler">
+		<property name="errorPage" value="/view/accessdenied"></property>
+	</bean>
+	
+	<!-- 权限验证异常处理bean -->
+	<bean id="myAuthenticationEntryPoint" class="config.MyAuthenticationEntryPoint">
+		<property name="loginPage" value="/login.htm"></property>
+	</bean>
 </beans>

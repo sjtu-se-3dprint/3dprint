@@ -6,7 +6,7 @@
 		select task.*, user_id, user_name from task, user
 		where task.task_publisher = user.user_id
 		<if test="task_status!=null">and task_status=#{task_status} order by task.task_id, user.user_id</if>
-		<if test="task_status==null">order by task_status, task.id, user.user_id</if>
+		<if test="task_status==null">order by task.task_id desc</if>
 	</select>
 	
 	<select id="getExecutorByTaskId" resultType="map">
@@ -14,6 +14,7 @@
 			process.addtime, process.updatetime, process.status from user, process
 		where process.task_id = #{task_id}
 			and user.user_id = process.user_id
+			and process.status = #{process_status}
 		order by process.process_id desc
 		limit 1
 	</select>
@@ -31,19 +32,41 @@
 	</select>
 	
 	<update id="updateTaskStatus">
-		update task set task_status = #{task_status_new}
+		update task set task_status = #{task_status_new},
+			updatetime = now()
 		where task_id = #{task_id}
 			and task_status = #{task_status_old}
 	</update>
 	
-	<insert id="insertProcess">
+	<insert id="insertProcess"  useGeneratedKeys="true" keyProperty="process_id">
 		insert into process(task_id, user_id, process_duration)
 		values(#{task_id}, #{user_id}, #{process_duration})
 	</insert>
 	
-	<insert id="insertTask">
+	<insert id="insertTask"  useGeneratedKeys="true" keyProperty="task_id">
 		insert into task(task_name, task_detail, task_publisher)
 		values(#{task_name}, #{task_detail}, #{task_publisher})
 	</insert>
+	
+	<update id="updateTask">
+		update task set task_name = #{task_name},
+			task_detail = #{task_detail},
+			updatetime = now()
+		where task_id = #{task_id}
+	</update>
+	
+	<update id="updateProcessStatus">
+		update process set status = #{process_status_new},
+			updatetime = now()
+		where process_id = #{process_id}
+			and status = #{process_status_old}
+	</update>
+	
+	<update id="updateProcessDuration">
+		update process set process_duration = #{process_duration},
+			updatetime = now()
+		where process_id = #{process_id}
+	</update>
+	
 	
 </mapper>
