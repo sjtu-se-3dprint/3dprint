@@ -24,12 +24,63 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/view/index">3DPrint</a>
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/view/index">
+				<img alt="Brand" src="<%=request.getContextPath()%>/image/easyprint.png" width="140" height="20">
+			</a>
 		</div>
 
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">开始学习吧<span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                         <li><a href="#">了解3D打印</a></li>
+                         <li><a href="#">打印机入门</a></li>                    
+                         <li><a href="#">一起学设计</a></li>
+                     </ul>
+                 </li>
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">资讯与交流<span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                         <li><a href="#">新闻资讯</a></li>
+                         <li><a href="#">网站论坛</a></li>                    
+                     </ul>
+                 </li>
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3D打印服务<span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                     	 <li><a href="#">我们如何帮你实现</a></li>
+                         <li><a href="#">工业打印机</a></li>
+                         <li><a href="#">3D打印材料</a></li>       
+                         <li><a href="#">3D模型上传</a></li>              
+                     </ul>
+                 </li>
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">模型商城<span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                     	 <li><a href="#">全部</a></li>
+                         <li><a href="#">艺术</a></li>
+                         <li><a href="#">饰件</a></li>       
+                         <li><a href="#">家居饰品</a></li>  
+                         <li><a href="#">玩具</a></li>
+                         <li><a href="#">更多</a></li>                
+                     </ul>
+                 </li>
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">关于EasyPrint<span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                     	 <li><a href="#">3D打印平台</a></li>
+                         <li><a href="#">如何运作</a></li>
+                         <li><a href="#">设计团队</a></li>       
+                         <li><a href="#">客服中心</a></li>
+                         <li><a href="#">帮助中心</a></li>              
+                     </ul>
+                 </li>
+			</ul>
+			
+			<!-- 导航栏的权限显示部分 -->
 			<ul class="nav navbar-nav navbar-right">
+				<!-- 权限检查，登录用户 -->
 				<security:authorize access="!hasRole('ROLE_ANONYMOUS')">
 					<li>
 						<a href="#">
