@@ -20,3 +20,8 @@
 	修改：任务中心表'task'的task_detail字段设置为长度20000
 	修改：任务中心表'record'的record_task_detail字段设置为长度20000
 	修改：任务中心表'record'的record_content字段设置为长度1280
+2015-07-13
+	修改：表'model'添加字段'image_name'，添加字段'image_index'
+	添加：表'model_type'，模型类型字典表
+	添加：表'model_comment'，模型评论表
+	添加：表'model_collection'，用户收藏模型记录表
