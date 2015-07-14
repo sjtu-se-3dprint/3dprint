@@ -103,7 +103,7 @@
 			}
 
 			$.ajax({
-				url : '../../admin/addPlainUser',
+				url : '../../admin/addPlainUser.ajax',
 				type : 'post',
 				dataType : 'json',
 				contentType : 'application/json',
@@ -139,7 +139,7 @@
 		function queryPlainUsers(status) {
 
 			$.ajax({
-				url : '../../admin/queryPlainUserList',
+				url : '../../admin/queryPlainUserList.ajax',
 				type : 'post',
 				dataType : 'json',
 				contentType : 'application/json',
@@ -179,7 +179,7 @@
 
 		function removeUser(user) {
 			$.ajax({
-				url : '../../admin/removePlainUser',
+				url : '../../admin/removePlainUser.ajax',
 				type : 'post',
 				dataType : 'json',
 				contentType : 'application/json',
@@ -248,7 +248,7 @@
 				user.rollback = true;
 			}
 			$.ajax({
-				url : '../../admin/resumePlainUser',
+				url : '../../admin/resumePlainUser.ajax',
 				type : 'post',
 				dataType : 'json',
 				contentType : 'application/json',

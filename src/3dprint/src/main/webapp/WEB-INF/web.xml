@@ -13,6 +13,7 @@
 		</param-value>
 	</context-param>
 
+	<!-- 捕获所有请求，进行权限管理 -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -26,6 +27,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- 用于url的匹配，.htm与.ajax后缀的请求都会被截获然后进行匹配，再分配到controller里面 -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -43,4 +45,10 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
+
+	<!-- 自定义404页面 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/view/404.htm</location>
+	</error-page>
 </web-app>

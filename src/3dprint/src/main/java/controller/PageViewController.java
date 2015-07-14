@@ -58,6 +58,12 @@ public class PageViewController {
 		return "common/denied";
 	}
 	
+	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
+	public String notfound(ModelMap model) {
+		model.addAttribute("error", "true");
+		return "common/404";
+	}
+	
 	/**
 	 * 登录失败
 	 * @param model
