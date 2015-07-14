@@ -25,7 +25,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.getTaskList(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -36,7 +36,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.getAllTaskList(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -47,7 +47,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.getTaskHistoryDetail(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -58,7 +58,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.getUserList(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -69,7 +69,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.pickTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -80,7 +80,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.publishTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -91,7 +91,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.editTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -102,7 +102,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.deleteTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -113,7 +113,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.cancelTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -124,7 +124,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.delayTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -135,7 +135,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.endTask(param));
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}
@@ -146,7 +146,7 @@ public class TaskController extends BaseController {
 		try {
 			return initResult(true, taskServiceImpl.myUser());
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
 		}
 	}

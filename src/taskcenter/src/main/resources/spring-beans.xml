@@ -27,12 +27,16 @@
 		<property name="minPoolSize" value="${c3p0.pool.size.min}" />
 		<property name="initialPoolSize" value="${c3p0.pool.size.ini}" />
 		<property name="acquireIncrement" value="${c3p0.pool.size.increment}" />
+		<property name="preferredTestQuery" value="SELECT 1" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="testConnectionOnCheckout" value="true" />
 	</bean>
 	<!-- sessionFactory 将spring和mybatis整合 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
-		<property name="configLocation" value="classpath:mybatisConfig.xml" />
+		<!-- <property name="configLocation" value="classpath:mybatisConfig.xml" 
+			/> -->
 	</bean>
 
 	<!-- 创建数据源 -->
