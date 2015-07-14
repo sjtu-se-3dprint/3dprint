@@ -118,4 +118,9 @@ public class PageViewController {
 	public String user(ModelMap model) {
 		return "user/user";
 	}
+	
+	@RequestMapping(value = "/common/modelCenter.htm", method = RequestMethod.GET)
+	public String modelCenter(ModelMap model) {
+		return "common/modelCenter";
+	}
 }
