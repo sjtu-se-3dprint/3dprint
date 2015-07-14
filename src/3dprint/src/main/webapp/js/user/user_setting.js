@@ -4,7 +4,7 @@ $(function() {
 
 	// 请求用户信息
 	$.ajax({
-		url : ContextPath + '/user/myInfo',
+		url : ContextPath + '/user/myInfo.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
@@ -63,7 +63,7 @@ function initUserInfo() {
 // 修改用户信息
 function modifyUserInfo() {
 	$.ajax({
-		url : ContextPath + '/user/modifyInfo',
+		url : ContextPath + '/user/modifyInfo.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
@@ -195,7 +195,7 @@ function submitUserheadImage() {
 
 	// 提交图像数据
 	$.ajax({
-		url : ContextPath + '/user/modifyUserhead',
+		url : ContextPath + '/user/modifyUserhead.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
@@ -283,7 +283,7 @@ function modifyPassword(){
 	}
 	
 	$.ajax({
-		url : ContextPath + '/user/modifyPassword',
+		url : ContextPath + '/user/modifyPassword.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',

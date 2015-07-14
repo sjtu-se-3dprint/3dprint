@@ -77,7 +77,7 @@ function confirmValidReset() {
 
 function usernameValidAjax(username) {
 	$.ajax({
-		url : '../common/usernameValid',
+		url : '../common/usernameValid.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
@@ -148,7 +148,7 @@ function submitRegister() {
 	}
 
 	$.ajax({
-		url : ContextPath+'/common/register',
+		url : ContextPath+'/common/register.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
@@ -159,7 +159,7 @@ function submitRegister() {
 		success : function(res) {
 			if (res && res.success) {
 				alert('注册成功！');
-				window.location.href = 'login';
+				window.location.href = 'login.htm';
 			} else if (res) {
 				alert(res.message);
 			}

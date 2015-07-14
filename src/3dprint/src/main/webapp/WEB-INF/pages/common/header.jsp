@@ -24,7 +24,7 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/view/index">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/view/index.htm">
 				<img alt="Brand" src="<%=request.getContextPath()%>/image/easyprint.png" width="140" height="20">
 			</a>
 		</div>
@@ -95,17 +95,17 @@
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<security:authorize access="hasRole('ROLE_ADMIN')">
-								<li><a href="<%=request.getContextPath()%>/view/admin/index">Admin中心</a></li>
+								<li><a href="<%=request.getContextPath()%>/view/admin/index.htm">Admin中心</a></li>
 							</security:authorize>
 							<security:authorize access="hasRole('ROLE_MANAGER')">
-								<li><a href="<%=request.getContextPath()%>/view/manager/index">Manager中心</a></li>
+								<li><a href="<%=request.getContextPath()%>/view/manager/index.htm">Manager中心</a></li>
 							</security:authorize>
 							<security:authorize access="hasRole('ROLE_USER')">
-								<li><a href="<%=request.getContextPath()%>/view/user/index">用户中心</a></li>
+								<li><a href="<%=request.getContextPath()%>/view/user/index.htm">用户中心</a></li>
 								<li><a href="#">购物车</a></li>
 							</security:authorize>
 							<li class="divider"></li>
-							<li><a href="<%=request.getContextPath()%>/view/logout">注销</a></li>
+							<li><a href="<%=request.getContextPath()%>/view/logout.htm">注销</a></li>
 						</ul>
 					</li>
 				</security:authorize>
@@ -115,10 +115,10 @@
 					<li>
 						<button type="button" class="btn btn-primary btn-sm"
 							style="margin: 9px"
-							onclick="javascript:window.location.href='<%=request.getContextPath()%>/view/login'">登录</button>
+							onclick="javascript:window.location.href='<%=request.getContextPath()%>/view/login.htm'">登录</button>
 					</li>
 				</security:authorize>
-				<li><a href="<%=request.getContextPath()%>/view/register">注册</a></li>
+				<li><a href="<%=request.getContextPath()%>/view/register.htm">注册</a></li>
 			</ul>
 		</div>
 	</div>

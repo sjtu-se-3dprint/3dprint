@@ -9,10 +9,10 @@
 <body>
 	<jsp:include page="../common/header.jsp" flush="true"></jsp:include>
 	<h2>这是Manager中心！</h2>
-	<a href="../user/index">去User中心</a>
-	<a href="../admin/index">去Admin中心</a>
-	<a href="../index">返回首页</a>
+	<a href="../user/index.htm">去User中心</a>
+	<a href="../admin/index.htm">去Admin中心</a>
+	<a href="../index.htm">返回首页</a>
 	<br><br>
-	<a href="../logout">注销</a>
+	<a href="../logout.htm">注销</a>
 </body>
 </html>

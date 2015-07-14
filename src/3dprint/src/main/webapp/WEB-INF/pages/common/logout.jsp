@@ -4,5 +4,5 @@
 You are now logged out!!
 <a href="login">Go back to login page.</a>
 <script>
-	window.location.href = 'login';
+	window.location.href = 'login.htm';
 </script>

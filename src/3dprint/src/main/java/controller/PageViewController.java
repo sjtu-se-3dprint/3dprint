@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/view")
 public class PageViewController {
 	
-	@RequestMapping(value = "/oldhead", method = RequestMethod.GET)
+	@RequestMapping(value = "/oldhead.htm", method = RequestMethod.GET)
 	public String oldhead(ModelMap model) {
 		return "common/oldheader";
 	}
@@ -22,7 +22,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/head", method = RequestMethod.GET)
+	@RequestMapping(value = "/head.htm", method = RequestMethod.GET)
 	public String head(ModelMap model) {
 		return "common/header";
 	}
@@ -32,7 +32,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 		return "common/login";
 	}
@@ -42,7 +42,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register.htm", method = RequestMethod.GET)
 	public String register(ModelMap model) {
 		return "common/register";
 	}
@@ -52,7 +52,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+	@RequestMapping(value = "/accessdenied.htm", method = RequestMethod.GET)
 	public String accessdenied(ModelMap model) {
 		model.addAttribute("error", "true");
 		return "common/denied";
@@ -63,7 +63,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginfailed.htm", method = RequestMethod.GET)
 	public String loginfailed(ModelMap model) {
 		model.addAttribute("error", "true");
 		return "common/loginfailed";
@@ -74,7 +74,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
 	public String logout(ModelMap model) {
 		return "common/logout";
 	}
@@ -84,7 +84,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index(ModelMap model) {
 		return "common/index";
 	}
@@ -94,7 +94,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/index.htm", method = RequestMethod.GET)
 	public String admin(ModelMap model) {
 		return "admin/admin";
 	}
@@ -104,7 +104,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/manager/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/manager/index.htm", method = RequestMethod.GET)
 	public String manager(ModelMap model) {
 		return "manager/manager";
 	}
@@ -114,7 +114,7 @@ public class PageViewController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/user/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/index.htm", method = RequestMethod.GET)
 	public String user(ModelMap model) {
 		return "user/user";
 	}

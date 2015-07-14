@@ -28,7 +28,7 @@ public class CommonController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/usernameValid", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/usernameValid.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map usernameValid(@RequestBody Map param) {
 		return initResult(true, userService.isUsernameValid(param));
@@ -40,7 +40,7 @@ public class CommonController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/register.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map register(@RequestBody Map param) {
 		try {

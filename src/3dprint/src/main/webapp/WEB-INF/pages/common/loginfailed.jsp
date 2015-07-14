@@ -10,7 +10,7 @@
 		<hr />
 	
 		<p class="message">用户名或者密码错误!</p>
-		<a href="/3dprint/view/index">去首页</a> 
-		<a href="/3dprint/view/login">返回登录页</a>
+		<a href="/3dprint/view/index.htm">去首页</a> 
+		<a href="/3dprint/view/login.htm">返回登录页</a>
 	</body>
 </html>

@@ -40,33 +40,11 @@
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-6">
 						<button id="loginBtn" type="submit" class="btn btn-default">登录</button>
-						<a href="register" style="margin-left: 10px">去注册</a>
+						<a href="register.htm" style="margin-left: 10px">去注册</a>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-	<script>
-		$(function(){
-// 			$('#loginBtn').bind('click', function(){
-// 				$('form').submit();
-// 				$.ajax({
-// 					url: ContextPath + '/j_spring_security_check',
-// 					type: 'post',
-// 					data: {
-// 						j_username:$('#inputUsername').val(),
-// 						j_password:$('#inputPassword').val()
-// 					},
-// 					success: function(res){
-// 						console.log(res);
-// 						alert('OK');
-// 					},
-// 					error: function(){
-// 						alert('Error');
-// 					}
-// 				});
-			});
-		})
-	</script>
 </body>
 </html>

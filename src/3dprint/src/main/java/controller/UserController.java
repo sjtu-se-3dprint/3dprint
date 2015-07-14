@@ -22,7 +22,7 @@ public class UserController extends BaseController {
 	@Resource(name = "userServiceImpl")
 	UserService userService;
 
-	@RequestMapping(value = "/modifyPassword", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/modifyPassword.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map modifyPassword(@RequestBody Map param) {                 
 		try {
@@ -39,7 +39,7 @@ public class UserController extends BaseController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/modifyUserhead", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/modifyUserhead.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map modifyUserhead(@RequestBody Map param, HttpServletRequest request) {                 
 		try {
@@ -57,7 +57,7 @@ public class UserController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/myInfo", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/myInfo.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map myInfo(@RequestBody Map param) {
 		return initResult(true, userService.myInfo(param));
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/modifyInfo", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/modifyInfo.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map modifyInfo(@RequestBody Map param) {
 		try {

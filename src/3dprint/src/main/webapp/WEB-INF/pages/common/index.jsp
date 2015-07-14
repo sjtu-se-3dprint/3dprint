@@ -14,11 +14,11 @@
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
 	
 	<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')">
-		<a href="logout">注销</a><br><br>
+		<a href="logout.htm">注销</a><br><br>
 	</security:authorize>
-	<a href="user/index">去User中心</a>
-	<a href="admin/index">去Admin中心</a>
-	<a href="manager/index">去Manager中心</a>
-	<a href="login">去登录页</a>
+	<a href="user/index.htm">去User中心</a>
+	<a href="admin/index.htm">去Admin中心</a>
+	<a href="manager/index.htm">去Manager中心</a>
+	<a href="login.htm">去登录页</a>
 </body>
 </html>

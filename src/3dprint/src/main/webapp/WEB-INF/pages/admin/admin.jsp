@@ -22,17 +22,17 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="link">
-					<a href="../user/index">去User中心</a>
+					<a href="../user/index.htm">去User中心</a>
 				</div>
 				<div class="link">
-					<a href="../manager/index">去Manager中心</a>
+					<a href="../manager/index.htm">去Manager中心</a>
 				</div>
 				<div class="link">
-					<a href="../index">返回首页</a>
+					<a href="../index.htm">返回首页</a>
 				</div>
 				<br>
 				<div class="link">
-					<a href="../logout">注销</a>
+					<a href="../logout.htm">注销</a>
 				</div>
 			</div>
 			<div class="col-md-10">

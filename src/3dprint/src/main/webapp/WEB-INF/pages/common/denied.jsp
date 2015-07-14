@@ -16,7 +16,7 @@
 			</div>
 		</c:if>
 	
-		<a href="/3dprint/view/index">返回首页</a>
-		<a href="/3dprint/view/login">重新登录</a> 
+		<a href="/3dprint/view/index.htm">返回首页</a>
+		<a href="/3dprint/view/login.htm">重新登录</a> 
 	</body>
 </html>

@@ -28,7 +28,7 @@ public class AdminController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/queryPlainUserList", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/queryPlainUserList.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map queryPlainUserList(@RequestBody Map param) {
 		return initResult(true, userService.queryPlainUserList(param));
@@ -40,7 +40,7 @@ public class AdminController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/removePlainUser", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/removePlainUser.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map removePlainUser(@RequestBody Map param) {
 		try {
@@ -56,7 +56,7 @@ public class AdminController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/resumePlainUser", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/resumePlainUser.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map resumePlainUser(@RequestBody Map param) {
 		try {
@@ -72,7 +72,7 @@ public class AdminController extends BaseController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/addPlainUser", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/addPlainUser.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map addPlainUser(@RequestBody Map param) {
 		try {
