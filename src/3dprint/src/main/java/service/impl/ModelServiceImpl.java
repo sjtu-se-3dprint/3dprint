@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import mapper.ModelMapper;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -24,6 +26,9 @@ public class ModelServiceImpl implements ModelService {
 
 	@Resource(name = "userServiceImpl")
 	UserService userService;
+
+	@Resource(name = "modelMapper")
+	ModelMapper modelMapper;
 
 	public String uploadTempModel(HttpServletRequest request) throws Exception {
 
@@ -69,6 +74,11 @@ public class ModelServiceImpl implements ModelService {
 			}
 		}
 		return curr + "";
+	}
+	
+	public List totalModelType(Map param) {
+		List modelTypeList = modelMapper.getTotalModelType(param);
+		return modelTypeList;
 	}
 
 }

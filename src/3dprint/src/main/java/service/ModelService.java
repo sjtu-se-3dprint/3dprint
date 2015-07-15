@@ -1,6 +1,8 @@
 package service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 public interface ModelService {
 
@@ -13,4 +15,11 @@ public interface ModelService {
 	 * @throws Exception
 	 */
 	public String uploadTempModel(HttpServletRequest request) throws Exception;
+	
+	/**
+	 * 查询模型的类型，获取模型类型列表
+	 * @param param
+	 * @return map 模型类型列表
+	 */
+	public List totalModelType(Map param);
 }

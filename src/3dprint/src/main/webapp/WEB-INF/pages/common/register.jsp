@@ -8,7 +8,7 @@
 <html lang="zh-CN">
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
-	<script src="<%=request.getContextPath()%>/js/common/register.js"></script>
+	<script src="<%=request.getContextPath()%>/js/common/register.js"></script>		<!-- 引入js必须在动态jsp include指令之后 -->
 
 	<div class="container">
 		<div class="row">

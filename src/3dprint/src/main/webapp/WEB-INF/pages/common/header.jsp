@@ -58,7 +58,7 @@
                  <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">模型商城<span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                     	 <li><a href="#">全部</a></li>
+                     	 <li><a href="<%=request.getContextPath()%>/view/common/modelCenter.htm">全部</a></li>
                          <li><a href="#">艺术</a></li>
                          <li><a href="#">饰件</a></li>       
                          <li><a href="#">家居饰品</a></li>  
