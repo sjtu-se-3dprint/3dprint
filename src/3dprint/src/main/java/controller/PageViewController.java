@@ -1,4 +1,4 @@
-package controller;
+﻿package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -133,5 +133,14 @@ public class PageViewController {
 	@RequestMapping(value = "/common/modelCenter.htm", method = RequestMethod.GET)
 	public String modelCenter(ModelMap model) {
 		return "common/modelCenter";
+	}
+
+	 * 模型上传
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/modelUpload.htm", method = RequestMethod.GET)
+	public String modelUpload(ModelMap model) {
+		return "user/modelUpload";
 	}
 }
