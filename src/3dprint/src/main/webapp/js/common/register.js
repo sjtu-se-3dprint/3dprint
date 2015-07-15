@@ -5,20 +5,20 @@ var config = {
 var usernameValid; // 记录用户输入的用户名是否可用
 var passwordValid; // 记录用户输入的密码是否符合格式
 
-$(function() {
+$(function() {		//initialization
 	$('#inputUsername').focus();
-	$('#inputUsername').blur(isUsernameValid);
+	$('#inputUsername').blur(isUsernameValid);		//失去焦点时判断用户名是否合法
 	$('#inputPassword').blur(isPasswordValid);
 	$('#inputConfirm').blur(isConfirmValid);
 	$('#inputPassword').focus(confirmValidReset);
-	$('#registerBtn').click(submitRegister);
+	$('#registerBtn').click(submitRegister);		//点击注册时提交
 
 	$('#inputUsername').keydown(inputEnter);
 	$('#inputPassword').keydown(inputEnter);
 	$('#inputConfirm').keydown(inputEnter);
 });
 
-function inputEnter(e){
+function inputEnter(e){		//回车提交
 	if(e.which == 13){
 		submitRegister();
 	}
@@ -77,14 +77,14 @@ function confirmValidReset() {
 
 function usernameValidAjax(username) {
 	$.ajax({
-		url : '../common/usernameValid.ajax',
+		url : ContextPath+'/common/usernameValid.ajax',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/json',
 		data : JSON.stringify({
 			name : username
 		}),
-		success : function(res) {
+		success : function(res) {		//res应该是代表着服务器的response
 			if (res && res.success) {
 				if (res.value) {
 					usernameValid = 'success';

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.UserService;
+import service.ModelService;
 
 /**
  * 这个Controller负责处理所有不需要权限的ajax请求
@@ -21,6 +22,9 @@ public class CommonController extends BaseController {
 
 	@Resource(name = "userServiceImpl")
 	UserService userService;
+	
+	@Resource(name = "modelServiceImpl")	//resource的name要与具体实现类中的service name相对应
+	ModelService modelService;
 
 	/**
 	 * 新用户名是否可用
@@ -50,5 +54,16 @@ public class CommonController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
-
+	
+	/**
+	 * 查询模型类型列表
+	 * 
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/modelTypeList.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map getModelTypeList(@RequestBody Map param) {
+		return initResult(true, modelService.totalModelType(param));
+	}
 }

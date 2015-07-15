@@ -225,13 +225,15 @@
 			<!--/.col-md-9-->
 
 			<div class="col-md-3" id="sidebar" role="navigation">
-				<div class="list-group">
-					<a href="#" class="list-group-item active">全部</a> <a href="#"
-						class="list-group-item">艺术</a> <a href="#" class="list-group-item">时尚</a>
-					<a href="#" class="list-group-item">玩具</a> <a href="#"
-						class="list-group-item">饰品</a> <a href="#" class="list-group-item">首饰</a>
-					<a href="#" class="list-group-item">家居</a> <a href="#"
-						class="list-group-item">零件</a>
+				<div class="list-group" id="model_type_list">
+					<a href="#" class="list-group-item active">全部</a> 
+					<a href="#" class="list-group-item">艺术</a> 
+					<a href="#" class="list-group-item">时尚</a>
+					<a href="#" class="list-group-item">玩具</a> 
+					<a href="#" class="list-group-item">饰品</a> 
+					<a href="#" class="list-group-item">首饰</a>
+					<a href="#" class="list-group-item">家居</a> 
+					<a href="#" class="list-group-item">零件</a>
 				</div>
 				<br />
 				<form class="form-inline">
