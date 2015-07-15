@@ -33,6 +33,9 @@ public class ModelServiceImpl implements ModelService {
 
 	// 模型文件上传的正式文件夹
 	private static String MODEL_FILE_PATH = "/upload-files/model/";
+	
+	// 模型预览图片的文件夹
+	private static String MODEL_IMAGE_PATH = "/image/model/";
 
 	@Resource(name = "userServiceImpl")
 	UserService userService;
@@ -114,11 +117,12 @@ public class ModelServiceImpl implements ModelService {
 			throw new Exception("上传模型失败");
 		}
 
-		String folder = param.get("real_path") + MODEL_FILE_PATH + "/"
+		String realPath = (String) param.get("real_path");
+		String imageFolder = realPath + MODEL_IMAGE_PATH + "/"
 				+ param.get("model_id");
-		util.Util.createFolder(folder);
+		util.Util.createFolder(imageFolder);
 
-		// 解码，写入文件系统
+		// 解码图片，写入文件系统
 		Base64 decoder = new Base64();
 		String flag = "base64,";
 		int index = 0;
@@ -129,12 +133,19 @@ public class ModelServiceImpl implements ModelService {
 			}
 			base64Image = base64Image.substring(location + flag.length());
 			byte[] bytes = decoder.decode(base64Image);
-			FileOutputStream os = new FileOutputStream(folder + "/"
+			FileOutputStream os = new FileOutputStream(imageFolder + "/"
 					+ index++ + ".jpg");
 			os.write(bytes);
 			os.close();
 		}
-
+		
+		// 把以前上传的模型文件从临时文件夹拷贝到正式文件夹下
+		String tempFilePath = realPath + MODEL_TEMP_PATH + me.get("user_id") + "/" + param.get("model_file_seq");
+		String newFileFolder = realPath + MODEL_FILE_PATH + param.get("model_id") + "/";
+		String newFilePath = newFileFolder + param.get("model_id") + ".stl";
+		util.Util.createFolder(newFileFolder);
+		util.Util.copyFile(tempFilePath, newFilePath);
+		
 		return true;
 	}
 
