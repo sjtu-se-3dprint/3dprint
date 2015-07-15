@@ -31,7 +31,7 @@ function listenSelect(){
 	});
 }
 
-function cancelLstenSelect(){
+function cancelListenSelect(){
 	$('#selectFileBtn').text('等待加载完毕');
 	$('#selectFileBtn').attr('disabled', 'disabled');
 	$('#selectFileBtn').off('click');
@@ -51,7 +51,7 @@ function selectFile(e, data){
 		return;
 	}
 
-	cancelLstenSelect();
+	cancelListenSelect();
 	$('#selectFileHint').text(globalFile.name + '，加载中：0%');
 	data.submit();
 }
@@ -62,11 +62,13 @@ function uploading(e, data, seq){
 	$('#selectFileHint').text(globalFile.name + '，加载中：' + per + '%')
 }
 
+// 上传失败回调
 function fail(e, data, seq){
 	alert('服务器出错');
 	listenSelect();
 }
 
+// 上传成功回调
 function success(data, seq){
 	if(data && data.success){
 		$('#selectFileHint').text(globalFile.name + '，加载完毕')
@@ -79,6 +81,7 @@ function success(data, seq){
 	listenSelect();
 }
 
+// 检查文件是否符合格式
 function checkModelFile(file){
 
 	var name = file.name;

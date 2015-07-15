@@ -99,7 +99,7 @@ function usernameValidAjax(username) {
 			}
 		},
 		error : function(err) {
-			alert('未知错误');
+			// alert('未知错误');
 		}
 	});
 }
@@ -165,7 +165,7 @@ function submitRegister() {
 			}
 		},
 		error : function(err) {
-			alert('未知错误');
+			// alert('未知错误');
 		}
 	});
 

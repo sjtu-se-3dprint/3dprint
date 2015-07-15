@@ -10,4 +10,11 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public List getTotalModelType(Map map);
+	
+	/**
+	 * 插入模型
+	 * @param map
+	 * @return
+	 */
+	public Integer insertModel(Map map);
 }

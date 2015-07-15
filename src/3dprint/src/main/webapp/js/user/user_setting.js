@@ -34,7 +34,7 @@ $(function() {
 			}
 		},
 		error : function(err) {
-			alert('未知错误');
+			// alert('未知错误');
 		}
 	});
 })
@@ -82,7 +82,7 @@ function modifyUserInfo() {
 			}
 		},
 		error : function(err) {
-			alert('未知错误');
+			// alert('未知错误');
 		}
 	});
 }
@@ -302,7 +302,7 @@ function modifyPassword(){
 			}
 		},
 		error : function(){
-			alert('未知错误');
+			// alert('未知错误');
 		}
 	});
 }

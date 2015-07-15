@@ -17,6 +17,14 @@ public interface ModelService {
 	public String uploadTempModel(HttpServletRequest request) throws Exception;
 	
 	/**
+	 * 模型上传
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean uploadModel(Map param) throws Exception;
+	
+	/**
 	 * 查询模型的类型，获取模型类型列表
 	 * @param param
 	 * @return map 模型类型列表

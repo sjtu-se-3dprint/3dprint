@@ -6,4 +6,10 @@
 		select model_type_id, model_type_name from model_type order by model_type_id
 	</select>
 
+	<insert id="insertModel" useGeneratedKeys="true" keyProperty="model_id">
+		insert into model(model_name, model_description, model_length, model_height, model_width,
+			model_style, user_id, image_name, image_index)
+		values(#{model_name}, #{model_description}, #{model_length}, #{model_height}, #{model_width},
+			#{model_style}, #{user_id}, #{image_name}, #{image_index})
+	</insert>
 </mapper>

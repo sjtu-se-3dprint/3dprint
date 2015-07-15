@@ -107,7 +107,7 @@
 				</div>
 
 				<div class="col-md-2 col-md-push-5">
-					<button type="button" class="btn btn-primary" style="margin-top:20px; margin-bottom:70px; width:100%">确认上传</button>
+					<button type="button" id="uploadModelBtn" class="btn btn-primary" style="margin-top:20px; margin-bottom:70px; width:100%">确认上传</button>
 				</div>
 			</form>
 		</div>
