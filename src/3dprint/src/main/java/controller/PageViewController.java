@@ -134,7 +134,8 @@ public class PageViewController {
 	public String modelCenter(ModelMap model) {
 		return "common/modelCenter";
 	}
-
+	
+	/**
 	 * 模型上传
 	 * @param model
 	 * @return
