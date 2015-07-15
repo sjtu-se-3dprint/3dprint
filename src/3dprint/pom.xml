@@ -155,12 +155,19 @@
 			<version>1.10</version>
 		</dependency>
 
+		<!-- 数据库连接池 -->
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5</version>
 		</dependency>
 
+		<!-- 百度的ueditor后台用的这个 -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>3dprint</finalName>

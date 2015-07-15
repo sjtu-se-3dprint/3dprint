@@ -9,10 +9,35 @@ $(function() {
 		add : addImage,
 	});
 
+	$.ajax({
+		url : ContextPath + '/common/modelTypeList.ajax',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/json',
+		data : JSON.stringify({}),
+		success : function(res) {
+			if (res && res.success) {
+				console.log(res.value)
+				var types = res.value;
+				var selectContent = '';
+				for(var i=0; i<types.length; i++){
+					selectContent += '<option value="' + types[i].model_type_id + '">'
+						+ types[i].model_type_name + '</option>';
+				}
+				$('#modelTypeSelect').append(selectContent);
+			} else if (res) {
+				alert(res.message);
+			}
+		},
+
+		error : function(err) {
+			alert('未知错误')
+		}
+	});
 });
 
 function addImage(e, data) {
-	
+
 	if (!data || !data.files || !data.files[0]) {
 		alert('添加图片失败');
 		return;
@@ -29,19 +54,19 @@ function addImage(e, data) {
 
 	var reader = new FileReader();
 	reader.onload = imgOnload;
-	
+
 	// 转为base64格式
 	reader.readAsDataURL(imagefile);
 }
 
-function imgOnload(evt){
-	
+function imgOnload(evt) {
+
 	var src = evt.target.result;
 	if (src.indexOf('data:image') != 0) {
 		alert('图片格式无法识别。');
 		return;
 	}
-	
+
 	// 显示图片
 	$($(globalThumbnail).find('img')[0]).css('padding-top', '0px');
 	$(globalThumbnail).find('img')[0].src = src;
