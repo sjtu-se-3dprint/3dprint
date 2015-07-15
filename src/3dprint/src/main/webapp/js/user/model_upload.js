@@ -1,99 +1,55 @@
-
-var globalFile = null;
-var globalFileSeq = null;
+var globalThumbnail = null;
 $(function() {
-	
-	listenSelect();
-	$('#selectFileHint').text('请选择后缀名为.stl，大小<100MB的模型文件');
-	
-	// 定义上传文件监听与回调
-	$('#uploadInput').fileupload({
-		add : selectFile,
-		progress : function(e, data){
-			uploading(e, data)
-		},
-		fail : function(e, data){
-			fail(e, data);
-		},
-		success : function(data){
-			success(data);
-		}
+	$('.thumbnail').off('click').on('click', function() {
+		globalThumbnail = this;
+		$('#uploadImageInput').click();
+	})
+
+	$('#uploadImageInput').fileupload({
+		add : addImage,
 	});
+
 });
 
-function listenSelect(){
-	$('#selectFileBtn').text('选择模型文件');
-	$('#selectFileBtn').removeClass('btn-danger');
-	$('#selectFileBtn').addClass('btn-primary');
-	$('#selectFileBtn').attr('disabled', false);
-	$('#selectFileBtn').off('click').on('click', function(){
-		$('#uploadInput').click();
-	});
-}
-
-function cancelLstenSelect(){
-	$('#selectFileBtn').text('等待加载完毕');
-	$('#selectFileBtn').attr('disabled', 'disabled');
-	$('#selectFileBtn').off('click');
-}
-
-// 选择了一个模型文件
-function selectFile(e, data){
+function addImage(e, data) {
 	
-	if(!data || !data.files || !data.files[0]){
-		alert('选择文件失败，请重新选择');
-		return;
-	}
-	globalFile = data.files[0];
-	globalFileSeq = null;
-	
-	if(!checkModelFile(globalFile)){
+	if (!data || !data.files || !data.files[0]) {
+		alert('添加图片失败');
 		return;
 	}
 
-	cancelLstenSelect();
-	$('#selectFileHint').text(globalFile.name + '，加载中：0%');
-	data.submit();
-}
+	var imagefile = data.files[0];
 
-// 在上传过程中的回调
-function uploading(e, data, seq){
-	var per = parseInt(data.loaded / data.total * 100);
-	$('#selectFileHint').text(globalFile.name + '，加载中：' + per + '%')
-}
-
-function fail(e, data, seq){
-	alert('服务器出错');
-	listenSelect();
-}
-
-function success(data, seq){
-	if(data && data.success){
-		$('#selectFileHint').text(globalFile.name + '，加载完毕')
-		globalFileSeq = data.value;
-	}else if(data){
-		alert(data.message);
-	}else{
-		alert('服务器出错');
+	// 限制大小
+	var limit = 3; // MB
+	if (imagefile.size > 1024 * 1024 * limit) {
+		alert('最大支持3MB大小的图片');
+		return;
 	}
-	listenSelect();
+
+	var reader = new FileReader();
+	reader.onload = imgOnload;
+	
+	// 转为base64格式
+	reader.readAsDataURL(imagefile);
 }
 
-function checkModelFile(file){
-
-	var name = file.name;
-	var size = file.size;
+function imgOnload(evt){
 	
-	if(name.length < 4 || name.indexOf('.stl') != name.length-4){
-		alert('只能上传后缀为.stl的模型文件。');
-		return false;
+	var src = evt.target.result;
+	if (src.indexOf('data:image') != 0) {
+		alert('图片格式无法识别。');
+		return;
 	}
 	
-	var limit = 100;
-	if(size > 1024*1024*limit){
-		alert('只能上传小于' + limit + 'MB的模型文件。');
-		return false;
-	}
-	
-	return true;
-}
+	// 显示图片
+	$($(globalThumbnail).find('img')[0]).css('padding-top', '0px');
+	$(globalThumbnail).find('img')[0].src = src;
+
+	// 调整图片位置（垂直居中）
+	var parentHeight = $(globalThumbnail).height();
+	var imgHeight = $($(globalThumbnail).find('img')[0]).height();
+	$($(globalThumbnail).find('img')[0]).css('padding-top',
+			(parentHeight - imgHeight) / 2 + 'px');
+
+};
