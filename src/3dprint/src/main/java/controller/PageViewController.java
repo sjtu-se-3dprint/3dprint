@@ -144,4 +144,15 @@ public class PageViewController {
 	public String modelUpload(ModelMap model) {
 		return "user/modelUpload";
 	}
+	
+
+	/**
+	 * 模型编辑
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/modelEdit.htm", method = RequestMethod.GET)
+	public String modelEdit(ModelMap model) {
+		return "user/modelEdit";
+	}
 }

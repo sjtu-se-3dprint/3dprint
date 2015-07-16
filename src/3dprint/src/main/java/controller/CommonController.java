@@ -66,4 +66,22 @@ public class CommonController extends BaseController {
 	public Map getModelTypeList(@RequestBody Map param) {
 		return initResult(true, modelService.totalModelType(param));
 	}
+	
+
+	/**
+	 * 
+	 * @param param
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/modelInfo.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map modelInfo(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.findModelById(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
 }

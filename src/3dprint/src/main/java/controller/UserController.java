@@ -124,4 +124,25 @@ public class UserController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
+
+	/**
+	 * 模型编辑
+	 * @param param
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/modelEdit.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map modelEdit(@RequestBody Map param, HttpServletRequest request) {
+		try {
+			String real_path = request.getSession().getServletContext()
+					.getRealPath("/");
+			param.put("real_path", real_path);
+			return initResult(true, modelService.editModel(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
 }

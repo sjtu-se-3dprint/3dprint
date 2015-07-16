@@ -17,4 +17,18 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public Integer insertModel(Map map);
+	
+	/**
+	 * 修改模型（只修改模型描述、模型图片信息）
+	 * @param map
+	 * @return
+	 */
+	public Integer updateModelById(Map map);
+	
+	/**
+	 * 查询模型
+	 * @param map
+	 * @return
+	 */
+	public Map findModelById(Map map);
 }

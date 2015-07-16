@@ -2,6 +2,8 @@ package service.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +35,15 @@ public class ModelServiceImpl implements ModelService {
 
 	// 模型文件上传的正式文件夹
 	private static String MODEL_FILE_PATH = "/upload-files/model/";
-	
+
 	// 模型预览图片的文件夹
 	private static String MODEL_IMAGE_PATH = "/image/model/";
+
+	// 模型图片后缀
+	private static String MODEL_IMAGE_SUFFIX = ".jpg";
+
+	// 模型文件后缀
+	private static String MODEL_FILE_SUFFIX = ".stl";
 
 	@Resource(name = "userServiceImpl")
 	UserService userService;
@@ -103,7 +111,7 @@ public class ModelServiceImpl implements ModelService {
 			throw new Exception("请登录后再上传模型");
 		}
 
-		// 
+		// 插入到数据库
 		List<String> model_images = (List) param.get("model_images");
 		int image_index = model_images.size();
 		String image_name = "";
@@ -113,40 +121,122 @@ public class ModelServiceImpl implements ModelService {
 		param.put("image_index", image_index);
 		param.put("user_id", me.get("user_id"));
 
-		if (1 != modelMapper.insertModel(param) || null == param.get("model_id")) {
+		if (1 != modelMapper.insertModel(param)
+				|| null == param.get("model_id")) {
 			throw new Exception("上传模型失败");
 		}
 
+		// 获取存放模型图片的文件夹
 		String realPath = (String) param.get("real_path");
 		String imageFolder = realPath + MODEL_IMAGE_PATH + "/"
 				+ param.get("model_id");
 		util.Util.createFolder(imageFolder);
 
 		// 解码图片，写入文件系统
-		Base64 decoder = new Base64();
-		String flag = "base64,";
 		int index = 0;
 		for (String base64Image : model_images) {
-			int location = base64Image.indexOf(flag);
-			if (location < 0) {
-				continue;
-			}
-			base64Image = base64Image.substring(location + flag.length());
-			byte[] bytes = decoder.decode(base64Image);
-			FileOutputStream os = new FileOutputStream(imageFolder + "/"
-					+ index++ + ".jpg");
-			os.write(bytes);
-			os.close();
+			util.Util.decodeBase64ImageAndSave(base64Image, imageFolder + "/"
+					+ index++ + MODEL_IMAGE_SUFFIX);
+
 		}
-		
+
 		// 把以前上传的模型文件从临时文件夹拷贝到正式文件夹下
-		String tempFilePath = realPath + MODEL_TEMP_PATH + me.get("user_id") + "/" + param.get("model_file_seq");
-		String newFileFolder = realPath + MODEL_FILE_PATH + param.get("model_id") + "/";
-		String newFilePath = newFileFolder + param.get("model_id") + ".stl";
+		String tempFilePath = realPath + MODEL_TEMP_PATH + me.get("user_id")
+				+ "/" + param.get("model_file_seq");
+		String newFileFolder = realPath + MODEL_FILE_PATH
+				+ param.get("model_id") + "/";
+		String newFilePath = newFileFolder + param.get("model_id")
+				+ MODEL_FILE_SUFFIX;
 		util.Util.createFolder(newFileFolder);
 		util.Util.copyFile(tempFilePath, newFilePath);
-		
+
 		return true;
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Boolean editModel(Map param) throws Exception {
+
+		Map me = userService.myInfo(null);
+		if (me == null) {
+			throw new Exception("请先登录");
+		}
+
+		// 找出模型
+		Map model = new HashMap();
+		model.put("model_id", param.get("model_id"));
+		model.put("status", "normal");
+		model = modelMapper.findModelById(model);
+		if (model == null) {
+			throw new Exception("找不到该模型");
+		}
+
+		// 修改者不是上传者
+		if (Integer.parseInt("" + model.get("user_id")) != Integer.parseInt(""
+				+ me.get("user_id"))) {
+			throw new Exception("你无权限修改此模型");
+		}
+
+		// 整理模型的图片变化信息
+		int image_index = Integer.parseInt("" + model.get("image_index"));
+		String image_name = "";
+		List<Map> modelImages = (List) param.get("model_images");
+		for (Map modelImage : modelImages) {
+			if (modelImage == null) {
+				continue;
+			}
+			if ("new".equals(modelImage.get("type"))) {
+				image_name += image_index++ + ";";
+			} else if ("origin".equals(modelImage.get("type"))) {
+				image_name += modelImage.get("index") + ";";
+			}
+		}
+
+		// 保存修改到数据库
+		Map modelChanged = new HashMap();
+		modelChanged.put("model_id", model.get("model_id"));
+		modelChanged.put("model_description", param.get("model_description"));
+		modelChanged.put("image_name", image_name);
+		modelChanged.put("image_index", image_index);
+		if (1 != modelMapper.updateModelById(modelChanged)) {
+			throw new Exception("编辑模型失败");
+		}
+		
+		// 获取存放模型图片的文件夹
+		String realPath = (String) param.get("real_path");
+		String imageFolder = realPath + MODEL_IMAGE_PATH + "/"
+				+ param.get("model_id");
+		util.Util.createFolder(imageFolder);
+		
+		// 保存新增的图片到文件系统
+		image_index = Integer.parseInt("" + model.get("image_index"));
+		for (Map modelImage : modelImages) {
+			if (modelImage == null || !"new".equals(modelImage.get("type"))) {
+				continue;
+			}
+			util.Util.decodeBase64ImageAndSave((String)modelImage.get("data"), imageFolder + "/"
+					+ image_index++ + MODEL_IMAGE_SUFFIX);
+		}
+
+		return true;
+	}
+
+	public Map findModelById(Map param) throws Exception {
+		param.put("status", "normal");
+		Map model = modelMapper.findModelById(param);
+		if (model != null && model.get("image_name") != null) {
+			String imageName = (String) model.get("image_name");
+			String[] images = imageName.split(";");
+			List<String> model_images = new ArrayList<String>();
+			for (String image : images) {
+				if ("".equals(image)) {
+					continue;
+				}
+				model_images.add(MODEL_IMAGE_PATH + model.get("model_id") + "/"
+						+ image + MODEL_IMAGE_SUFFIX);
+			}
+			model.put("model_images", model_images);
+		}
+		return model;
 	}
 
 }

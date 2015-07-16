@@ -1,0 +1,21 @@
+.control-label a {
+	font-size: 14px;
+	font-weight: bold
+}
+.control-label span {
+	font-size: 14px;
+}
+
+.form-group label {
+	width: 22%;
+}
+.form-group div {
+	width: 28%;
+}
+
+.border-right {
+	border-right:1px solid #AAA;
+}
+.border-left {
+	border-left:1px solid #AAA;
+}

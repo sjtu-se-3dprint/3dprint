@@ -12,4 +12,19 @@
 		values(#{model_name}, #{model_description}, #{model_length}, #{model_height}, #{model_width},
 			#{model_style}, #{user_id}, #{image_name}, #{image_index})
 	</insert>
+	
+	<update id="updateModelById">
+		update model
+		set model_description = #{model_description},
+			image_name = #{image_name},
+			image_index = #{image_index},
+			updatetime = now()
+		where model_id = #{model_id}
+	</update>
+	
+	<select id="findModelById" resultType="map">
+		select * from model
+		where model_id = #{model_id}
+			<if test="status!=null">and status=#{status}</if>
+	</select>
 </mapper>

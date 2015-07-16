@@ -4,7 +4,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class Util {
+	
+
+	static public void decodeBase64ImageAndSave(String base64Image, String fileLocation) throws Exception{
+		Base64 decoder = new Base64();
+		String flag = "base64,";
+		int location = base64Image.indexOf(flag);
+		if (location < 0) {
+			return;
+		}
+		base64Image = base64Image.substring(location + flag.length());
+		byte[] bytes = decoder.decode(base64Image);
+		FileOutputStream os = new FileOutputStream(fileLocation);
+		os.write(bytes);
+		os.close();
+	}
 
 	static public void createFolder(String folder) throws Exception {
 		if (folder == null) {

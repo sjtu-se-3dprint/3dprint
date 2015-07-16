@@ -25,9 +25,25 @@ public interface ModelService {
 	public Boolean uploadModel(Map param) throws Exception;
 	
 	/**
+	 * 模型编辑
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean editModel(Map param) throws Exception;
+	
+	/**
 	 * 查询模型的类型，获取模型类型列表
 	 * @param param
 	 * @return map 模型类型列表
 	 */
 	public List totalModelType(Map param);
+	
+	/**
+	 * 查询模型
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Map findModelById(Map param) throws Exception;
 }
