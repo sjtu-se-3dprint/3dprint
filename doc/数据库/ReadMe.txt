@@ -25,3 +25,5 @@
 	添加：表'model_type'，模型类型字典表
 	添加：表'model_comment'，模型评论表
 	添加：表'model_collection'，用户收藏模型记录表
+2015-07-16
+	修改：表'model'的字段'model_description'长度扩充到20000
