@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.ModelService;
 import service.UserService;
+import service.CollectionService;
 
 /**
  * 这个Controller负责处理所有user权限的ajax请求
@@ -26,6 +27,9 @@ public class UserController extends BaseController {
 
 	@Resource(name = "modelServiceImpl")
 	ModelService modelService;
+	
+	@Resource(name = "collectionServiceImpl")
+	CollectionService collectionService;
 
 	@RequestMapping(value = "/modifyPassword.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
@@ -145,4 +149,17 @@ public class UserController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 测试添加模型收藏功能
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map addCollection(@RequestBody Map param) throws Exception{
+		int model_id =  (Integer) param.get("model_id");
+		Boolean result = collectionService.addCollection(param);
+		return initResult(true, result); 
+	}
 }

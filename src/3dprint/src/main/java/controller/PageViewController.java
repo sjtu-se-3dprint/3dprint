@@ -155,4 +155,15 @@ public class PageViewController {
 	public String modelEdit(ModelMap model) {
 		return "user/modelEdit";
 	}
+
+	/**
+	 * 收藏测试页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/test.htm", method = RequestMethod.GET)
+	public String addCollection(ModelMap model) {
+		return "/user/test";
+	}
+
 }

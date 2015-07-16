@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.CollectionMapper" >
+
+	<select id="findCollectionByUser" resultType="map">
+		select * from model_collection 
+		where user_id=#{user_id}
+		  <if test="status!=null">and status=#{status}</if>
+	</select>
+	
+	<select id="findCollectionByModel" resultType="Integer">
+		select count(user_id)
+		from model_collection 
+		where model_id=#{model_id}
+		  <if test="status!=null">and status=#{status}</if>
+	</select>
+	
+	<select id="isCollection" resultType="map">
+	    select * 
+	    from model_collection
+	    where user_id=#{user_id} 
+	    and model_id=#{model_id}
+	    and status=='normal'
+	</select>
+	
+	<update id="removeCollection">
+		update model_collection
+		set status="deleted",
+			updatetime=now()
+		where collection_id=#{collection_id}
+		and status=#{status}
+	</update>
+	
+	<insert id="addCollection" useGeneratedKeys="true" keyProperty="collection_id">
+		insert into model_collection(user_id, model_id)
+		values(#{user_id},
+			   #{model_id});
+	</insert>
+
+</mapper>

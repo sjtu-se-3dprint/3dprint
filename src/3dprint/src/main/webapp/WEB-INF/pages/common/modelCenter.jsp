@@ -235,7 +235,7 @@
 					<a href="#" class="list-group-item">家居</a> 
 					<a href="#" class="list-group-item">零件</a>
 				</div>
-				<br />
+				<br/>
 				<form class="form-inline">
 					<div class="form-group">
 						<label for="sortType">排序类型：</label> <select class="form-control"
