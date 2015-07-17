@@ -1,12 +1,12 @@
 .modelThumbnail {
 	width: 200px;
 	height: 205px;
-	border: 1px solid #CCC;
+	border: 1px solid #DDD;
 	border-radius: 4px;
 	padding: 5px;
 	text-align: center;
 	margin-left: 10px;
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 	overflow: hidden;
 	cursor: pointer;
 	transition: all 0.5s;
@@ -37,7 +37,7 @@
 }
 
 .modelThumbnail .operate {
-	background: #333;
+	background: #555;
 	width: 199px;
 	height: 40px;
 	margin-left: -5px;

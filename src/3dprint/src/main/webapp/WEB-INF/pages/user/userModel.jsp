@@ -44,15 +44,6 @@
 				</div>
 			</div>
 			<div id="modelContainer" class="row" style="padding-top: 30px">
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-					<div class="operate">
-						<a href="" class="pull-right">删除</a> <a href="" class="pull-right">编辑</a>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

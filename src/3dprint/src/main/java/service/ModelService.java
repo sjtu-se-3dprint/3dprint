@@ -33,6 +33,14 @@ public interface ModelService {
 	public Map myModels(Map param) throws Exception;
 	
 	/**
+	 * 删除用户自己上传的模型
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean deleteMyModel(Map param) throws Exception;
+	
+	/**
 	 * 模型编辑
 	 * @param param
 	 * @return

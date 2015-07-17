@@ -92,7 +92,11 @@ public class UserController extends BaseController {
 		}
 	}
 	
-
+	/**
+	 * 获取用户上传模型列表
+	 * @param param
+	 * @return
+	 */
 	@RequestMapping(value = "/myModels.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Map myModels(@RequestBody Map param) {
@@ -103,7 +107,23 @@ public class UserController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
-
+	
+	/**
+	 * 删除用户自己上传的模型
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteMyModel.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map deleteMyModel(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.deleteMyModel(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
 	/**
 	 * 模型文件上传。
 	 * 在模型上传页面，用户选择了一个模型文件，先上传模型文件，

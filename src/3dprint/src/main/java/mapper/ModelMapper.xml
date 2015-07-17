@@ -22,6 +22,14 @@
 		where model_id = #{model_id}
 	</update>
 	
+	<update id="updateModelStatusById">
+		update model
+		set status = #{new_status},
+			updatetime = now()
+		where model_id = #{model_id}
+			and status = #{old_status}
+	</update>
+	
 	<select id="findModelById" resultType="map">
 		select * from model
 		where model_id = #{model_id}

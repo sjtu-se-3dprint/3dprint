@@ -37,7 +37,7 @@ function createModelHtml(model) {
 	content += '</div>';
 	content += '<div class="name">' + model.model_name + '</div>';
 	content += '<div class="operate">';
-	content += '<a href="" class="pull-right">删除</a> <a href="' + ContextPath
+	content += '<a href="javascript:deleteMyModel(' + model.model_id + ')" class="pull-right">删除</a> <a href="' + ContextPath
 			+ '/view/user/modelEdit.htm?model_id=' + model.model_id
 			+ '" class="pull-right">编辑</a>';
 	content += '</div>';
@@ -63,6 +63,32 @@ function getUserModels(page, amount) {
 
 				showModels();
 
+			} else if (res) {
+				alert(res.message);
+			}
+		},
+		error : function(err) {
+			// alert('未知错误');
+		}
+	});
+}
+
+function deleteMyModel(model_id){
+	if(!confirm('确定要删除此模型？')){
+		return false;
+	}
+	$.ajax({
+		url : ContextPath + '/user/deleteMyModel.ajax',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/json',
+		data : JSON.stringify({
+			model_id: model_id
+		}),
+		success : function(res) {
+			if (res && res.success) {
+//				alert('删除成功');
+				getUserModels(currPage, amountPerPage);
 			} else if (res) {
 				alert(res.message);
 			}

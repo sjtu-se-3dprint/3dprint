@@ -191,6 +191,41 @@ public class ModelServiceImpl implements ModelService {
 		
 		return modelInfo;
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Boolean deleteMyModel(Map param) throws Exception{
+		
+		Map me = userService.myInfo(null);
+		if (me == null) {
+			throw new Exception("请先登录");
+		}
+		
+		// 找出模型
+		Map model = new HashMap();
+		model.put("model_id", param.get("model_id"));
+		model.put("status", "normal");
+		model = modelMapper.findModelById(model);
+		if (model == null) {
+			throw new Exception("找不到该模型");
+		}
+
+		// 删除者不是上传者
+		if (Integer.parseInt("" + model.get("user_id")) != Integer.parseInt(""
+				+ me.get("user_id"))) {
+			throw new Exception("你无权限删除此模型");
+		}
+		
+		// 删除模型
+		Map modelStatusMap = new HashMap();
+		modelStatusMap.put("model_id", model.get("model_id"));
+		modelStatusMap.put("old_status", model.get("status"));
+		modelStatusMap.put("new_status", "deleted");
+		if(1 != modelMapper.updateModelStatusById(modelStatusMap)){
+			throw new Exception("删除模型失败");
+		}
+		
+		return true;
+	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean editModel(Map param) throws Exception {
