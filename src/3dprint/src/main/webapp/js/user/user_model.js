@@ -1,4 +1,4 @@
-var amountPerPage = 9;
+var amountPerPage = 6;
 var currPage = 1;
 var modelInfo = null;
 
@@ -11,8 +11,38 @@ $(function() {
 
 	});
 
-	getUserModels(currPage, amountPerPage);
+	getUserModels(currPage);
 })
+
+function showPagination() {
+	if (!modelInfo || !modelInfo.models) {
+		return;
+	}
+
+	currPage = parseInt(modelInfo.page);
+	var maxPage = parseInt((modelInfo.total + amountPerPage - 1)
+			/ amountPerPage);
+	var fromPage = currPage - 2;
+	fromPage < 1 && (fromPage = 1);
+	var toPage = currPage + 2;
+	toPage > maxPage && (toPage = maxPage);
+	var left = '<li '
+			+ (currPage == 1 ? 'class="disabled"' : '')
+			+ '><a href="javascript:getUserModels('
+			+ (currPage - 1)
+			+ ')" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>';
+	var mid = '';
+	for (var i = fromPage; i <= toPage; i++) {
+		mid += '<li ' + (currPage==i?'class="active"':'') + '><a href="javascript:getUserModels(' + i + ')">' + i
+				+ '</a></li>';
+	}
+	var right = '<li '
+		+ (currPage == maxPage ? 'class="disabled"' : '')
+		+ '><a href="javascript:getUserModels('
+		+ (currPage + 1)
+		+ ')" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>';
+	$('#pagination').html(left + mid + right)
+}
 
 function showModels() {
 	if (!modelInfo || !modelInfo.models) {
@@ -37,7 +67,8 @@ function createModelHtml(model) {
 	content += '</div>';
 	content += '<div class="name">' + model.model_name + '</div>';
 	content += '<div class="operate">';
-	content += '<a href="javascript:deleteMyModel(' + model.model_id + ')" class="pull-right">删除</a> <a href="' + ContextPath
+	content += '<a href="javascript:deleteMyModel(' + model.model_id
+			+ ')" class="pull-right">删除</a> <a href="' + ContextPath
 			+ '/view/user/modelEdit.htm?model_id=' + model.model_id
 			+ '" class="pull-right">编辑</a>';
 	content += '</div>';
@@ -45,7 +76,7 @@ function createModelHtml(model) {
 	return content;
 }
 
-function getUserModels(page, amount) {
+function getUserModels(page) {
 	$.ajax({
 		url : ContextPath + '/user/myModels.ajax',
 		type : 'post',
@@ -53,15 +84,16 @@ function getUserModels(page, amount) {
 		contentType : 'application/json',
 		data : JSON.stringify({
 			page : page,
-			amount : amount
+			amount : amountPerPage
 		}),
 		success : function(res) {
 			if (res && res.success) {
 
-				console.log(res.value);
 				modelInfo = res.value;
 
 				showModels();
+
+				showPagination();
 
 			} else if (res) {
 				alert(res.message);
@@ -73,8 +105,8 @@ function getUserModels(page, amount) {
 	});
 }
 
-function deleteMyModel(model_id){
-	if(!confirm('确定要删除此模型？')){
+function deleteMyModel(model_id) {
+	if (!confirm('确定要删除此模型？')) {
 		return false;
 	}
 	$.ajax({
@@ -83,12 +115,12 @@ function deleteMyModel(model_id){
 		dataType : 'json',
 		contentType : 'application/json',
 		data : JSON.stringify({
-			model_id: model_id
+			model_id : model_id
 		}),
 		success : function(res) {
 			if (res && res.success) {
-//				alert('删除成功');
-				getUserModels(currPage, amountPerPage);
+				// alert('删除成功');
+				getUserModels(currPage);
 			} else if (res) {
 				alert(res.message);
 			}

@@ -180,7 +180,7 @@ public class ModelServiceImpl implements ModelService {
 		}
 
 		modelParam.put("limit_from", (page - 1) * amount);
-		modelParam.put("limit_to", page * amount);
+		modelParam.put("limit_to", amount);
 		List models = modelMapper.findModelsByUserId(modelParam);
 		generateImagesPathForModel(models);
 
@@ -188,18 +188,18 @@ public class ModelServiceImpl implements ModelService {
 		modelInfo.put("models", models);
 		modelInfo.put("page", page);
 		modelInfo.put("total", total);
-		
+
 		return modelInfo;
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Boolean deleteMyModel(Map param) throws Exception{
-		
+	public Boolean deleteMyModel(Map param) throws Exception {
+
 		Map me = userService.myInfo(null);
 		if (me == null) {
 			throw new Exception("请先登录");
 		}
-		
+
 		// 找出模型
 		Map model = new HashMap();
 		model.put("model_id", param.get("model_id"));
@@ -214,16 +214,16 @@ public class ModelServiceImpl implements ModelService {
 				+ me.get("user_id"))) {
 			throw new Exception("你无权限删除此模型");
 		}
-		
+
 		// 删除模型
 		Map modelStatusMap = new HashMap();
 		modelStatusMap.put("model_id", model.get("model_id"));
 		modelStatusMap.put("old_status", model.get("status"));
 		modelStatusMap.put("new_status", "deleted");
-		if(1 != modelMapper.updateModelStatusById(modelStatusMap)){
+		if (1 != modelMapper.updateModelStatusById(modelStatusMap)) {
 			throw new Exception("删除模型失败");
 		}
-		
+
 		return true;
 	}
 
@@ -300,19 +300,20 @@ public class ModelServiceImpl implements ModelService {
 		generateImagesPathForModel(model);
 		return model;
 	}
-	
-	private void generateImagesPathForModel(List<Map> models) throws Exception{
-		for(Map model : models){
+
+	private void generateImagesPathForModel(List<Map> models) throws Exception {
+		for (Map model : models) {
 			generateImagesPathForModel(model);
 		}
 	}
-	
+
 	/**
 	 * 为模型配好图片路径
+	 * 
 	 * @param model
 	 * @throws Exception
 	 */
-	private void generateImagesPathForModel(Map model) throws Exception{
+	private void generateImagesPathForModel(Map model) throws Exception {
 		if (model != null && model.get("image_name") != null) {
 			String imageName = (String) model.get("image_name");
 			String[] images = imageName.split(";");

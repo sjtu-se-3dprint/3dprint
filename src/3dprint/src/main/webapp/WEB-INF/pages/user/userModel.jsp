@@ -43,8 +43,15 @@
 						type="button" class="btn btn-primary">上传模型</a>
 				</div>
 			</div>
-			<div id="modelContainer" class="row" style="padding-top: 30px">
+
+			<div class="row" style="margin-top: 30px">
+				<div id="modelContainer"></div>
 			</div>
+
+			<nav style="width:690px;">
+				<ul id="pagination" class="pagination pull-right">
+				</ul>
+			</nav>
 		</div>
 	</div>
 </body>

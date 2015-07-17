@@ -1,11 +1,11 @@
 .modelThumbnail {
 	width: 200px;
-	height: 205px;
-	border: 1px solid #DDD;
+	height: 175px;
+	border: 1px solid #CCC;
 	border-radius: 4px;
 	padding: 5px;
 	text-align: center;
-	margin-left: 10px;
+	margin-left: 35px;
 	margin-bottom: 15px;
 	overflow: hidden;
 	cursor: pointer;
@@ -27,7 +27,7 @@
 
 .modelThumbnail .img {
 	width: 188px;
-	height: 150px;
+	height: 120px;
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -52,7 +52,7 @@
 
 .modelThumbnail .img img {
 	max-width: 188px;
-	max-height: 150px;
+	max-height: 120px;
 }
 
 .modelThumbnail .name {
