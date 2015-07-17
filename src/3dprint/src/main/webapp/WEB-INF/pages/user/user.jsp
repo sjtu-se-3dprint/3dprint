@@ -4,10 +4,11 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>用户中心</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" flush="true"></jsp:include>
+	<script src="<%=request.getContextPath()%>/js/user/user_info.js"></script>
 	<script src="<%=request.getContextPath()%>/js/user/user_setting.js"></script>
 	<script src="<%=request.getContextPath()%>/js/common/drag.js"></script>
 	<div class="container">
@@ -22,10 +23,11 @@
 
 			<div class="list-group center-block"
 				style="width: 160px; padding-top: 20px;">
-				<a href="#" class="list-group-item active">个人设置</a> <a href="#"
-					class="list-group-item">我的模型</a> <a href="#"
-					class="list-group-item">我的购物</a> <a href="#"
-					class="list-group-item">我的收藏</a> <a href="#"
+				<a href="<%=request.getContextPath()%>/view/user/index.htm"
+					class="list-group-item active">个人设置</a> <a href="<%=request.getContextPath()%>/view/user/userModel.htm"
+					class="list-group-item">我的模型</a> <a href="<%=request.getContextPath()%>/view/user/userShop.htm"
+					class="list-group-item">我的购物</a> <a href="<%=request.getContextPath()%>/view/user/userCollection.htm"
+					class="list-group-item">我的收藏</a> <a href="<%=request.getContextPath()%>/view/user/userArticle.htm"
 					class="list-group-item">我的帖子</a>
 			</div>
 		</div>
@@ -159,14 +161,14 @@
 					<div class="form-group">
 						<label for="inputQQ" class="col-sm-2 control-label">确认密码：</label>
 						<div class="col-sm-4">
-							<input type="password" class="form-control" id="inputConfirmPassword"
-								placeholder="Confirm New Password">
+							<input type="password" class="form-control"
+								id="inputConfirmPassword" placeholder="Confirm New Password">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-4 col-sm-2">
-							<button id="modifyPasswordBtn" type="submit" class="btn btn-primary"
-								style="width: 100%">确认修改</button>
+							<button id="modifyPasswordBtn" type="submit"
+								class="btn btn-primary" style="width: 100%">确认修改</button>
 						</div>
 					</div>
 				</div>
