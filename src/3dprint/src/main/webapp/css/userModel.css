@@ -1,0 +1,46 @@
+.modelThumbnail {
+	width: 200px;
+	height: 240px;
+	border: 1px solid #CCC;
+	border-radius: 4px;
+	padding: 5px;
+	text-align: center;
+	margin-left: 10px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s; /* Firefox 4 */
+	-webkit-transition: all 0.5s; /* Safari and Chrome */
+	-o-transition: all 0.5s; /* Opera */
+}
+
+.modelThumbnail:hover {
+	border: 1px solid #337ab7;
+	cursor: pointer;
+}
+
+.modelThumbnail:hover .name{
+	color: #00a1d6
+}
+
+.modelThumbnail .img {
+	width: 188px;
+	height: 150px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.modelThumbnail .img img {
+	max-width: 188px;
+	max-height: 150px;
+}
+
+.modelThumbnail .name {
+	color: #666;
+	padding-top: 6px;
+	padding-left: 3px;
+	padding-right: 3px; height : 40px;
+	overflow: hidden;
+	height: 40px; overflow : hidden;
+	line-height: 17px
+}
