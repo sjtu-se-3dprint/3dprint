@@ -44,45 +44,56 @@
 				</div>
 			</div>
 			<div class="row" style="padding-top: 30px">
-				<div class="pull-left">
-					<div class="modelThumbnail">
-						<div class="img">
-							<img src="/3dprint/image/model/26/12.jpg" alt="...">
-						</div>
-						<div class="name">
-							这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
-						</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
+					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
+					<div class="operate">
+						<a href="">编辑</a>
 					</div>
 				</div>
-				<div class="pull-left">
-					<div class="modelThumbnail">
-						<div class="img">
-							<img src="/3dprint/image/model/26/17.jpg" alt="...">
-						</div>
-						<div class="name">
-							这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
-						</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
 					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
 				</div>
-				<div class="pull-left">
-					<div class="modelThumbnail">
-						<div class="img">
-							<img src="/3dprint/image/model/26/12.jpg" alt="...">
-						</div>
-						<div class="name">
-							这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
-						</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
 					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
 				</div>
-				<div class="pull-left">
-					<div class="modelThumbnail">
-						<div class="img">
-							<img src="/3dprint/image/model/26/12.jpg" alt="...">
-						</div>
-						<div class="name">
-							这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
-						</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
 					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
+				</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
+					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
+				</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
+					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
+				</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
+					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
+				</div>
+				<div class="modelThumbnail pull-left">
+					<div class="img">
+						<img src="/3dprint/image/model/26/17.jpg" alt="...">
+					</div>
+					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
 				</div>
 			</div>
 		</div>
