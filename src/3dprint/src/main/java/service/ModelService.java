@@ -30,7 +30,7 @@ public interface ModelService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List myModels(Map param) throws Exception;
+	public Map myModels(Map param) throws Exception;
 	
 	/**
 	 * 模型编辑

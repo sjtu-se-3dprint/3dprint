@@ -22,7 +22,7 @@
 
 .modelThumbnail:hover .name {
 	color: #00a1d6;
-	height: 20px;
+	height: 23px;
 }
 
 .modelThumbnail .img {
@@ -68,5 +68,6 @@
 .modelThumbnail .operate a {
 	color: #FFF;
 	margin-right: 10px;
-	margin-top: 5px
+	margin-top: 4px;
+	font-size: 9px;
 }

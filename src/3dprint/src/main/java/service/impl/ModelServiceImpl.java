@@ -1,7 +1,6 @@
 package service.impl;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import mapper.ModelMapper;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -153,7 +151,7 @@ public class ModelServiceImpl implements ModelService {
 		return true;
 	}
 
-	public List myModels(Map param) throws Exception {
+	public Map myModels(Map param) throws Exception {
 
 		Map me = userService.myInfo(null);
 		if (me == null) {
@@ -184,10 +182,14 @@ public class ModelServiceImpl implements ModelService {
 		modelParam.put("limit_from", (page - 1) * amount);
 		modelParam.put("limit_to", page * amount);
 		List models = modelMapper.findModelsByUserId(modelParam);
+		generateImagesPathForModel(models);
 
-		System.out.println(models);
+		Map modelInfo = new HashMap();
+		modelInfo.put("models", models);
+		modelInfo.put("page", page);
+		modelInfo.put("total", total);
 		
-		return models;
+		return modelInfo;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -260,6 +262,22 @@ public class ModelServiceImpl implements ModelService {
 	public Map findModelById(Map param) throws Exception {
 		param.put("status", "normal");
 		Map model = modelMapper.findModelById(param);
+		generateImagesPathForModel(model);
+		return model;
+	}
+	
+	private void generateImagesPathForModel(List<Map> models) throws Exception{
+		for(Map model : models){
+			generateImagesPathForModel(model);
+		}
+	}
+	
+	/**
+	 * 为模型配好图片路径
+	 * @param model
+	 * @throws Exception
+	 */
+	private void generateImagesPathForModel(Map model) throws Exception{
 		if (model != null && model.get("image_name") != null) {
 			String imageName = (String) model.get("image_name");
 			String[] images = imageName.split(";");
@@ -273,7 +291,6 @@ public class ModelServiceImpl implements ModelService {
 			}
 			model.put("model_images", model_images);
 		}
-		return model;
 	}
 
 }
