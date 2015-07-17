@@ -21,7 +21,8 @@
 }
 
 .modelThumbnail:hover .name {
-	color: #00a1d6
+	color: #00a1d6;
+	height: 20px;
 }
 
 .modelThumbnail .img {
@@ -32,20 +33,21 @@
 }
 
 .modelThumbnail:hover .operate {
-	margin-top: -50px;
+	margin-top: 3px;
 }
 
 .modelThumbnail .operate {
-	background: #AAA;
-	width: 198px;
+	background: #333;
+	width: 199px;
 	height: 40px;
 	margin-left: -5px;
-	margin-top: -20px;
+	margin-top: 9px;
+	/* 	margin-top: -20px; */
 	border-radius: 4px;
-	transition: all 0.5s;
-	-moz-transition: all 0.5s; /* Firefox 4 */
-	-webkit-transition: all 0.5s; /* Safari and Chrome */
-	-o-transition: all 0.5s;
+	transition: all 0.1s;
+	-moz-transition: all 0.1s; /* Firefox 4 */
+	-webkit-transition: all 0.1s; /* Safari and Chrome */
+	-o-transition: all 0.1s;
 }
 
 .modelThumbnail .img img {
@@ -61,4 +63,10 @@
 	overflow: hidden;
 	height: 40px;
 	line-height: 17px
+}
+
+.modelThumbnail .operate a {
+	color: #FFF;
+	margin-right: 10px;
+	margin-top: 5px
 }

@@ -27,4 +27,19 @@
 		where model_id = #{model_id}
 			<if test="status!=null">and status=#{status}</if>
 	</select>
+	
+	<select id="countModelsByUserId" resultType="java.lang.Integer">
+		select count(*) from model
+		where user_id = #{user_id}
+			<if test="status!=null">and status=#{status}</if>
+	</select>
+	
+	<select id="findModelsByUserId" resultType="map">
+		select * from model
+		where user_id = #{user_id}
+			<if test="status!=null">and status=#{status}</if>
+		order by model_id desc
+		limit #{limit_from}, #{limit_to}
+	</select>
+	
 </mapper>

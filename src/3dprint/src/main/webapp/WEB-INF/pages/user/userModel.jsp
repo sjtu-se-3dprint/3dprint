@@ -11,7 +11,7 @@
 <body>
 	<jsp:include page="../common/header.jsp" flush="true"></jsp:include>
 	<script src="<%=request.getContextPath()%>/js/user/user_info.js"></script>
-	<script src="<%=request.getContextPath()%>/js/user/user_setting.js"></script>
+	<script src="<%=request.getContextPath()%>/js/user/user_model.js"></script>
 	<div class="container">
 		<div class="col-md-3">
 			<div class="thumbnail center-block"
@@ -43,57 +43,15 @@
 						type="button" class="btn btn-primary">上传模型</a>
 				</div>
 			</div>
-			<div class="row" style="padding-top: 30px">
+			<div id="modelContainer" class="row" style="padding-top: 30px">
 				<div class="modelThumbnail pull-left">
 					<div class="img">
 						<img src="/3dprint/image/model/26/17.jpg" alt="...">
 					</div>
 					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
 					<div class="operate">
-						<a href="">编辑</a>
+						<a href="" class="pull-right">删除</a> <a href="" class="pull-right">编辑</a>
 					</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
-				</div>
-				<div class="modelThumbnail pull-left">
-					<div class="img">
-						<img src="/3dprint/image/model/26/17.jpg" alt="...">
-					</div>
-					<div class="name">这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题</div>
 				</div>
 			</div>
 		</div>

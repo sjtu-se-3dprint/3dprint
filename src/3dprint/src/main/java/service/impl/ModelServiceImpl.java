@@ -153,6 +153,43 @@ public class ModelServiceImpl implements ModelService {
 		return true;
 	}
 
+	public List myModels(Map param) throws Exception {
+
+		Map me = userService.myInfo(null);
+		if (me == null) {
+			throw new Exception("请先登录");
+		}
+
+		// 检查参数正确性
+		int page = Integer.parseInt("" + param.get("page"));
+		int amount = Integer.parseInt("" + param.get("amount"));
+		if (page <= 0 || amount <= 0) {
+			return null;
+		}
+
+		// 查出总共有多少个模型
+		Map modelParam = new HashMap();
+		modelParam.put("user_id", me.get("user_id"));
+		modelParam.put("status", "normal");
+		Integer total = modelMapper.countModelsByUserId(modelParam);
+		if (total == null || total <= 0) {
+			return null;
+		}
+
+		// 再次检查参数正确性
+		if ((page - 1) * amount >= total) {
+			return null;
+		}
+
+		modelParam.put("limit_from", (page - 1) * amount);
+		modelParam.put("limit_to", page * amount);
+		List models = modelMapper.findModelsByUserId(modelParam);
+
+		System.out.println(models);
+		
+		return models;
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean editModel(Map param) throws Exception {
 
@@ -200,21 +237,21 @@ public class ModelServiceImpl implements ModelService {
 		if (1 != modelMapper.updateModelById(modelChanged)) {
 			throw new Exception("编辑模型失败");
 		}
-		
+
 		// 获取存放模型图片的文件夹
 		String realPath = (String) param.get("real_path");
 		String imageFolder = realPath + MODEL_IMAGE_PATH + "/"
 				+ param.get("model_id");
 		util.Util.createFolder(imageFolder);
-		
+
 		// 保存新增的图片到文件系统
 		image_index = Integer.parseInt("" + model.get("image_index"));
 		for (Map modelImage : modelImages) {
 			if (modelImage == null || !"new".equals(modelImage.get("type"))) {
 				continue;
 			}
-			util.Util.decodeBase64ImageAndSave((String)modelImage.get("data"), imageFolder + "/"
-					+ image_index++ + MODEL_IMAGE_SUFFIX);
+			util.Util.decodeBase64ImageAndSave((String) modelImage.get("data"),
+					imageFolder + "/" + image_index++ + MODEL_IMAGE_SUFFIX);
 		}
 
 		return true;

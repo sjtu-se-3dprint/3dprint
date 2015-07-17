@@ -91,6 +91,18 @@ public class UserController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
+	
+
+	@RequestMapping(value = "/myModels.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map myModels(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.myModels(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
 
 	/**
 	 * 模型文件上传。
