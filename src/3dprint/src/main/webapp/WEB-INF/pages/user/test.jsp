@@ -11,27 +11,53 @@
 <jsp:include page="../common/header.jsp" flush="true"></jsp:include>
 test 
 模型1
-<button id ="btntest" class = "btn btn-primary">添加收藏</button>
-<button id ="btntest2" class = "btn btn-primary">添加收藏</button>
+<button id ="btntest" class = "btn btn-primary"></button>
+<button id = "haha" class = "btn btn-primary">被多少人收藏了</button>
 <script>
-$(function() {		//initialization	
-	$('#btntest').click(addCollection();		//点击注册时提交
-	$('#btntest').click(removeCollection();		//点击注册时提交
+$(function() {		//initialization
+	$('#haha').click(getCollectionNum);
+		$.ajax({
+			url : ContextPath+'/user/isCollection.ajax',
+			type : 'post',
+			dataType : 'json',
+			contentType : 'application/json',
+			data : JSON.stringify({
+				model_id : 4
+			}),
+			success : function(res) {
+				if (res && res.success) {
+					if(res.value){
+						$('#btntest').html("tianjia收藏");
+						$('#btntest').one("click",addCollection);
+					    }else{	
+							$('#btntest').html("quxiao收藏");
+							$('#btntest').one("click",removeCollection);	
+					    }			
+					} else if (res) {
+						alert(res.message);
+				}
+			},
+			error : function(err) {
+				alert('未知错误');
+			}
+		});
+
 });
 
-function addCollection(){
+function addCollection(){	
 $.ajax({
 	url : ContextPath+'/user/addCollection.ajax',
 	type : 'post',
 	dataType : 'json',
 	contentType : 'application/json',
 	data : JSON.stringify({
-		model_id : 28
+		model_id : 4
 	}),
 	success : function(res) {
 		if (res && res.success) {
 			alert('收藏成功！');
-			window.location.href = 'test.htm';
+			$('#btntest').html("取消收藏");
+			$('#btntest').one("click",removeCollection);
 		} else if (res) {
 			alert(res.message);
 		}
@@ -41,7 +67,53 @@ $.ajax({
 	}
 });
 }
-alert('test')
+
+function removeCollection(){
+	$.ajax({
+		url : ContextPath+'/user/removeCollection.ajax',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/json',
+		data : JSON.stringify({
+			model_id : 4
+		}),
+		success : function(res) {
+			if (res && res.success) {
+				alert('取消成功！');
+				$('#btntest').html("添加收藏");
+				$('#btntest').one("click",addCollection);
+			} else if (res) {
+				alert(res.message);
+			}
+		},
+		error : function(err) {
+			alert('未知错误');
+		}
+	});
+}
+
+function getCollectionNum(){
+	$ajax({
+		url : ContextPath+'/user/getCollectionNum.ajax',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/json',
+		data : JSON.stringify({
+			model_id : 4
+		}),
+		success : function(res) {
+			if (res && res.success) {
+				alert('res.value')			
+				$('#haha').html("res.value");
+			} else if (res) {
+				alert(res.message);
+			}
+		},
+		error : function(err) {
+			alert('未知错误');
+		}
+		});
+}
 </script>
 </body>
 </html>

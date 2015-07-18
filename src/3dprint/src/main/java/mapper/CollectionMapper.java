@@ -20,7 +20,7 @@ public interface CollectionMapper {
      /*
       * 根据模型id查找收藏数目
       */
-    public Integer findCollectionByModel(Map map);
+    public int findCollectionByModel(Map map);
     
     /*
      * 根据用户id和模型id判断是否已经收藏

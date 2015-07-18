@@ -157,9 +157,58 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/addCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
 	@ResponseBody
-	public Map addCollection(@RequestBody Map param) throws Exception{
-		int model_id =  (Integer) param.get("model_id");
-		Boolean result = collectionService.addCollection(param);
-		return initResult(true, result); 
+	public Map addCollection(@RequestBody Map param){
+	    try{
+		return initResult(true, collectionService.addCollection(param)); 
+	    } catch(Exception e){
+	    	e.printStackTrace();
+	    	return initResult(false,e.getMessage(),"");	
+	    }
 	}
+	
+	/**
+	 * 取消收藏
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/removeCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map removeCollection(@RequestBody Map param) {
+		try {
+			return initResult(true, collectionService.removeCollection(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 模型页面加载时，判断用户是否已经收藏该模型
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/isCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map isCollection(@RequestBody Map param) {
+		try {
+			return initResult(true, collectionService.isCollection(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	
+	@RequestMapping(value = "/getCollectionNum.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map getCollectionNum(@RequestBody Map param) {
+		try {
+			int result = collectionService.getCollectionNum(param);
+			String results = "" +result;
+			return initResult(true, results);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}	
 }

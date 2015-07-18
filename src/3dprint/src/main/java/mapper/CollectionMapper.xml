@@ -20,14 +20,15 @@
 	    from model_collection
 	    where user_id=#{user_id} 
 	    and model_id=#{model_id}
-	    and status=='normal'
+	    <if test="status!=null">and status=#{status}</if>
 	</select>
 	
 	<update id="removeCollection">
 		update model_collection
 		set status="deleted",
 			updatetime=now()
-		where collection_id=#{collection_id}
+		where user_id=#{user_id} 
+	    and model_id=#{model_id}
 		and status=#{status}
 	</update>
 	

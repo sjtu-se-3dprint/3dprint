@@ -22,6 +22,9 @@ public class CollectionServiceImpl implements CollectionService {
 	@Resource(name = "userServiceImpl")
 	UserService userServiceImpl;
 	
+	/**
+	 * 添加收藏
+	 */
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public Boolean addCollection(Map param) throws Exception{
 		
@@ -42,11 +45,17 @@ public class CollectionServiceImpl implements CollectionService {
 		return true;
 	}
 
+	/**
+	 * 判断是否收藏
+	 */
 	public Boolean isCollection(Map param){
 		Map collection = collectionMapper.isCollection(param);
 		return collection == null;
 	}
 
+	/**
+	 * 取消收藏该模型
+	 */
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public Boolean removeCollection(Map param) throws Exception{
 		Map user = userServiceImpl.myInfo(null);
@@ -67,6 +76,12 @@ public class CollectionServiceImpl implements CollectionService {
 			throw new Exception("删除模型收藏时发生错误。");
 		}	
 		return true;
+	}
+	
+	public int getCollectionNum(Map param){
+		param.put("status", "normal");
+		int num = collectionMapper.findCollectionByModel(param);
+		return num;
 	}
 	
 	//未写完，获得用户收藏的模型列表，暂时不知道如何处理
