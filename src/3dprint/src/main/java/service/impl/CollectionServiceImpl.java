@@ -34,15 +34,27 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 
 		param.put("user_id", user.get("user_id"));	
-		param.put("status", "normal");
-		
-		Integer row = collectionMapper.addCollection(param);
+		param.put("status", "deleted");
+		Map collection = collectionMapper.isCollection(param);
+		if(collection == null){
+			param.put("status", "normal");
+			Integer row = collectionMapper.addCollection(param);
 			
+			if (row == null || row != 1) {
+				throw new Exception("添加模型收藏时发生错误。");
+			}
+			
+			return true;
+		}
+		
+		Integer row = collectionMapper.recoverCollection(param);
+		
 		if (row == null || row != 1) {
 			throw new Exception("添加模型收藏时发生错误。");
 		}
 		
 		return true;
+		
 	}
 
 	/**

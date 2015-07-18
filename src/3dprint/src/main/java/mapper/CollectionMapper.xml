@@ -32,6 +32,15 @@
 		and status=#{status}
 	</update>
 	
+	<update id="recoverCollection">
+	   update model_collection
+	   set status = "normal",
+	   updatetime=now()
+	   where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		and status=#{status}
+	</update>
+	
 	<insert id="addCollection" useGeneratedKeys="true" keyProperty="collection_id">
 		insert into model_collection(user_id, model_id)
 		values(#{user_id},

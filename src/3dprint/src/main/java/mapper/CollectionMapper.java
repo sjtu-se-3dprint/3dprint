@@ -33,6 +33,12 @@ public interface CollectionMapper {
      */
     public Integer addCollection(Map map);
     
+    /**
+     * 用户恢复收藏该模型
+     * @param map
+     * @return int
+     */
+    public Integer recoverCollection(Map map);
     /*
      * 用户取消收藏，输入为用户和模型
      */
