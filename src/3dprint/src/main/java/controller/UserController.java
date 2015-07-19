@@ -203,6 +203,22 @@ public class UserController extends BaseController {
 	}
 	
 	/**
+	 * 修改帖子
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleEdit.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleEdit(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.editArticle(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
 	 * 测试添加模型收藏功能
 	 * @param param
 	 * @return

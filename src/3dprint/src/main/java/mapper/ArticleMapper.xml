@@ -18,4 +18,18 @@
 		insert into article (article_name, article_type, article_content, user_id)
 		values (#{article_name}, #{article_type}, #{article_content}, #{user_id});
 	</insert>
+	
+	<select id="findArticleById" resultType="map">
+		select * from article
+		where article_id = #{article_id}
+			<if test="status!=null">and status = #{status}</if>
+	</select>
+	
+	<update id="updateArticle">
+		update article
+		set article_name = #{article_name},
+			article_content = #{article_content},
+			updatetime = now()
+		where article_id = #{article_id}
+	</update>
 </mapper>

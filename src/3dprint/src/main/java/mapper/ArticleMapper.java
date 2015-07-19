@@ -25,4 +25,18 @@ public interface ArticleMapper {
 	 * @return
 	 */
 	public Integer insertArticle(Map map);
+	
+	/**
+	 * 根据帖子ID找帖子基本信息
+	 * @param map
+	 * @return
+	 */
+	public Map findArticleById(Map map);
+	
+	/**
+	 * 修改帖子的名称、内容，不修改类别
+	 * @param map
+	 * @return
+	 */
+	public Integer updateArticle(Map map);
 }

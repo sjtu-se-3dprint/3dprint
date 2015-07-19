@@ -208,6 +208,16 @@ public class PageViewController {
 	}
 
 	/**
+	 * 帖子修改
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/articleEdit.htm", method = RequestMethod.GET)
+	public String articleEdit(ModelMap model) {
+		return "user/articleEdit";
+	}
+
+	/**
 	 * 收藏测试页面
 	 * @param model
 	 * @return
