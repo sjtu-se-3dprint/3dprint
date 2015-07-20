@@ -57,3 +57,8 @@ create table article_type(
 	status varchar(128) default 'normal',
 	primary key(article_type_id)
 );
+
+insert into article_type(article_type) values('3D打印机');
+insert into article_type(article_type) values('3D模型设计');
+insert into article_type(article_type) values('3D产品服务');
+insert into article_type(article_type) values('综合讨论区');
