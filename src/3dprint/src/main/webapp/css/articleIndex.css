@@ -74,7 +74,8 @@
 }
 
 .articleImages img {
-	max-width: 150px;
+/* 	max-width: 150px; */
+	max-height: 120px;
 	vertical-align: top;
 	padding-right: 5px;
 }

@@ -33,7 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
 	static private int MAX_ARTICLE_TEXT_IN_THUMBNAILS = 110;
 
 	// 在展示帖子列表的时候需要图片，最多允许3张
-	static private int MAX_ARTICLE_IMAGE_IN_THUMBNAILS = 3;
+	static private int MAX_ARTICLE_IMAGE_IN_THUMBNAILS = 5;
 
 	@Resource(name = "userServiceImpl")
 	UserService userService;
@@ -220,6 +220,12 @@ public class ArticleServiceImpl implements ArticleService {
 			List images = new ArrayList<String>();
 			for (Element img : imgs) {
 				String src = img.attr("src");
+				
+				// 不展示外链的图片
+				if(!src.contains("3dprint")){
+					continue;
+				}
+				
 				images.add(src);
 				if (images.size() >= MAX_ARTICLE_IMAGE_IN_THUMBNAILS) {
 					break;
