@@ -26,9 +26,30 @@ public interface ModelMapper {
 	public Integer updateModelById(Map map);
 	
 	/**
+	 * 修改模型状态
+	 * @param map
+	 * @return
+	 */
+	public Integer updateModelStatusById(Map map);
+	
+	/**
 	 * 查询模型
 	 * @param map
 	 * @return
 	 */
 	public Map findModelById(Map map);
+	
+	/**
+	 * 查询用户上传的模型
+	 * @param map
+	 * @return
+	 */
+	public List findModelsByUserId(Map map);
+	
+	/**
+	 * 查询用户上传的模型总数
+	 * @param map
+	 * @return
+	 */
+	public Integer countModelsByUserId(Map map);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.ArticleService;
 import service.ModelService;
 import service.UserService;
 import service.CollectionService;
@@ -30,6 +31,9 @@ public class UserController extends BaseController {
 	
 	@Resource(name = "collectionServiceImpl")
 	CollectionService collectionService;
+	
+	@Resource(name = "articleServiceImpl")
+	ArticleService articleService;
 
 	@RequestMapping(value = "/modifyPassword.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
@@ -91,7 +95,39 @@ public class UserController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
-
+	
+	/**
+	 * 获取用户上传模型列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/myModels.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map myModels(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.myModels(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 删除用户自己上传的模型
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteMyModel.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map deleteMyModel(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.deleteMyModel(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
 	/**
 	 * 模型文件上传。
 	 * 在模型上传页面，用户选择了一个模型文件，先上传模型文件，
@@ -143,6 +179,39 @@ public class UserController extends BaseController {
 					.getRealPath("/");
 			param.put("real_path", real_path);
 			return initResult(true, modelService.editModel(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 发布帖子
+	 * @param param
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/articlePublish.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articlePublish(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.publishArticle(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 修改帖子
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleEdit.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleEdit(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.editArticle(param));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");

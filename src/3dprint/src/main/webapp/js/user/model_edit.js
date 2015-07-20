@@ -210,7 +210,7 @@ function editModel(){
 		success : function(res) {
 			if (res && res.success) {
 				alert('编辑模型成功！');
-				window.location.href = '';
+				window.location.href = ContextPath + '/view/user/userModel.htm';
 			} else if (res) {
 				alert(res.message);
 			}

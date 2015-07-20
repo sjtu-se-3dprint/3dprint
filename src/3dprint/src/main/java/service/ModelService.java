@@ -25,6 +25,22 @@ public interface ModelService {
 	public Boolean uploadModel(Map param) throws Exception;
 	
 	/**
+	 * 获取用户上传的模型列表
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Map myModels(Map param) throws Exception;
+	
+	/**
+	 * 删除用户自己上传的模型
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean deleteMyModel(Map param) throws Exception;
+	
+	/**
 	 * 模型编辑
 	 * @param param
 	 * @return
