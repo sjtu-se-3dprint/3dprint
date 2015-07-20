@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import service.CollectionService;
 import mapper.CollectionMapper;
 import service.UserService;
+import service.ModelService;
 
 @Service("collectionServiceImpl")
 public class CollectionServiceImpl implements CollectionService {
@@ -22,6 +23,11 @@ public class CollectionServiceImpl implements CollectionService {
 	@Resource(name = "userServiceImpl")
 	UserService userServiceImpl;
 	
+	@Resource(name = "modelServiceImpl")
+	ModelService modelServiceImpl;
+	/**
+	 * 添加收藏
+	 */
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public Boolean addCollection(Map param) throws Exception{
 		
@@ -31,22 +37,43 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 
 		param.put("user_id", user.get("user_id"));	
-		param.put("status", "normal");
-		
-		Integer row = collectionMapper.addCollection(param);
+		param.put("status", "deleted");
+		Map collection = collectionMapper.isCollection(param);
+		if(collection == null){
+			param.put("status", "normal");
+			Integer row = collectionMapper.addCollection(param);
 			
+			if (row == null || row != 1) {
+				throw new Exception("添加模型收藏时发生错误。");
+			}
+			
+			
+		} else
+		{
+		Integer row = collectionMapper.recoverCollection(param);
+		
 		if (row == null || row != 1) {
 			throw new Exception("添加模型收藏时发生错误。");
 		}
-		
+		}
+		Map model = modelServiceImpl.findModelById(param);
+		int newCounts = modelServiceImpl.countCollections(param)+1;
+		model.put("collections", newCounts);
+		modelServiceImpl.modifyCollections(model);
 		return true;
 	}
 
+	/**
+	 * 判断是否收藏
+	 */
 	public Boolean isCollection(Map param){
 		Map collection = collectionMapper.isCollection(param);
 		return collection == null;
 	}
 
+	/**
+	 * 取消收藏该模型
+	 */
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public Boolean removeCollection(Map param) throws Exception{
 		Map user = userServiceImpl.myInfo(null);
@@ -67,6 +94,12 @@ public class CollectionServiceImpl implements CollectionService {
 			throw new Exception("删除模型收藏时发生错误。");
 		}	
 		return true;
+	}
+	
+	public int getCollectionNum(Map param){
+		param.put("status", "normal");
+		int num = collectionMapper.findCollectionByModel(param);
+		return num;
 	}
 	
 	//未写完，获得用户收藏的模型列表，暂时不知道如何处理

@@ -26,6 +26,13 @@ public interface ModelMapper {
 	public Integer updateModelById(Map map);
 	
 	/**
+	 * 修改模型状态
+	 * @param map
+	 * @return
+	 */
+	public Integer updateModelStatusById(Map map);
+	
+	/**
 	 * 查询模型
 	 * @param map
 	 * @return
@@ -59,4 +66,33 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public List getModelListWithoutTypeWithoutKeyWord(Map map);
+
+	/**
+	 * 查询用户上传的模型
+	 * @param map
+	 * @return
+	 */
+	public List findModelsByUserId(Map map);
+	
+	/**
+	 * 查询用户上传的模型总数
+	 * @param map
+	 * @return
+	 */
+	public Integer countModelsByUserId(Map map);
+	
+	/**
+	 * 查询该模型收藏数
+	 * @param map
+	 * @return
+	 */
+	
+	public Integer countCollectionsByModelId(Map map);
+	
+	/**
+	 * 修改模型收藏数
+	 * @param map
+	 * @return
+	 */
+	public Boolean modifyCollections(Map map);
 }

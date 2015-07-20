@@ -1,0 +1,40 @@
+.articlePagination {
+	margin-top: 5px;
+}
+
+.articlePagination a {
+	color: #666;
+	text-decoration: none;
+	padding: 5px 9px;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+}
+
+.articlePagination a:hover {
+	color: #2d64b3;
+	text-decoration: none;
+	border: 1px solid rgb(62, 137, 250);
+}
+
+.articlePagination span {
+	color: rgb(62, 137, 250);
+	padding: 5px 9px;
+	font-size: 12px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.pageInfo {
+	margin-top: 7px;
+	margin-left: 1px;
+	color: #999;
+	font-size: 12px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 22px;
+	margin-bottom: 20px;
+}
+
+.pageInfo span{
+	color: #FF8040
+}

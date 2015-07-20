@@ -27,3 +27,10 @@
 	添加：表'model_collection'，用户收藏模型记录表
 2015-07-16
 	修改：表'model'的字段'model_description'长度扩充到20000
+2015-07-19
+	添加：表'article'，用于记录帖子
+	添加：表'article_comment'，用于记录帖子评论
+	添加：表'floor_comment'，用于记录楼中楼
+	添加：表'article_type'，字典表，记录的帖子的类型
+2015-07-20
+	修改：表model中，添加字段collections,记录模型的收藏数

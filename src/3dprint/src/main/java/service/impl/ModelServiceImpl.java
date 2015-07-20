@@ -1,7 +1,6 @@
 package service.impl;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import mapper.ModelMapper;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -153,6 +151,82 @@ public class ModelServiceImpl implements ModelService {
 		return true;
 	}
 
+	public Map myModels(Map param) throws Exception {
+
+		Map me = userService.myInfo(null);
+		if (me == null) {
+			throw new Exception("请先登录");
+		}
+
+		// 检查参数正确性
+		int page = Integer.parseInt("" + param.get("page"));
+		int amount = Integer.parseInt("" + param.get("amount"));
+		if (page <= 0 || amount <= 0) {
+			return null;
+		}
+
+		// 查出总共有多少个模型
+		Map modelParam = new HashMap();
+		modelParam.put("user_id", me.get("user_id"));
+		modelParam.put("status", "normal");
+		Integer total = modelMapper.countModelsByUserId(modelParam);
+		if (total == null || total <= 0) {
+			return null;
+		}
+
+		// 再次检查参数正确性
+		if ((page - 1) * amount >= total) {
+			return null;
+		}
+
+		modelParam.put("limit_from", (page - 1) * amount);
+		modelParam.put("limit_to", amount);
+		List models = modelMapper.findModelsByUserId(modelParam);
+		generateImagesPathForModel(models);
+
+		Map modelInfo = new HashMap();
+		modelInfo.put("models", models);
+		modelInfo.put("page", page);
+		modelInfo.put("total", total);
+
+		return modelInfo;
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Boolean deleteMyModel(Map param) throws Exception {
+
+		Map me = userService.myInfo(null);
+		if (me == null) {
+			throw new Exception("请先登录");
+		}
+
+		// 找出模型
+		Map model = new HashMap();
+		model.put("model_id", param.get("model_id"));
+		model.put("status", "normal");
+		model = modelMapper.findModelById(model);
+		if (model == null) {
+			throw new Exception("找不到该模型");
+		}
+
+		// 删除者不是上传者
+		if (Integer.parseInt("" + model.get("user_id")) != Integer.parseInt(""
+				+ me.get("user_id"))) {
+			throw new Exception("你无权限删除此模型");
+		}
+
+		// 删除模型
+		Map modelStatusMap = new HashMap();
+		modelStatusMap.put("model_id", model.get("model_id"));
+		modelStatusMap.put("old_status", model.get("status"));
+		modelStatusMap.put("new_status", "deleted");
+		if (1 != modelMapper.updateModelStatusById(modelStatusMap)) {
+			throw new Exception("删除模型失败");
+		}
+
+		return true;
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Boolean editModel(Map param) throws Exception {
 
@@ -200,21 +274,21 @@ public class ModelServiceImpl implements ModelService {
 		if (1 != modelMapper.updateModelById(modelChanged)) {
 			throw new Exception("编辑模型失败");
 		}
-		
+
 		// 获取存放模型图片的文件夹
 		String realPath = (String) param.get("real_path");
 		String imageFolder = realPath + MODEL_IMAGE_PATH + "/"
 				+ param.get("model_id");
 		util.Util.createFolder(imageFolder);
-		
+
 		// 保存新增的图片到文件系统
 		image_index = Integer.parseInt("" + model.get("image_index"));
 		for (Map modelImage : modelImages) {
 			if (modelImage == null || !"new".equals(modelImage.get("type"))) {
 				continue;
 			}
-			util.Util.decodeBase64ImageAndSave((String)modelImage.get("data"), imageFolder + "/"
-					+ image_index++ + MODEL_IMAGE_SUFFIX);
+			util.Util.decodeBase64ImageAndSave((String) modelImage.get("data"),
+					imageFolder + "/" + image_index++ + MODEL_IMAGE_SUFFIX);
 		}
 
 		return true;
@@ -223,6 +297,23 @@ public class ModelServiceImpl implements ModelService {
 	public Map findModelById(Map param) throws Exception {
 		param.put("status", "normal");
 		Map model = modelMapper.findModelById(param);
+		generateImagesPathForModel(model);
+		return model;
+	}
+
+	private void generateImagesPathForModel(List<Map> models) throws Exception {
+		for (Map model : models) {
+			generateImagesPathForModel(model);
+		}
+	}
+
+	/**
+	 * 为模型配好图片路径
+	 * 
+	 * @param model
+	 * @throws Exception
+	 */
+	private void generateImagesPathForModel(Map model) throws Exception {
 		if (model != null && model.get("image_name") != null) {
 			String imageName = (String) model.get("image_name");
 			String[] images = imageName.split(";");
@@ -236,7 +327,6 @@ public class ModelServiceImpl implements ModelService {
 			}
 			model.put("model_images", model_images);
 		}
-		return model;
 	}
 	
 	
@@ -277,5 +367,14 @@ public class ModelServiceImpl implements ModelService {
 		}
 		
 		return model_list;
+	}
+
+	public int countCollections(Map param)
+	{
+		return modelMapper.countCollectionsByModelId(param);
+	}
+	
+	public Boolean modifyCollections(Map param){
+		return modelMapper.modifyCollections(param);
 	}
 }

@@ -22,6 +22,20 @@
 		where model_id = #{model_id}
 	</update>
 	
+	<update id="updateModelStatusById">
+		update model
+		set status = #{new_status},
+			updatetime = now()
+		where model_id = #{model_id}
+			and status = #{old_status}
+	</update>
+	
+	<update id="modifyCollections">
+		update model
+		set collections = #{collections},
+			updatetime = now()
+		where model_id = #{model_id}
+	</update>
 	<select id="findModelById" resultType="map">
 		select * from model
 		where model_id = #{model_id}
@@ -50,5 +64,26 @@
 		select * from (
 			select * from model order by #{sort_type}
 		) as t limit #{amount} offset #{offset}
+	</select>
+
+	<select id="countModelsByUserId" resultType="java.lang.Integer">
+		select count(*) from model
+		where user_id = #{user_id}
+			<if test="status!=null">and status=#{status}</if>
+	</select>
+	
+	
+	<select id="findModelsByUserId" resultType="map">
+		select * from model
+		where user_id = #{user_id}
+			<if test="status!=null">and status=#{status}</if>
+		order by model_id desc
+		limit #{limit_from}, #{limit_to}
+	</select>
+	
+	<select id="countCollectionsByModelId" resultType="java.lang.Integer">
+		select collections from model
+		where model_id = #{model_id}
+			<if test="status!=null">and status=#{status}</if>
 	</select>
 </mapper>

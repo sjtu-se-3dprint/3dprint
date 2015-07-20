@@ -1,55 +1,22 @@
-var user = null;
+
 
 $(function() {
 
-	// 请求用户信息
-	$.ajax({
-		url : ContextPath + '/user/myInfo.ajax',
-		type : 'post',
-		dataType : 'json',
-		contentType : 'application/json',
-		data : JSON.stringify({}),
-		success : function(res) {
-			if (res && res.success) {
+	getUserInfo(function(){
+		
+		// 显示用户头像
+		initUserHead();
 
-				// 储存用户信息
-				user = res.value;
+		// 显示用户信息
+		initUserInfo();
 
-				// 显示用户头像
-				initUserHead();
-
-				// 显示用户信息
-				initUserInfo();
-
-				// 绑定修改头像tab中选择图片按钮事件
-				bindModifyUserheadButton();
-				
-				// 绑定修改密码按钮事件
-				bindModifyPasswordButton();
-
-			} else if (res) {
-				alert(res.message);
-			} else {
-				alert('服务器异常！');
-			}
-		},
-		error : function(err) {
-			// alert('未知错误');
-		}
+		// 绑定修改头像tab中选择图片按钮事件
+		bindModifyUserheadButton();
+		
+		// 绑定修改密码按钮事件
+		bindModifyPasswordButton();
 	});
 })
-
-// 显示用户头像、头像下的用户名
-function initUserHead() {
-
-	$('#usernameText').html(user.name)
-
-	$("<img/>").load(function() {
-		$('#headimage').attr('src', ContextPath + '/image/userhead/' + user.user_id + '/large.png' + '?' + new Date().getTime());
-	}).error(function() {
-		console.log("error loading image");
-	}).attr("src", ContextPath + '/image/userhead/' + user.user_id + '/large.png');
-}
 
 // 显示用户信息
 function initUserInfo() {

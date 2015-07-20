@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.ArticleService;
 import service.UserService;
 import service.ModelService;
 
@@ -25,6 +26,9 @@ public class CommonController extends BaseController {
 	
 	@Resource(name = "modelServiceImpl")	//resource的name要与具体实现类中的service name相对应
 	ModelService modelService;
+	
+	@Resource(name = "articleServiceImpl")
+	ArticleService articleService;
 
 	/**
 	 * 新用户名是否可用
@@ -80,7 +84,7 @@ public class CommonController extends BaseController {
 	
 
 	/**
-	 * 
+	 * 获取模型信息
 	 * @param param
 	 * @param request
 	 * @return
@@ -90,6 +94,71 @@ public class CommonController extends BaseController {
 	public Map modelInfo(@RequestBody Map param) {
 		try {
 			return initResult(true, modelService.findModelById(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 获取帖子信息
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleInfo.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleInfo(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.findArticleById(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+
+	/**
+	 * 根据帖子类别找出前几个帖子（用于展示在首页上）
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleOverview.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleOverview(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.findArticleOverviewByTypeId(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+
+	/**
+	 * 获取帖子类型列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleTypeList.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleTypeList(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.findArticleTypes(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 根据帖子类型、页码，获取帖子列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleList.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleList(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.findArticlesByTypeId(param));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");

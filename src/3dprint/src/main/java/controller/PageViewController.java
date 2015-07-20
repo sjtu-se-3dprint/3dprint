@@ -116,13 +116,54 @@ public class PageViewController {
 	}
 	
 	/**
-	 * User中心
+	 * User中心-个人设置
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/user/index.htm", method = RequestMethod.GET)
 	public String user(ModelMap model) {
 		return "user/user";
+	}
+	
+	/**
+	 * User中心-我的模型
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/userModel.htm", method = RequestMethod.GET)
+	public String userModel(ModelMap model) {
+		return "user/userModel";
+	}
+	
+
+	/**
+	 * User中心-我的购物
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/userShop.htm", method = RequestMethod.GET)
+	public String userShop(ModelMap model) {
+		return "user/userShop";
+	}
+	
+	/**
+	 * User中心-我的收藏
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/userCollection.htm", method = RequestMethod.GET)
+	public String userCollection(ModelMap model) {
+		return "user/userCollection";
+	}
+	
+	/**
+	 * User中心-我的帖子
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/userArticle.htm", method = RequestMethod.GET)
+	public String userArticle(ModelMap model) {
+		return "user/userArticle";
 	}
 	
 	/**
@@ -154,6 +195,46 @@ public class PageViewController {
 	@RequestMapping(value = "/user/modelEdit.htm", method = RequestMethod.GET)
 	public String modelEdit(ModelMap model) {
 		return "user/modelEdit";
+	}
+	
+	/**
+	 * 帖子发布
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/articlePublish.htm", method = RequestMethod.GET)
+	public String articlePublish(ModelMap model) {
+		return "user/articlePublish";
+	}
+
+	/**
+	 * 帖子修改
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/articleEdit.htm", method = RequestMethod.GET)
+	public String articleEdit(ModelMap model) {
+		return "user/articleEdit";
+	}
+
+	/**
+	 * 论坛首页
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/common/articleIndex.htm", method = RequestMethod.GET)
+	public String articleIndex(ModelMap model) {
+		return "common/articleIndex";
+	}
+	
+	/**
+	 * 论坛列表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/common/articleList.htm", method = RequestMethod.GET)
+	public String articleList(ModelMap model) {
+		return "common/articleList";
 	}
 
 	/**

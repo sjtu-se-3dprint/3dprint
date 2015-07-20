@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.ArticleService;
 import service.ModelService;
 import service.UserService;
 import service.CollectionService;
@@ -30,6 +31,9 @@ public class UserController extends BaseController {
 	
 	@Resource(name = "collectionServiceImpl")
 	CollectionService collectionService;
+	
+	@Resource(name = "articleServiceImpl")
+	ArticleService articleService;
 
 	@RequestMapping(value = "/modifyPassword.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
@@ -91,7 +95,39 @@ public class UserController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
-
+	
+	/**
+	 * 获取用户上传模型列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/myModels.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map myModels(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.myModels(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 删除用户自己上传的模型
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteMyModel.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map deleteMyModel(@RequestBody Map param) {
+		try {
+			return initResult(true, modelService.deleteMyModel(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
 	/**
 	 * 模型文件上传。
 	 * 在模型上传页面，用户选择了一个模型文件，先上传模型文件，
@@ -150,6 +186,39 @@ public class UserController extends BaseController {
 	}
 	
 	/**
+	 * 发布帖子
+	 * @param param
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/articlePublish.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articlePublish(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.publishArticle(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 修改帖子
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleEdit.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleEdit(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.editArticle(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
 	 * 测试添加模型收藏功能
 	 * @param param
 	 * @return
@@ -157,9 +226,57 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/addCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
 	@ResponseBody
-	public Map addCollection(@RequestBody Map param) throws Exception{
-		int model_id =  (Integer) param.get("model_id");
-		Boolean result = collectionService.addCollection(param);
-		return initResult(true, result); 
+	public Map addCollection(@RequestBody Map param){
+	    try{
+		return initResult(true, collectionService.addCollection(param)); 
+	    } catch(Exception e){
+	    	e.printStackTrace();
+	    	return initResult(false,e.getMessage(),"");	
+	    }
 	}
+	
+	/**
+	 * 取消收藏
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/removeCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map removeCollection(@RequestBody Map param) {
+		try {
+			return initResult(true, collectionService.removeCollection(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	/**
+	 * 模型页面加载时，判断用户是否已经收藏该模型
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/isCollection.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map isCollection(@RequestBody Map param) {
+		try {
+			return initResult(true, collectionService.isCollection(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
+	
+	@RequestMapping(value = "/getCollectionNum.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map getCollectionNum(@RequestBody Map param) {
+		try {
+			int collections = modelService.countCollections(param);
+			String collectS = "收藏数(" + collections +")";
+			return initResult(true, collectS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}	
 }

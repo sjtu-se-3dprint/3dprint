@@ -8,8 +8,8 @@
 		  <if test="status!=null">and status=#{status}</if>
 	</select>
 	
-	<select id="findCollectionByModel" resultType="Integer">
-		select count(user_id)
+	<select id="findCollectionByModel" resultType="java.lang.Integer">
+		select count(*)
 		from model_collection 
 		where model_id=#{model_id}
 		  <if test="status!=null">and status=#{status}</if>
@@ -20,14 +20,24 @@
 	    from model_collection
 	    where user_id=#{user_id} 
 	    and model_id=#{model_id}
-	    and status=='normal'
+	    <if test="status!=null">and status=#{status}</if>
 	</select>
 	
 	<update id="removeCollection">
 		update model_collection
 		set status="deleted",
 			updatetime=now()
-		where collection_id=#{collection_id}
+		where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		and status=#{status}
+	</update>
+	
+	<update id="recoverCollection">
+	   update model_collection
+	   set status = "normal",
+	   updatetime=now()
+	   where user_id=#{user_id} 
+	    and model_id=#{model_id}
 		and status=#{status}
 	</update>
 	

@@ -20,7 +20,7 @@ public interface CollectionMapper {
      /*
       * 根据模型id查找收藏数目
       */
-    public Integer findCollectionByModel(Map map);
+    public int findCollectionByModel(Map map);
     
     /*
      * 根据用户id和模型id判断是否已经收藏
@@ -33,6 +33,12 @@ public interface CollectionMapper {
      */
     public Integer addCollection(Map map);
     
+    /**
+     * 用户恢复收藏该模型
+     * @param map
+     * @return int
+     */
+    public Integer recoverCollection(Map map);
     /*
      * 用户取消收藏，输入为用户和模型
      */
