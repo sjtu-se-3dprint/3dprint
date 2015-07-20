@@ -35,7 +35,7 @@
 				<div class="form-group">
 					<div class="pull-left labelWidth">
 						<label for="selectArticleType" class="control-label"
-							>帖子标题：</label>
+							>帖子类别：</label>
 					</div>
 					<div class="marginForLabel">
 						<select class="form-control" id="selectArticleType">
