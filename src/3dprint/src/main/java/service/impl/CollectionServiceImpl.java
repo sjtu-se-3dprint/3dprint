@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import service.CollectionService;
 import mapper.CollectionMapper;
 import service.UserService;
+import service.ModelService;
 
 @Service("collectionServiceImpl")
 public class CollectionServiceImpl implements CollectionService {
@@ -22,6 +23,8 @@ public class CollectionServiceImpl implements CollectionService {
 	@Resource(name = "userServiceImpl")
 	UserService userServiceImpl;
 	
+	@Resource(name = "modelServiceImpl")
+	ModelService modelServiceImpl;
 	/**
 	 * 添加收藏
 	 */
@@ -44,17 +47,20 @@ public class CollectionServiceImpl implements CollectionService {
 				throw new Exception("添加模型收藏时发生错误。");
 			}
 			
-			return true;
-		}
-		
+			
+		} else
+		{
 		Integer row = collectionMapper.recoverCollection(param);
 		
 		if (row == null || row != 1) {
 			throw new Exception("添加模型收藏时发生错误。");
 		}
-		
+		}
+		Map model = modelServiceImpl.findModelById(param);
+		int newCounts = modelServiceImpl.countCollections(param)+1;
+		model.put("collections", newCounts);
+		modelServiceImpl.modifyCollections(model);
 		return true;
-		
 	}
 
 	/**

@@ -16,7 +16,7 @@ test
 <script>
 $(function() {		//initialization
 	$('#haha').click(getCollectionNum);
-		$.ajax({
+	$.ajax({
 			url : ContextPath+'/user/isCollection.ajax',
 			type : 'post',
 			dataType : 'json',
@@ -99,11 +99,11 @@ function getCollectionNum(){
 		dataType : 'json',
 		contentType : 'application/json',
 		data : JSON.stringify({
-			model_id : 4
+			model_id : 1
 		}),
 		success : function(res) {
 			if (res && res.success) {
-				alert('res.value')			
+				alert('hasd asd');			
 				$('#haha').html("res.value");
 			} else if (res) {
 				alert(res.message);

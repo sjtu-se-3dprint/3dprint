@@ -267,14 +267,13 @@ public class UserController extends BaseController {
 		}
 	}
 	
-	
 	@RequestMapping(value = "/getCollectionNum.ajax", method = RequestMethod.POST,consumes = "application/json")
 	@ResponseBody
 	public Map getCollectionNum(@RequestBody Map param) {
 		try {
-			int result = collectionService.getCollectionNum(param);
-			String results = "" +result;
-			return initResult(true, results);
+			int collections = modelService.countCollections(param);
+			String collectS = "收藏数(" + collections +")";
+			return initResult(true, collectS);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");
