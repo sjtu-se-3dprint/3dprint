@@ -23,16 +23,22 @@
 					</ol>
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="../Image/slider-bg-1.png" alt="...">
-							<div class="carousel-caption">...</div>
+							<img src="<%=request.getContextPath()%>/image/slider-bg-1.png" alt="...">
+							<div class="carousel-caption">
+								<!-- 此处应有内容 -->
+							</div>
 						</div>
 						<div class="item">
-							<img src="../Image/slider-bg-1.png" alt="...">
-							<div class="carousel-caption">...</div>
+							<img src="<%=request.getContextPath()%>/image/slider-bg-1.png" alt="...">
+							<div class="carousel-caption">
+							
+							</div>
 						</div>
 						<div class="item">
-							<img src="../Image/slider-bg-1.png" alt="...">
-							<div class="carousel-caption">...</div>
+							<img src="<%=request.getContextPath()%>/image/slider-bg-1.png" alt="...">
+							<div class="carousel-caption">
+							
+							</div>
 						</div>
 					</div>
 					<a class="left carousel-control" href="#carousel_shop_center"
@@ -205,12 +211,12 @@
 				<!--/row-->
 				<br />
 				<nav>
-					<ul class="pagination">
+					<ul class="pagination" id="model_paging">
 						<li><a href="#">前继5页</a></li>
 						<li><a href="#" aria-label="Previous"> <span
 								aria-hidden="true">&laquo;</span>
 						</a></li>
-						<li><a href="#">1</a></li>
+						<li class="active"><a href="#">1</a></li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
 						<li><a href="#">4</a></li>
@@ -226,23 +232,17 @@
 
 			<div class="col-md-3" id="sidebar" role="navigation">
 				<div class="list-group" id="model_type_list">
-					<a href="#" class="list-group-item active">全部</a> 
-					<a href="#" class="list-group-item">艺术</a> 
-					<a href="#" class="list-group-item">时尚</a>
-					<a href="#" class="list-group-item">玩具</a> 
-					<a href="#" class="list-group-item">饰品</a> 
-					<a href="#" class="list-group-item">首饰</a>
-					<a href="#" class="list-group-item">家居</a> 
-					<a href="#" class="list-group-item">零件</a>
+					<a href="#" class="list-group-item active">全部</a>
 				</div>
 				<br/>
 				<form class="form-inline">
 					<div class="form-group">
-						<label for="sortType">排序类型：</label> <select class="form-control"
-							id="sortType">
-							<option>评分</option>
+						<label for="sortType">排序类型：</label> 
+						<select class="form-control" id="sortType">
+							<option>默认</option>
+							<option>销量</option>
+							<option>收藏数</option>
 							<option>最近</option>
-							<option>大小</option>
 						</select>
 					</div>
 					<button type="button" class="btn btn-default">
@@ -254,9 +254,9 @@
 				</form>
 				<br />
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="关键字搜索...">
+					<input type="text" class="form-control" placeholder="关键字搜索..." id="key_word_input">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">搜索</button>
+						<button class="btn btn-default" type="button" id="key_word_search_btn">搜索</button>
 					</span>
 				</div>
 			</div>

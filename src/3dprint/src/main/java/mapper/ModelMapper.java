@@ -31,4 +31,32 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public Map findModelById(Map map);
+	
+	/**
+	 * 在有类别无关键字的情况下获取模型列表
+	 * @param map 查询条件
+	 * @return
+	 */
+	public List getModelList(Map map);
+	
+	/**
+	 * 在有类别有关键字的情况下获取模型列表
+	 * @param map 查询条件
+	 * @return
+	 */
+	public List getModelListWithoutKeyWord(Map map);
+	
+	/**
+	 * 在无类别和无关键字的情况下获取模型列表
+	 * @param map
+	 * @return
+	 */
+	public List getModelListWithoutType(Map map);
+	
+	/**
+	 * 在无类别和无关键字的情况下获取模型列表
+	 * @param map
+	 * @return
+	 */
+	public List getModelListWithoutTypeWithoutKeyWord(Map map);
 }

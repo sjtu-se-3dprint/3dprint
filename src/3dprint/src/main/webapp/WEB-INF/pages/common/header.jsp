@@ -21,6 +21,12 @@
 
 <script src="<%=request.getContextPath()%>/js/util.js"></script>
 
+<style>
+	.ratings {
+		color : #FF0000;
+	}
+</style>
+
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -52,7 +58,7 @@
                      	 <li><a href="#">我们如何帮你实现</a></li>
                          <li><a href="#">工业打印机</a></li>
                          <li><a href="#">3D打印材料</a></li>       
-                         <li><a href="#">3D模型上传</a></li>              
+                         <li><a href="<%=request.getContextPath()%>/view/user/modelUpload.htm">3D模型上传</a></li>              
                      </ul>
                  </li>
                  <li class="dropdown">

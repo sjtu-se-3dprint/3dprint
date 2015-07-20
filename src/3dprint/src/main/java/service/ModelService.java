@@ -35,9 +35,16 @@ public interface ModelService {
 	/**
 	 * 查询模型的类型，获取模型类型列表
 	 * @param param
-	 * @return map 模型类型列表
+	 * @return list 模型类型列表
 	 */
 	public List totalModelType(Map param);
+	
+	/**
+	 * 获取模型的列表
+	 * @param param
+	 * @return list 模型列表
+	 */
+	public List getModelList(Map param);
 	
 	/**
 	 * 查询模型

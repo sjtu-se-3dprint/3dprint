@@ -238,5 +238,44 @@ public class ModelServiceImpl implements ModelService {
 		}
 		return model;
 	}
-
+	
+	
+	public List getModelList(Map param) {
+		List model_list;
+		Map model_list_query = new HashMap();
+		
+		int page_number = Integer.parseInt(param.get("active_page").toString());
+		int page_amount = Integer.parseInt(param.get("page_amount").toString());
+		//System.out.println(page_number);
+		int offset = page_number * page_amount;
+		model_list_query.put("page", page_number);			//当前页面号码
+		model_list_query.put("amount", page_amount);		//当前页面容量
+		model_list_query.put("offset", offset);
+		//model_list_query.put("model_type", param.get("model_type"));
+		model_list_query.put("sort_type", param.get("sort_type"));
+		//model_list_query.put("key_word", param.get("key_word"));
+		
+		if (param.get("model_type").toString().equals("全部")) {
+			if (param.get("key_word").toString() == "") {
+				model_list = modelMapper.getModelListWithoutTypeWithoutKeyWord(model_list_query);
+			}
+			else {
+				model_list_query.put("key_word", param.get("key_word"));
+				model_list = modelMapper.getModelListWithoutType(model_list_query);
+			}
+		}
+		else {
+			if (param.get("key_word").toString() == "") {
+				model_list_query.put("model_type", param.get("model_type"));
+				model_list = modelMapper.getModelListWithoutKeyWord(model_list_query);
+			}
+			else {
+				model_list_query.put("model_type", param.get("model_type"));
+				model_list_query.put("key_word", param.get("key_word"));
+				model_list = modelMapper.getModelList(model_list_query);
+			}
+		}
+		
+		return model_list;
+	}
 }

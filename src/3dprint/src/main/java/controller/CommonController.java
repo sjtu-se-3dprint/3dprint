@@ -67,6 +67,17 @@ public class CommonController extends BaseController {
 		return initResult(true, modelService.totalModelType(param));
 	}
 	
+	/**
+	 * 获取模型列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/modelList.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map getModelList(@RequestBody Map param) {
+		return initResult(true, modelService.getModelList(param));
+	}
+	
 
 	/**
 	 * 
