@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.ArticleMapper" >
+
+	<select id="findArticleTypes" resultType="map">
+		select * from article_type
+			<if test="status!=null">where status=#{status}</if>
+		order by article_type_id asc
+	</select>
+	
+	<select id="findArticleTypeById" resultType="map">
+		select * from article_type
+		where article_type_id = #{article_type_id}
+			<if test="status!=null">and status=#{status}</if>
+	</select>
+	
+	<insert id="insertArticle">
+		insert into article (article_name, article_type, article_content, user_id)
+		values (#{article_name}, #{article_type}, #{article_content}, #{user_id});
+	</insert>
+</mapper>

@@ -196,6 +196,16 @@ public class PageViewController {
 	public String modelEdit(ModelMap model) {
 		return "user/modelEdit";
 	}
+	
+	/**
+	 * 帖子发布
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/user/articlePublish.htm", method = RequestMethod.GET)
+	public String articlePublish(ModelMap model) {
+		return "user/articlePublish";
+	}
 
 	/**
 	 * 收藏测试页面
