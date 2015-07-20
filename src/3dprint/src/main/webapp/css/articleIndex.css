@@ -1,0 +1,140 @@
+.articleClassify {
+	margin-bottom: 50px;
+}
+
+.articleClassify:hover .panel-heading {
+	background: #FFC78E;
+}
+
+.articleClassify:hover .panel {
+	border:1px solid #FFAF60;
+}
+
+.articleClassify .panel {
+	border:1px solid #FFE4CA;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.articleClassify .panel-heading {
+	background: #FFE4CA;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.articleClassify .panel-title {
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.articleClassify:hover .panel-title {
+	color: rgb(40, 30, 20)
+}
+
+.panel-body {
+	margin-bottom: -30px;
+}
+
+.panel-title {
+	font-weight: bold
+}
+
+.articleName {
+	max-height: 48px;
+	line-height: 24px;
+	overflow: hidden;
+	font-family: STHeiti, "Microsoft Yahei", "Microsoft YaHei", Arial,
+		sans-serif;
+	font-size: 16px;
+	color: #005097
+}
+
+.articleText {
+	max-height: 48px;
+	overflow: hidden;
+	line-height: 24px;
+	color: #666;
+	font-size: 14px;
+	padding: 4px 0 0;
+}
+
+.articleImages {
+	padding-top: 10px;
+	height: 120px;
+	overflow: hidden;
+}
+
+.articleImages img {
+	max-width: 150px;
+	vertical-align: top;
+	padding-right: 5px;
+}
+
+.articleItem {
+	margin-bottom: 30px;
+}
+
+.publishBtn {
+	background: #cb60b3;
+	color: #fff;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.publishBtn:hover {
+	background: #333;
+	color: #fff;
+}
+
+.articlePublisher {
+	padding-top: 10px;
+	font-size: 10px;
+}
+
+.articlePublisher a {
+	color: #999;
+}
+
+.articlePublisher a:hover {
+	color: #999;
+}
+
+.articlePublisher a span {
+	color: #CCC;
+	padding-right: 5px;
+}
+
+.articlePublisher .time {
+	margin-left: 20px;
+	text-decoration: none;
+}
+

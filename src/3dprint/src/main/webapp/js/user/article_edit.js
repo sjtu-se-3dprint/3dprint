@@ -22,6 +22,9 @@ function initListeners(){
 }
 
 function initArticleInfo(){
+	if(globalArticleId == null){
+		return false;
+	}
 	$.ajax({
 		url : ContextPath + '/common/articleInfo.ajax',
 		type : 'post',

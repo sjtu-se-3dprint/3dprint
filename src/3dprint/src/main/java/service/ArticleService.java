@@ -36,4 +36,12 @@ public interface ArticleService {
 	 * @throws Exception
 	 */
 	public Boolean editArticle(Map param) throws Exception;
+	
+	/**
+	 * 根据帖子类别找出前几个帖子（用于展示在首页上）
+	 * @param param
+	 * @return
+	 */
+	public List findArticleOverviewByTypeId(Map param) throws Exception;
+	
 }

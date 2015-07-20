@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/articlePublish.css" />
-<title>发布帖子</title>
+<title>编辑帖子</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" flush="true"></jsp:include>
