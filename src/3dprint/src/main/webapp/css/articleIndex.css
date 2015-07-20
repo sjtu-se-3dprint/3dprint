@@ -139,3 +139,14 @@
 	text-decoration: none;
 }
 
+.article-path a{
+	padding-top: 12px;
+	padding-right: 10px;
+}
+
+.article-path div{
+	float: left;
+	padding-top: 12px;
+	padding-right: 10px;
+	color: #999;
+}

@@ -20,13 +20,28 @@ function showArticleClassify() {
 	if (!globalArticleTypes) {
 		return false;
 	}
+	var pathHtml = '';
 	var html = ''
 	for (var i = 0; i < globalArticleTypes.length; i++) {
 		html += createArticleClassifyContent(
 				globalArticleTypes[i].article_type,
 				globalArticleTypes[i].article_type_id);
+		pathHtml += createPathA(globalArticleTypes[i].article_type_id,
+				globalArticleTypes[i].article_type);
+		i!=globalArticleTypes.length-1 && (pathHtml += createPathDivide());
 	}
+	$('.article-path').html(pathHtml);
 	$('.container').append(html);
+}
+
+function createPathA(article_type_id, article_type) {
+	return '<a href="' + ContextPath
+			+ '/view/common/articleList.htm?article_type_id=' + article_type_id
+			+ '" class="pull-left">' + article_type + '</a>';
+}
+
+function createPathDivide(){
+	return '<div>|</div>';
 }
 
 // 创建需要展示的每个帖子type框
@@ -34,9 +49,10 @@ function createArticleClassifyContent(title, type_id) {
 	return '<div class="row articleClassify">' + '<div class="col-md-12">'
 			+ '<div class="panel">' + '<div class="panel-heading">'
 			+ '<h3 class="panel-title"><a href="' + ContextPath
-			+ '/view/common/articleList.htm?article_type_id=' + type_id + '">' + title
-			+ '</a></h3>' + '</div>' + '<div class="panel-body" id="classify_'
-			+ type_id + '"></div>' + '</div>' + '</div>' + '</div>';
+			+ '/view/common/articleList.htm?article_type_id=' + type_id + '">'
+			+ title + '</a></h3>' + '</div>'
+			+ '<div class="panel-body" id="classify_' + type_id + '"></div>'
+			+ '</div>' + '</div>' + '</div>';
 }
 
 // 获取帖子的所有type
