@@ -3,11 +3,19 @@ package util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 
 public class Util {
 	
+	static public Map getLimitRange(int page, int amount){
+		Map map = new HashMap();
+		map.put("limit_from", (page - 1) * amount);
+		map.put("amount", amount);
+		return map;
+	}
 
 	static public void decodeBase64ImageAndSave(String base64Image, String fileLocation) throws Exception{
 		Base64 decoder = new Base64();

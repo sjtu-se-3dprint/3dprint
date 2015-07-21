@@ -32,11 +32,11 @@ function showArticleClassify() {
 // 创建需要展示的每个帖子type框
 function createArticleClassifyContent(title, type_id) {
 	return '<div class="row articleClassify">' + '<div class="col-md-12">'
-			+ '<div class="panel">'
-			+ '<div class="panel-heading">' + '<h3 class="panel-title"><a href="#">'
-			+ title + '</a></h3>' + '</div>'
-			+ '<div class="panel-body" id="classify_' + type_id + '"></div>'
-			+ '</div>' + '</div>' + '</div>';
+			+ '<div class="panel">' + '<div class="panel-heading">'
+			+ '<h3 class="panel-title"><a href="' + ContextPath
+			+ '/view/common/articleList.htm?article_type_id=' + type_id + '">' + title
+			+ '</a></h3>' + '</div>' + '<div class="panel-body" id="classify_'
+			+ type_id + '"></div>' + '</div>' + '</div>' + '</div>';
 }
 
 // 获取帖子的所有type
@@ -67,7 +67,8 @@ function initArticleClassify() {
 function showArticles(article_type_id, articles) {
 	var html = '';
 	if (!articles || !articles.length) {
-		html == '' && (html = '<div style="padding-bottom:30px">此分类暂时还没有帖子</div>');
+		html == ''
+				&& (html = '<div style="padding-bottom:30px">此分类暂时还没有帖子</div>');
 	} else {
 		for (var i = 0; i < articles.length; i++) {
 			html += createArticleContent(articles[i]);
@@ -79,36 +80,39 @@ function showArticles(article_type_id, articles) {
 // 创建需要展示的帖子内容
 function createArticleContent(article) {
 	var html = '<div class="articleItem text-left">'
-			+ '<div class="articleName"><a href="#">' + article.article_name
-			+ '</a></div>' + '<div class="articleText">' + article.text + '</div>'
-			+ createArticleImages(article.images) + createArticlePublisher(article) + '</div>';
+			+ '<div class="articleName"><a href="' + '">'
+			+ article.article_name + '</a></div>' + '<div class="articleText">'
+			+ article.text + '</div>' + createArticleImages(article.images)
+			+ createArticlePublisher(article) + '</div>';
 	return html;
 }
 
 // 创建需要展示的帖子发布者信息
 function createArticlePublisher(article) {
-	
+
 	var html = '<div class="articlePublisher">'
-			+ '<a class="publisher" href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>' + article.user_name + '</a>'
-			+ '<a class="time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>' + getTimeTag(article) + '</a>'
-			+ '</div>';
+			+ '<a class="publisher" href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>'
+			+ article.user_name
+			+ '</a>'
+			+ '<a class="time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>'
+			+ getTimeTag(article) + '</a>' + '</div>';
 	return html;
 }
 
 // 根据帖子的发布时间，返回需要显示的发布时间标签内容
-function getTimeTag(article){
+function getTimeTag(article) {
 	var now = new Date();
 	var publishTime = new Date(article.addtime);
-	var time = parseInt((now.getTime() - publishTime.getTime())/1000/60);
+	var time = parseInt((now.getTime() - publishTime.getTime()) / 1000 / 60);
 	time < 0 && (time = 0);
 	var timeTag = '';
-	if(time == 0){
+	if (time == 0) {
 		timeTag = '1分钟内';
-	}else if(time < 60){
-		timeTag = time + '分钟前'; 
-	}else if(time < 60*24){
-		timeTag = parseInt(time/60) + '小时' + parseInt(time%60) + '分钟前';
-	}else{
+	} else if (time < 60) {
+		timeTag = time + '分钟前';
+	} else if (time < 60 * 24) {
+		timeTag = parseInt(time / 60) + '小时' + parseInt(time % 60) + '分钟前';
+	} else {
 		timeTag = publishTime.pattern("yyyy-MM-dd hh:mm");
 	}
 	return timeTag;
@@ -140,7 +144,8 @@ function findArticles(article_type_id) {
 		contentType : 'application/json',
 		data : JSON.stringify({
 			article_type_id : article_type_id,
-			amount : amountPerType
+			amount : amountPerType,
+			page : 1
 		}),
 		success : function(res) {
 			if (res && res.success) {

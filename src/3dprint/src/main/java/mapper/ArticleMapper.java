@@ -46,4 +46,11 @@ public interface ArticleMapper {
 	 * @return
 	 */
 	public List findArticles(Map map);
+	
+	/**
+	 * 某个类别的帖子个数
+	 * @param map
+	 * @return
+	 */
+	public Integer countArticlesByTypeId(Map map);
 }
