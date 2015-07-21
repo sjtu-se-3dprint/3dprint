@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/articlePublish.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/articleIndex.css" />
 <title>编辑帖子</title>
 </head>
 <body>
@@ -19,6 +21,14 @@
 	<script src="<%=request.getContextPath()%>/js/user/article_edit.js"></script>
 
 	<div class="container" style="max-width: 1000px">
+		<div class="row" style="padding-bottom: 15px;">
+			<div class="col-md-8 article-path" style="margin-left: -30px;">
+				<a href="<%=request.getContextPath()%>/view/common/articleIndex.htm"
+					class="pull-left">论坛首页</a>
+				<div>&gt;</div>
+				<div id="title">编辑帖子</div>
+			</div>
+		</div>
 		<div class="row">
 			<form class="form-horizontal">
 

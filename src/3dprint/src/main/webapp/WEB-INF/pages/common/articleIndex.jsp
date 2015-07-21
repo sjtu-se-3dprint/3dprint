@@ -14,7 +14,9 @@
 
 	<div class="container text-center" style="max-width: 1000px">
 		<div class="row" style="padding-bottom: 15px;">
-			<div class="col-md-12">
+			<div class="col-md-8 article-path">
+			</div>
+			<div class="col-md-4">
 				<a href="<%=request.getContextPath()%>/view/user/articlePublish.htm"
 					class="pull-right publishBtn" style="text-decoration: none">我要发帖</a>
 			</div>

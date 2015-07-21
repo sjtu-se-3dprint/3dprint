@@ -10,6 +10,12 @@ $(function() {
 	initArticleListInfo(currPage);
 });
 
+function showPath(){
+	if(globalArticles){
+		$('#title').text(globalArticles.article_type);
+	}
+}
+
 // 展示某一个type的帖子
 function showArticles() {
 	$('#articleContainer').html(
@@ -206,6 +212,7 @@ function initArticleListInfo(page) {
 			if (res && res.success) {
 				globalArticles = res.value;
 				currPage = page;
+				showPath();
 				showArticles();
 			} else if (res) {
 				alert(res.message);
