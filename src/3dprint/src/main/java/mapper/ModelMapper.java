@@ -52,4 +52,19 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public Integer countModelsByUserId(Map map);
+	
+	/**
+	 * 查询该模型收藏数
+	 * @param map
+	 * @return
+	 */
+	
+	public Integer countCollectionsByModelId(Map map);
+	
+	/**
+	 * 修改模型收藏数
+	 * @param map
+	 * @return
+	 */
+	public Boolean modifyCollections(Map map);
 }

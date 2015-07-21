@@ -62,4 +62,18 @@ public interface ModelService {
 	 * @throws Exception
 	 */
 	public Map findModelById(Map param) throws Exception;
+	
+	/**
+	 * 获得模型的收藏数
+	 * @param param
+	 * @return
+	 */
+	public int countCollections(Map param);
+	
+	/**
+	 * 修改模型的收藏数
+	 * @param param
+	 * @return
+	 */
+	public Boolean modifyCollections(Map param);
 }

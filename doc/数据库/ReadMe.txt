@@ -32,3 +32,5 @@
 	添加：表'article_comment'，用于记录帖子评论
 	添加：表'floor_comment'，用于记录楼中楼
 	添加：表'article_type'，字典表，记录的帖子的类型
+2015-07-20
+	修改：表model中，添加字段collections,记录模型的收藏数

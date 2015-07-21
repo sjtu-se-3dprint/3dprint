@@ -8,8 +8,8 @@
 		  <if test="status!=null">and status=#{status}</if>
 	</select>
 	
-	<select id="findCollectionByModel" resultType="Integer">
-		select count(user_id)
+	<select id="findCollectionByModel" resultType="java.lang.Integer">
+		select count(*)
 		from model_collection 
 		where model_id=#{model_id}
 		  <if test="status!=null">and status=#{status}</if>
