@@ -218,6 +218,16 @@ public class PageViewController {
 	}
 
 	/**
+	 * 论坛首页
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/common/articleIndex.htm", method = RequestMethod.GET)
+	public String articleIndex(ModelMap model) {
+		return "common/articleIndex";
+	}
+
+	/**
 	 * 收藏测试页面
 	 * @param model
 	 * @return

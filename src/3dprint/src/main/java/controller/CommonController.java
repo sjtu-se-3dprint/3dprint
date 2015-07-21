@@ -104,6 +104,23 @@ public class CommonController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
+	
+
+	/**
+	 * 根据帖子类别找出前几个帖子（用于展示在首页上）
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleOverview.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleOverview(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.findArticleOverviewByTypeId(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
 
 	/**
 	 * 获取帖子类型列表

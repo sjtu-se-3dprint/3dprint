@@ -39,4 +39,11 @@ public interface ArticleMapper {
 	 * @return
 	 */
 	public Integer updateArticle(Map map);
+	
+	/**
+	 * 查找帖子，会根据type_name进行筛选，根据limit_from、amount进行筛选
+	 * 按照发布时间倒序排列
+	 * @return
+	 */
+	public List findArticles(Map map);
 }
