@@ -7,12 +7,12 @@ $(function() {
 
 	findTypeId();
 
-	initArticleListInfo(currPage);
-
 	$(window).hashchange(function() {
-		var hash = location.hash;
-		var cmd = hash.split('=')[0];
-		var page = hash.split('=')[1];
+		
+		var page = getHashParam('page');
+		if(!page || !isPositiveInteger(page)){
+			page = 1;
+		}
 		gotoPage(page);
 	})
 
