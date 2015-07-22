@@ -32,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
 	// 在展示帖子列表的时候需要显示概要信息，最多允许110个字
 	static private int MAX_ARTICLE_TEXT_IN_THUMBNAILS = 110;
 
-	// 在展示帖子列表的时候需要图片，最多允许3张
+	// 在展示帖子列表的时候需要图片，最多允许5张
 	static private int MAX_ARTICLE_IMAGE_IN_THUMBNAILS = 5;
 
 	@Resource(name = "userServiceImpl")
