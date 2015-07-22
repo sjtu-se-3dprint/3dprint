@@ -28,12 +28,6 @@ public interface CollectionService {
 	public Boolean removeCollection(Map param) throws Exception;
 	
 	/**
-	 * 获取模型被收藏数
-	 * @param param
-	 * @return
-	 */
-	public int getCollectionNum(Map param);
-	/**
 	 * 用户获取自己收藏的模型列表
 	 * @param param
 	 * @return

@@ -271,9 +271,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map getCollectionNum(@RequestBody Map param) {
 		try {
-			int collections = modelService.countCollections(param);
-			String collectS = "收藏数(" + collections +")";
-			return initResult(true, collectS);
+			return initResult(true, modelService.countCollections(param));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");

@@ -329,12 +329,9 @@ public class ModelServiceImpl implements ModelService {
 		}
 	}
 
-	public int countCollections(Map param)
+	public String countCollections(Map param)
 	{
-		return modelMapper.countCollectionsByModelId(param);
-	}
-	
-	public Boolean modifyCollections(Map param){
-		return modelMapper.modifyCollections(param);
+		Map result = modelMapper.countCollectionsByModelId(param);
+		return result.get("collections").toString();
 	}
 }

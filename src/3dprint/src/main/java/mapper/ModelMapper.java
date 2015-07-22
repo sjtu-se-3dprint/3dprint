@@ -59,12 +59,19 @@ public interface ModelMapper {
 	 * @return
 	 */
 	
-	public Integer countCollectionsByModelId(Map map);
+	public Map countCollectionsByModelId(Map map);
 	
 	/**
 	 * 修改模型收藏数
 	 * @param map
 	 * @return
 	 */
-	public Boolean modifyCollections(Map map);
+
+	public Boolean addModelCollections(Map map);
+	/**
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public Boolean reduceModelCollections(Map map);
 }
