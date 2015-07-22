@@ -12,6 +12,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" flush="true"></jsp:include>
+	<script src="<%=request.getContextPath()%>/js/jquery.hashchange.js"></script>
 	<script src="<%=request.getContextPath()%>/js/common/articleList.js"></script>
 
 	<div class="container" style="max-width: 1000px">
