@@ -137,4 +137,20 @@ public class CommonController extends BaseController {
 			return initResult(false, e.getMessage(), "");
 		}
 	}
+	
+	/**
+	 * 根据帖子类型、页码，获取帖子列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/articleList.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map articleList(@RequestBody Map param) {
+		try {
+			return initResult(true, articleService.findArticlesByTypeId(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}
 }

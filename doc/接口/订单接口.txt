@@ -1,0 +1,210 @@
+上传材料页面（Manager权限可访问）
+
+1.上传材料
+入参
+	material_name
+	material_price
+	material_unit
+	material_accuracy
+	material_intensity
+	material_smooth
+	material_description
+	material_image
+返回
+	boolean
+
+编辑材料页面（Manager权限可访问）
+
+1.获取材料详细信息
+入参
+	material_id
+返回
+	material表中的一行
+
+2.编辑材料
+入参
+	material_id
+	material_name
+	material_price
+	material_unit
+	material_accuracy
+	material_intensity
+	material_smooth
+	material_description
+	material_image
+返回
+	boolean
+
+Manager中心-材料列表页面（Manager权限可访问）
+
+1.获取材料列表
+入参
+	page
+	amount
+返回
+	material表中的多行
+
+2.删除材料
+入参
+	material_id
+返回
+	boolean
+
+材料展示页面（所有权限可访问）
+
+1.获取材料列表（在Manager中心-材料列表页面已实现）
+
+我的购物车页面（User权限可访问）
+
+1.获取购物车商品列表
+入参
+	无
+返回
+	购物车表中的所有行
+
+2.修改商品数目
+入参
+	cart_id
+	amount
+返回
+	boolean
+
+3.删除商品
+入参
+	cart_id
+返回
+	boolean
+
+4.选择材料
+入参
+	cart_id
+	material_id
+返回
+	boolean
+
+5.获取材料列表（id和名称）
+入参
+	无
+返回
+	material表中的所有行（只需要id和名称）
+
+
+确认订单页面（User权限可访问）
+
+1.获取下单的商品列表
+入参
+	cart_ids
+返回
+	购物车中被选中的所有行
+
+2.获取用户收货信息
+入参
+	空
+返回
+	用户收货信息List
+
+3.新增收货信息
+入参
+	address
+	telephone
+	name
+返回
+	返回刚刚插入的收货信息（包括收货信息id）
+
+4.编辑收货信息
+入参
+	收货信息id
+	address
+	telephone
+	name
+返回
+	boolean
+
+5.删除收货信息
+入参
+	收货信息id
+返回
+	boolean
+
+6.确认下单（需要插入order、master_order，对比入参中的cart_id与cart表中被选中的cart_id是否一一对应，然后删除已下单的cart行）
+入参
+	所有选中的cart_id
+	收货信息id
+返回
+	boolean
+
+User中心-我的订单页面（User权限可访问）
+
+1.获取订单列表
+入参
+	page
+	amount
+	type（待审核、待发货、待收货、全部）
+返回
+	返回类型为主订单List，主订单里面有子订单元素（这是一个List）
+
+2.申请取消订单
+入参
+	子订单id
+返回
+	boolean
+
+3.确认收货
+入参
+	子订单id
+返回
+	boolean
+
+Manager中心-用户订单页面（Manager权限可访问）
+
+1.管理员获取订单列表
+入参
+	status
+	page
+	amount
+返回
+	订单中的多行
+
+2.管理员取消订单
+入参
+	子订单id
+返回
+	boolean
+
+3.管理员审核通过
+入参
+	子订单id
+返回
+	boolean
+
+4.管理员发货
+入参
+	子订单id
+返回
+	boolean
+
+5.管理员同意取消订单
+入参
+	子订单id
+返回
+	boolean
+
+6.管理员恢复订单（把申请取消订单状态的订单挪到已审核待发货状态）
+入参
+	子订单id
+返回
+	boolean
+
+7.搜索订单
+入参
+	子订单id
+返回
+	子订单的整行信息
+
+8.状态迁移
+入参
+	子订单id
+	old_status
+	new_status
+返回
+	boolean

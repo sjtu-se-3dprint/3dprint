@@ -45,4 +45,10 @@
 			<if test="amount!=null">limit #{limit_from}, #{amount}</if>
 		</if>
 	</select>
+	
+	<select id="countArticlesByTypeId" resultType="java.lang.Integer">
+		select count(*) from article
+		where article_type = #{article_type}
+			<if test="status!=null">and status = #{status}</if>
+	</select>
 </mapper>

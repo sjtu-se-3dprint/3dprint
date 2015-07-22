@@ -1,6 +1,7 @@
 var pathName=window.document.location.pathname;
 var ContextPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 
+// 为Date添加pattern方法，格式化日期
 Date.prototype.pattern=function(fmt) {           
     var o = {           
     "M+" : this.getMonth()+1, //月份           
@@ -35,12 +36,21 @@ Date.prototype.pattern=function(fmt) {
     return fmt;           
 }
 
+// 获取url中的?后面的参数值
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  // 匹配目标参数
     if (r != null) return unescape(r[2]); return null; // 返回参数值
 }
 
+// 获取url中#后面的参数值
+function getHashParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象
+    var r = window.location.hash.substr(1).match(reg);  // 匹配目标参数
+    if (r != null) return unescape(r[2]); return null; // 返回参数值
+}
+
+// 是否为正整数
 function isPositiveInteger(number){
 	return /^[0-9]*[1-9][0-9]*$/.test(number);
 }

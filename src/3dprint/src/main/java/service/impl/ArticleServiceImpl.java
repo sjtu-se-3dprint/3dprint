@@ -28,12 +28,12 @@ public class ArticleServiceImpl implements ArticleService {
 	static private int MAX_ARTICLE_NAME = 100;
 
 	static private int MAX_ARTICLE_CONTENT = 19500;
-	
+
 	// 在展示帖子列表的时候需要显示概要信息，最多允许110个字
 	static private int MAX_ARTICLE_TEXT_IN_THUMBNAILS = 110;
-	
-	// 在展示帖子列表的时候需要图片，最多允许3张
-	static private int MAX_ARTICLE_IMAGE_IN_THUMBNAILS = 3;
+
+	// 在展示帖子列表的时候需要图片，最多允许5张
+	static private int MAX_ARTICLE_IMAGE_IN_THUMBNAILS = 5;
 
 	@Resource(name = "userServiceImpl")
 	UserService userService;
@@ -139,43 +139,105 @@ public class ArticleServiceImpl implements ArticleService {
 	public List findArticleOverviewByTypeId(Map param) throws Exception {
 
 		// 检查是否存在该类别（分论坛）
-		param.put("status", "normal");
-		Map type = articleMapper.findArticleTypeById(param);
-		if (type == null) {
-			throw new ServiceException("无该类别帖子");
-		}
+		Map type = isArticleTypeExists(param);
 
 		// 限制数目为1~30之间
-		int amount = Integer.parseInt("" + param.get("amount"));
-		amount = Math.max(1, amount);
-		amount = Math.min(30, amount);
+		int amount = limitTheAmount(param, 1, 30);
 
+		// 查询帖子
 		Map articleParam = new HashMap();
 		articleParam.put("article_type", type.get("article_type"));
 		articleParam.put("status", "normal");
 		articleParam.put("limit_from", 0);
 		articleParam.put("amount", amount);
 		List<Map> articles = articleMapper.findArticles(articleParam);
-		for(Map article : articles){
+		generateTextAndImgForArticles(articles);
+
+		return articles;
+	}
+
+	public Map findArticlesByTypeId(Map param) throws Exception {
+
+		// 检查是否存在该类别（分论坛）
+		Map type = isArticleTypeExists(param);
+
+		// 限制数目为1~30之间
+		int amount = limitTheAmount(param, 1, 30);
+
+		// 限制页码>0
+		int page = limitThePage(param);
+		
+		// 查询该类别的帖子总数
+		Map countParam = new HashMap();
+		countParam.put("article_type", type.get("article_type"));
+		countParam.put("status", "normal");
+		int total = articleMapper.countArticlesByTypeId(countParam);
+		
+		// 查询帖子
+		Map articleParam = new HashMap();
+		articleParam.put("article_type", type.get("article_type"));
+		articleParam.put("status", "normal");
+		articleParam.putAll(util.Util.getLimitRange(page, amount));
+		List<Map> articles = articleMapper.findArticles(articleParam);
+		generateTextAndImgForArticles(articles);
+		
+		// 包装返回结果
+		Map result = new HashMap();
+		result.put("page", page);
+		result.put("total", total);
+		result.put("articles", articles);
+		result.put("article_type", type.get("article_type"));
+
+		return result;
+	}
+
+	private int limitThePage(Map param) throws Exception {
+		int page = Integer.parseInt("" + param.get("page"));
+		page = Math.max(1, page);
+		return page;
+	}
+
+	private int limitTheAmount(Map param, int min, int max) throws Exception {
+		int amount = Integer.parseInt("" + param.get("amount"));
+		amount = Math.max(min, amount);
+		amount = Math.min(max, amount);
+		return amount;
+	}
+
+	private Map isArticleTypeExists(Map param) throws Exception {
+		param.put("status", "normal");
+		Map type = articleMapper.findArticleTypeById(param);
+		if (type == null) {
+			throw new ServiceException("无该类别帖子");
+		}
+		return type;
+	}
+
+	private void generateTextAndImgForArticles(List<Map> articles) {
+		for (Map article : articles) {
 			Document doc = Jsoup.parse("" + article.get("article_content"));
 			Elements imgs = doc.getElementsByTag("img");
 			List images = new ArrayList<String>();
 			for (Element img : imgs) {
 				String src = img.attr("src");
+				
+				// 不展示外链的图片
+				if(!src.contains("3dprint")){
+					continue;
+				}
+				
 				images.add(src);
-				if(images.size() >= MAX_ARTICLE_IMAGE_IN_THUMBNAILS){
+				if (images.size() >= MAX_ARTICLE_IMAGE_IN_THUMBNAILS) {
 					break;
 				}
 			}
 			String text = doc.text();
-			if(text!= null && text.length() > MAX_ARTICLE_TEXT_IN_THUMBNAILS){
-				text = text.substring(0, MAX_ARTICLE_TEXT_IN_THUMBNAILS) + "...";
+			if (text != null && text.length() > MAX_ARTICLE_TEXT_IN_THUMBNAILS) {
+				text = text.substring(0, MAX_ARTICLE_TEXT_IN_THUMBNAILS)
+						+ "...";
 			}
 			article.put("text", text);
 			article.put("images", images);
 		}
-
-		return articles;
 	}
-
 }

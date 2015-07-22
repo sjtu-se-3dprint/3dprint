@@ -44,4 +44,12 @@ public interface ArticleService {
 	 */
 	public List findArticleOverviewByTypeId(Map param) throws Exception;
 	
+	/**
+	 * 根据帖子类别找出帖子列表
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public Map findArticlesByTypeId(Map param) throws Exception;
+	
 }

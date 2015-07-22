@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/articlePublish.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/articleIndex.css" />
 <title>发布帖子</title>
 </head>
 <body>
@@ -19,13 +21,20 @@
 	<script src="<%=request.getContextPath()%>/js/user/article_publish.js"></script>
 
 	<div class="container" style="max-width: 1000px">
+		<div class="row" style="padding-bottom: 15px;">
+			<div class="col-md-8 article-path" style="margin-left: -30px;">
+				<a href="<%=request.getContextPath()%>/view/common/articleIndex.htm"
+					class="pull-left">论坛首页</a>
+				<div>&gt;</div>
+				<div id="title">发布帖子</div>
+			</div>
+		</div>
 		<div class="row">
 			<form class="form-horizontal">
 
 				<div class="form-group">
 					<div class="pull-left labelWidth">
-						<label for="inputArticleName" class="control-label"
-							>帖子标题：</label>
+						<label for="inputArticleName" class="control-label">帖子标题：</label>
 					</div>
 					<div class="marginForLabel">
 						<input type="text" class="form-control" id="inputArticleName"
@@ -34,8 +43,7 @@
 				</div>
 				<div class="form-group">
 					<div class="pull-left labelWidth">
-						<label for="selectArticleType" class="control-label"
-							>帖子类别：</label>
+						<label for="selectArticleType" class="control-label">帖子类别：</label>
 					</div>
 					<div class="marginForLabel">
 						<select class="form-control" id="selectArticleType">
