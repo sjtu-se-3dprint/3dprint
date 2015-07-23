@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import service.CollectionService;
 import mapper.CollectionMapper;
 import service.UserService;
+import mapper.ModelMapper;
 import service.ModelService;
 
 @Service("collectionServiceImpl")
@@ -25,6 +26,11 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Resource(name = "modelServiceImpl")
 	ModelService modelServiceImpl;
+	
+	@Resource(name = "modelMapper")
+	ModelMapper modelMapper;
+
+	
 	/**
 	 * 添加收藏
 	 */
@@ -32,34 +38,32 @@ public class CollectionServiceImpl implements CollectionService {
 	public Boolean addCollection(Map param) throws Exception{
 		
 		Map user = userServiceImpl.myInfo(null);
+		Map model = modelMapper.findModelById(param);
 		if(user == null){
 			throw new Exception("请先登录！");
 		}
 
 		param.put("user_id", user.get("user_id"));	
 		param.put("status", "deleted");
+		
 		Map collection = collectionMapper.isCollection(param);
-		if(collection == null){
+		if(collection == null)
+		{
 			param.put("status", "normal");
-			Integer row = collectionMapper.addCollection(param);
+			Integer row = collectionMapper.addCollection(model);
 			
 			if (row == null || row != 1) {
 				throw new Exception("添加模型收藏时发生错误。");
 			}
-			
-			
-		} else
-		{
+			modelMapper.addModelCollections(model);
+			return true;
+		}
 		Integer row = collectionMapper.recoverCollection(param);
 		
 		if (row == null || row != 1) {
 			throw new Exception("添加模型收藏时发生错误。");
 		}
-		}
-		Map model = modelServiceImpl.findModelById(param);
-		int newCounts = modelServiceImpl.countCollections(param)+1;
-		model.put("collections", newCounts);
-		modelServiceImpl.modifyCollections(model);
+		modelMapper.addModelCollections(model);
 		return true;
 	}
 
@@ -77,6 +81,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public Boolean removeCollection(Map param) throws Exception{
 		Map user = userServiceImpl.myInfo(null);
+		Map model = modelMapper.findModelById(param);
 		if(user == null){
 			throw new Exception("请先登录！");
 		}
@@ -92,15 +97,11 @@ public class CollectionServiceImpl implements CollectionService {
 		Integer row = collectionMapper.removeCollection(collection);
 		if (row == null || row != 1) {
 			throw new Exception("删除模型收藏时发生错误。");
-		}	
+		}
+		modelMapper.reduceModelCollections(model);
 		return true;
 	}
 	
-	public int getCollectionNum(Map param){
-		param.put("status", "normal");
-		int num = collectionMapper.findCollectionByModel(param);
-		return num;
-	}
 	
 	//未写完，获得用户收藏的模型列表，暂时不知道如何处理
 	public List<Map> myCollection(Map param) throws Exception{

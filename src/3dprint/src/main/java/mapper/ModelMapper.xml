@@ -30,12 +30,20 @@
 			and status = #{old_status}
 	</update>
 	
-	<update id="modifyCollections">
+	<update id="addModelCollections">
 		update model
-		set collections = #{collections},
+		set collections = collections+1,
 			updatetime = now()
 		where model_id = #{model_id}
 	</update>
+	
+	<update id="reduceModelCollections">
+		update model
+		set collections = collections-1,
+			updatetime = now()
+		where model_id = #{model_id}
+	</update>
+	
 	<select id="findModelById" resultType="map">
 		select * from model
 		where model_id = #{model_id}
@@ -81,7 +89,7 @@
 		limit #{limit_from}, #{limit_to}
 	</select>
 	
-	<select id="countCollectionsByModelId" resultType="java.lang.Integer">
+	<select id="countCollectionsByModelId" resultType="map">
 		select collections from model
 		where model_id = #{model_id}
 			<if test="status!=null">and status=#{status}</if>

@@ -87,7 +87,7 @@ public interface ModelMapper {
 	 * @return
 	 */
 	
-	public Integer countCollectionsByModelId(Map map);
+	public Map countCollectionsByModelId(Map map);
 	
 	/**
 	 * 修改模型收藏数
@@ -102,4 +102,12 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public int getModelCount(Map map);
+
+	public Boolean addModelCollections(Map map);
+	/**
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public Boolean reduceModelCollections(Map map);
 }

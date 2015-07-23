@@ -12,26 +12,30 @@
 test 
 模型1
 <button id ="btntest" class = "btn btn-primary"></button>
-<button id = "haha" class = "btn btn-primary">被多少人收藏了</button>
+<button id = "btncount" class = "btn btn-primary"></button>
 <script>
 $(function() {		//initialization
-	$('#haha').click(getCollectionNum);
+	
 	$.ajax({
 			url : ContextPath+'/user/isCollection.ajax',
 			type : 'post',
 			dataType : 'json',
 			contentType : 'application/json',
 			data : JSON.stringify({
-				model_id : 4
+				model_id : 9 
 			}),
 			success : function(res) {
+				/* //alert(res.value);
+				//console.log(res); */
 				if (res && res.success) {
 					if(res.value){
+						//alert(res);
 						$('#btntest').html("tianjia收藏");
 						$('#btntest').one("click",addCollection);
 					    }else{	
-							$('#btntest').html("quxiao收藏");
-							$('#btntest').one("click",removeCollection);	
+					    	$('#btntest').html("quxiao收藏");
+							$('#btntest').one("click",removeCollection);
+					    		
 					    }			
 					} else if (res) {
 						alert(res.message);
@@ -40,6 +44,26 @@ $(function() {		//initialization
 			error : function(err) {
 				alert('未知错误');
 			}
+		});
+	
+	$.ajax({
+		url : ContextPath+'/user/getCollectionNum.ajax',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/json',
+		data : JSON.stringify({
+			model_id : 9
+		}),
+		success : function(res) {
+			if (res && res.success) {
+				$('#btncount').html(res.value);
+			} else if (res) {
+				alert(res.message);
+			}
+		},
+		error : function(err) {
+			alert('未知错误');
+		}
 		});
 
 });
@@ -51,7 +75,7 @@ $.ajax({
 	dataType : 'json',
 	contentType : 'application/json',
 	data : JSON.stringify({
-		model_id : 4
+		model_id : 9
 	}),
 	success : function(res) {
 		if (res && res.success) {
@@ -75,7 +99,7 @@ function removeCollection(){
 		dataType : 'json',
 		contentType : 'application/json',
 		data : JSON.stringify({
-			model_id : 4
+			model_id : 9
 		}),
 		success : function(res) {
 			if (res && res.success) {
@@ -92,28 +116,7 @@ function removeCollection(){
 	});
 }
 
-function getCollectionNum(){
-	$ajax({
-		url : ContextPath+'/user/getCollectionNum.ajax',
-		type : 'post',
-		dataType : 'json',
-		contentType : 'application/json',
-		data : JSON.stringify({
-			model_id : 1
-		}),
-		success : function(res) {
-			if (res && res.success) {
-				alert('hasd asd');			
-				$('#haha').html("res.value");
-			} else if (res) {
-				alert(res.message);
-			}
-		},
-		error : function(err) {
-			alert('未知错误');
-		}
-		});
-}
+
 </script>
 </body>
 </html>

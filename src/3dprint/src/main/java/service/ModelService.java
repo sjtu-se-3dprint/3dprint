@@ -75,7 +75,7 @@ public interface ModelService {
 	 * @param param
 	 * @return
 	 */
-	public int countCollections(Map param);
+	public String countCollections(Map param);
 	
 	/**
 	 * 修改模型的收藏数
@@ -90,4 +90,5 @@ public interface ModelService {
 	 * @return
 	 */
 	public int getModelCount(Map param);
+
 }

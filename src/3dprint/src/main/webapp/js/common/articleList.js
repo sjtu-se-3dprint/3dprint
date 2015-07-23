@@ -7,11 +7,20 @@ $(function() {
 
 	findTypeId();
 
-	initArticleListInfo(currPage);
+	$(window).hashchange(function() {
+		
+		var page = getHashParam('page');
+		if(!page || !isPositiveInteger(page)){
+			page = 1;
+		}
+		gotoPage(page);
+	})
+
+	$(window).hashchange();
 });
 
-function showPath(){
-	if(globalArticles){
+function showPath() {
+	if (globalArticles) {
 		$('#title').text(globalArticles.article_type);
 	}
 }
@@ -22,7 +31,7 @@ function showArticles() {
 			createArticleClassifyContent(globalArticles.article_type,
 					globalTypeId));
 	var articles = globalArticles.articles;
-	
+
 	var html = '';
 	if (!articles || !articles.length) {
 		html == ''
@@ -32,7 +41,7 @@ function showArticles() {
 		var pageInfo = createPageInfo();
 		html += pagination;
 		html += pageInfo;
-		
+
 		// 遍历帖子
 		for (var i = 0; i < articles.length; i++) {
 			html += createArticleContent(articles[i]);
@@ -44,75 +53,80 @@ function showArticles() {
 	$('#classify_' + globalTypeId).html(html);
 }
 
-function createPageInfo(){
-	
-	if(!globalArticles){
+function createPageInfo() {
+
+	if (!globalArticles) {
 		return '';
 	}
 
 	var total = globalArticles.total;
-	var maxPage = parseInt((total+amountPerPage-1)/amountPerPage);
-	
-	return '<div class="pageInfo">共计<span>' + total + '</span>篇帖子，分为<span>' + maxPage + '</span>页。</div>';
+	var maxPage = parseInt((total + amountPerPage - 1) / amountPerPage);
+
+	return '<div class="pageInfo">共计<span>' + total + '</span>篇帖子，分为<span>'
+			+ maxPage + '</span>页。</div>';
 }
 
 // 生成页码
-function createPagination(){
-	
-	if(!globalArticles){
+function createPagination() {
+
+	if (!globalArticles) {
 		return '';
 	}
-	
+
 	// 如果总共就只有一页，就不需要页码了
 	var total = globalArticles.total;
-	if(total <= amountPerPage){
+	if (total <= amountPerPage) {
 		return '';
 	}
-	
+
 	var paginationHtml = '<div class="articlePagination">';
-	var maxPage = parseInt((total+amountPerPage-1)/amountPerPage); // 总页数
+	var maxPage = parseInt((total + amountPerPage - 1) / amountPerPage); // 总页数
 	var from = currPage - 4; // 显示当前页的前4页
 	var to = currPage + 5; // 显示当前页的后5页
-	
+
 	// 显示的页数是from~to，但是它们可能超出了范围，所以限制from>0、to<=maxPage
 	// 但是这样的话，就可能导致总共显示不了10页（比如说当前页为3，那么只会显示1~8页）
 	from = Math.max(1, from);
 	to = Math.min(maxPage, to);
-	
+
 	// 为了使得尽可能显示10页，调整一下from和to
-	if(from == 1){
-		to = Math.min(maxPage, from+9);
+	if (from == 1) {
+		to = Math.min(maxPage, from + 9);
 	}
-	if(to == maxPage){
-		from = Math.max(1, to-9)
+	if (to == maxPage) {
+		from = Math.max(1, to - 9)
 	}
-	
+
 	// 如果当前页不是首页，那么显示首页和上一页
-	if(currPage > 1){
-		paginationHtml += '<a href="javascript:gotoPage(' + (1) + ')">' + '首页' + '</a> ';
-		paginationHtml += '<a href="javascript:gotoPage(' + (currPage-1) + ')">' + '<上一页' + '</a> ';
+	if (currPage > 1) {
+		paginationHtml += '<a href="#page=' + 1 + '">' + '首页'
+				+ '</a> ';
+		paginationHtml += '<a href="#page=' + (currPage - 1)
+				+ '">' + '<上一页' + '</a> ';
 	}
-	
+
 	// 显示页码
-	for(var i=from; i<=to; i++){
-		if(i != currPage){
-			paginationHtml += '<a href="javascript:gotoPage(' + i + ')">' + i + '</a> ';
-		}else{
+	for (var i = from; i <= to; i++) {
+		if (i != currPage) {
+			paginationHtml += '<a href="#page=' + i + '">' + i + '</a> ';
+		} else {
 			paginationHtml += '<span>' + i + '</span> ';
 		}
 	}
-	
+
 	// 如果当前页不是末页，那么显示下一页和末页
-	if(currPage < maxPage){
-		paginationHtml += '<a href="javascript:gotoPage(' + (currPage+1) + ')">' + '下一页>' + '</a> ';
-		paginationHtml += '<a href="javascript:gotoPage(' + (maxPage) + ')">' + '末页' + '</a> ';
+	if (currPage < maxPage) {
+		paginationHtml += '<a href="#page=' + (currPage + 1)
+				+ '">' + '下一页>' + '</a> ';
+		paginationHtml += '<a href="#page=' + (maxPage) + '">'
+				+ '末页' + '</a> ';
 	}
-	
+
 	paginationHtml += '</div>';
 	return paginationHtml;
 }
 
-function gotoPage(p){
+function gotoPage(p) {
 	initArticleListInfo(p);
 }
 
@@ -120,9 +134,9 @@ function gotoPage(p){
 function createArticleClassifyContent(title, type_id) {
 	return '<div class="row articleClassify">' + '<div class="col-md-12">'
 			+ '<div class="panel">' + '<div class="panel-heading">'
-			+ '<h3 class="panel-title">' + title + '</h3>'
-			+ '</div>' + '<div class="panel-body" id="classify_' + type_id
-			+ '"></div>' + '</div>' + '</div>' + '</div>';
+			+ '<h3 class="panel-title">' + title + '</h3>' + '</div>'
+			+ '<div class="panel-body" id="classify_' + type_id + '"></div>'
+			+ '</div>' + '</div>' + '</div>';
 }
 
 // 创建需要展示的帖子内容
@@ -211,7 +225,7 @@ function initArticleListInfo(page) {
 		success : function(res) {
 			if (res && res.success) {
 				globalArticles = res.value;
-				currPage = page;
+				currPage = parseInt(page);
 				showPath();
 				showArticles();
 			} else if (res) {
