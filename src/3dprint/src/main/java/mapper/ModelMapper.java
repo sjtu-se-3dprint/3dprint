@@ -95,4 +95,11 @@ public interface ModelMapper {
 	 * @return
 	 */
 	public Boolean modifyCollections(Map map);
+	
+	/**
+	 * 获取当前查询条件下模型个数
+	 * @param map
+	 * @return
+	 */
+	public int getModelCount(Map map);
 }

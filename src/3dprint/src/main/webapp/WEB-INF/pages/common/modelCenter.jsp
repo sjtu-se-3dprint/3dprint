@@ -212,19 +212,17 @@
 				<br />
 				<nav>
 					<ul class="pagination" id="model_paging">
-						<li><a href="#">前继5页</a></li>
-						<li><a href="#" aria-label="Previous"> <span
-								aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#" aria-label="Next"> <span
-								aria-hidden="true">&raquo;</span>
-						</a></li>
-						<li><a href="#">后续5页</a></li>
+						<li id="prev_pages">
+							<a href="#" aria-label="Previous"> 
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						
+						<li id="post_pages">
+							<a href="#" aria-label="Next"> 
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -232,7 +230,6 @@
 
 			<div class="col-md-3" id="sidebar" role="navigation">
 				<div class="list-group" id="model_type_list">
-					<a href="#" class="list-group-item active">全部</a>
 				</div>
 				<br/>
 				<form class="form-inline">

@@ -337,7 +337,7 @@ public class ModelServiceImpl implements ModelService {
 		int page_number = Integer.parseInt(param.get("active_page").toString());
 		int page_amount = Integer.parseInt(param.get("page_amount").toString());
 		//System.out.println(page_number);
-		int offset = page_number * page_amount;
+		int offset = (page_number-1) * page_amount;
 		model_list_query.put("page", page_number);			//当前页面号码
 		model_list_query.put("amount", page_amount);		//当前页面容量
 		model_list_query.put("offset", offset);
@@ -376,5 +376,10 @@ public class ModelServiceImpl implements ModelService {
 	
 	public Boolean modifyCollections(Map param){
 		return modelMapper.modifyCollections(param);
+	}
+	
+	public int getModelCount(Map param) {
+		param.put("status", "normal");
+		return modelMapper.getModelCount(param);
 	}
 }

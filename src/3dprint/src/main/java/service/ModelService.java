@@ -83,4 +83,11 @@ public interface ModelService {
 	 * @return
 	 */
 	public Boolean modifyCollections(Map param);
+	
+	/**
+	 * 获得当前查询条件下模型的个数
+	 * @param param
+	 * @return
+	 */
+	public int getModelCount(Map param);
 }

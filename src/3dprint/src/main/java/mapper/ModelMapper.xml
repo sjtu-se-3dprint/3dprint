@@ -44,7 +44,7 @@
 	
 	<select id="getModelList" resultType="map">
 		select * from (
-			select * from model where model_style=#{model_type} and  model_name like N'#{key_word}' order by #{sort_type}
+			select * from model where model_style=#{model_type} and  model_name like N'%#{key_word}%' order by #{sort_type}
 		) as t limit #{amount} offset #{offset}
 	</select>
 	
@@ -56,7 +56,7 @@
 	
 	<select id="getModelListWithoutType" resultType="map">
 		select * from (
-			select * from model where model_name like N'#{key_word}' order by #{sort_type}
+			select * from model where model_name like N'%#{key_word}%' order by #{sort_type}
 		) as t limit #{amount} offset #{offset}
 	</select>
 	
@@ -86,4 +86,12 @@
 		where model_id = #{model_id}
 			<if test="status!=null">and status=#{status}</if>
 	</select>
+	
+	<select id="getModelCount" resultType="java.lang.Integer">
+		select count(*) from model
+		where model_style = #{model_type} and model_name like N'%#{key_word}%' 
+			<if test="status!=null">and status=#{status}</if>
+	</select>
+	
+	
 </mapper>

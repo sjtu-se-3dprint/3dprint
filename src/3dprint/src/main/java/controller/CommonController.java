@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Map;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 
@@ -82,6 +83,16 @@ public class CommonController extends BaseController {
 		return initResult(true, modelService.getModelList(param));
 	}
 	
+	/**
+	 * 获取当前查询条件下满足条件模型的个数
+	 */
+	@RequestMapping(value = "/modelCount.ajax", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public Map getModelCount(@RequestBody Map param) {
+		Map model_count = new HashMap();
+		model_count.put("count", modelService.getModelCount(param));
+		return initResult(true, model_count);
+	}
 
 	/**
 	 * 获取模型信息
