@@ -379,4 +379,9 @@ public class ModelServiceImpl implements ModelService {
 		param.put("status", "normal");
 		return modelMapper.getModelCount(param);
 	}
+
+	public Boolean modifyCollections(Map param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
