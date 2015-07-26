@@ -14,6 +14,8 @@
 		  <if test="status!=null">and status=#{status}</if>
 	</select>
 	
+	
+	
 	<update id="modifyUserInfo">
 		update user
 		set updatetime=now()

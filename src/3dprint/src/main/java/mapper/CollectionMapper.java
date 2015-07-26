@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author shuying
- *
+ * 对应收藏表collection
+ * 
  */
 public interface CollectionMapper {
 

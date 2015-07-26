@@ -78,13 +78,6 @@ public interface ModelService {
 	public String countCollections(Map param);
 	
 	/**
-	 * 修改模型的收藏数
-	 * @param param
-	 * @return
-	 */
-	public Boolean modifyCollections(Map param);
-	
-	/**
 	 * 获得当前查询条件下模型的个数
 	 * @param param
 	 * @return

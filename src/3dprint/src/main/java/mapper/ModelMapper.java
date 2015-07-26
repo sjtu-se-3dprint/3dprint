@@ -94,7 +94,7 @@ public interface ModelMapper {
 	 * @param map
 	 * @return
 	 */
-	public Boolean modifyCollections(Map map);
+	public Integer modifyCollections(Map map);
 	
 	/**
 	 * 获取当前查询条件下模型个数
@@ -103,11 +103,11 @@ public interface ModelMapper {
 	 */
 	public int getModelCount(Map map);
 
-	public Boolean addModelCollections(Map map);
+	public Integer addModelCollections(Map map);
 	/**
 	 * 
 	 * @param map
 	 * @return
 	 */
-	public Boolean reduceModelCollections(Map map);
+	public Integer reduceModelCollections(Map map);
 }

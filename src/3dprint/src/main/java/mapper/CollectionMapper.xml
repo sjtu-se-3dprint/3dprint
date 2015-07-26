@@ -42,9 +42,10 @@
 	</update>
 	
 	<insert id="addCollection" useGeneratedKeys="true" keyProperty="collection_id">
-		insert into model_collection(user_id, model_id)
+		insert into model_collection(user_id, model_id,status)
 		values(#{user_id},
-			   #{model_id});
+			   #{model_id},
+			   #{status});
 	</insert>
 
 </mapper>

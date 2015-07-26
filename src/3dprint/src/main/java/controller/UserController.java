@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.ArticleService;
+import service.CartService;
 import service.ModelService;
 import service.UserService;
 import service.CollectionService;
@@ -34,6 +35,9 @@ public class UserController extends BaseController {
 	
 	@Resource(name = "articleServiceImpl")
 	ArticleService articleService;
+	
+	@Resource(name = "cartServiceImpl")
+	CartService cartService;
 
 	@RequestMapping(value = "/modifyPassword.ajax", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
@@ -267,11 +271,48 @@ public class UserController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 获取模型被收藏的数目
+	 * @param param
+	 * @return
+	 */
 	@RequestMapping(value = "/getCollectionNum.ajax", method = RequestMethod.POST,consumes = "application/json")
 	@ResponseBody
 	public Map getCollectionNum(@RequestBody Map param) {
 		try {
 			return initResult(true, modelService.countCollections(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}	
+	
+	/**
+	 * 添加购物车
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/addModelInCart.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map addModelInCart(@RequestBody Map param) {
+		try {
+			return initResult(true,cartService.addModelIntoCart(param));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return initResult(false, e.getMessage(), "");
+		}
+	}	
+	
+	/**
+	 * 模型页面加载时，获取用户是否将该模型加入到购物车
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/getModelAmountInCart.ajax", method = RequestMethod.POST,consumes = "application/json")
+	@ResponseBody
+	public Map getModelAmountInCart(@RequestBody Map param) {
+		try {
+			return initResult(true,cartService.getModelAmountInCart(param));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return initResult(false, e.getMessage(), "");

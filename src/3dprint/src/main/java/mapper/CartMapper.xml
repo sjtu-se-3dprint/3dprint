@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.CartMapper" >
+
+    <select id = "getCartByUserId" resultType="map">
+       select * from cart 
+	   where user_id=#{user_id}
+		<if test="status!=null">and status=#{status}</if>
+    </select>
+   
+    <insert id="addModelIntoCart" useGeneratedKeys="true" keyProperty="cart_id">
+      insert into cart(user_id, model_id)
+		values(#{user_id},
+			   #{model_id});
+    </insert>
+    
+    <update id="recoverModelInCart">
+	   update cart
+	   set status = "normal",
+	       amount = 1,
+	       updatetime=now()
+	   where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		and status=#{status}
+	</update>
+	
+    <update id = "removeModelFromCart">
+    update cart
+		set status="deleted",
+			updatetime=now()
+		where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		and status=#{status}
+    </update>
+    
+    <select id="isInMyCart" resultType="map">
+       select * from cart
+       where user_id=#{user_id}
+       and model_id=#{model_id}
+		and status=#{status}
+    </select>
+    
+    <select id="getModelAmountInCart" resultType="map">
+       select amount from cart
+       where user_id=#{user_id}
+       and model_id=#{model_id}
+		and status="normal"
+    </select>
+    
+    <update id="addModelAmountInCart">
+      update cart
+          set amount = amount+1,
+          updatetime=now()
+		where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		<if test="status!=null">and status=#{status}</if>
+    </update>
+
+    <update id="reduceModelAmountInCart">
+      update cart
+          set amount = amount-1,
+          updatetime=now()
+		where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		<if test="status!=null">and status=#{status}</if>
+    </update>
+    
+    <update id="modifyModelAmountInCart">
+    update cart
+         set amount=#{amount},
+         updatetime=now()
+		where user_id=#{user_id} 
+	    and model_id=#{model_id}
+		<if test="status!=null">and status=#{status}</if>
+    </update>
+    
+</mapper>

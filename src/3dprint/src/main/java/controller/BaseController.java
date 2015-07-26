@@ -13,13 +13,6 @@ public class BaseController {
 		return result;
 	}
 	
-	public Map initResult(boolean success, int value){
-		Map result = new HashMap();
-		result.put("success", success);
-		result.put("value", value);
-		return result;
-	}
-	
 	public Map initResult(boolean success, Map value){
 		Map result = new HashMap();
 		result.put("success", success);
